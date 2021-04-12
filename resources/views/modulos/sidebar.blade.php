@@ -20,16 +20,85 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            !--=====================================
+            <!--=====================================
             Botón Blog
             ======================================-->
-
             <li class="nav-item">
                 <a href="{{ url('/')}}" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>Catalogo</p>
                 </a>
             </li>
+
+            <!--=====================================
+            Botón Administradores
+            ======================================-->
+            <li class="nav-item">
+                <a href="{{ url('/administradores')}}" class="nav-link">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>Administradores</p>
+                </a>
+            </li>
+
+          <!--=====================================
+          Botón Categorías
+          ======================================-->
+          <li class="nav-item">
+            <a href="{{ url('/categorias') }}" class="nav-link">
+              <i class="nav-icon fas fa-list-ul"></i>
+              <p>Categorías</p>
+            </a>
+          </li>
+
+          <!--=====================================
+          Botón Artículos
+          ======================================-->
+          <li class="nav-item">
+            <a href="{{ url('/articulos') }}" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>Artículos</p>
+            </a>
+          </li>
+
+          <!--=====================================
+          Botón Opiniones
+          ======================================-->
+          <li class="nav-item">
+            <a href="{{ url('/opiniones') }}" class="nav-link">
+              <i class="nav-icon fas fa-user-check"></i>
+              <p>Opiniones</p>
+            </a>
+          </li>
+
+          <!--=====================================
+          Botón Banner
+          ======================================-->
+          <li class="nav-item">
+            <a href="{{ url('/banner') }}" class="nav-link">
+              <i class="nav-icon far fa-images"></i>
+              <p>Banner</p>
+            </a>
+          </li>
+
+          <!--=====================================
+          Botón Anuncios
+          ======================================-->
+          <li class="nav-item">
+            <a href="{{ url('/anuncios') }}" class="nav-link">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>Anuncios</p>
+            </a>
+          </li>
+
+          <!--=====================================
+          BOTÓN SITIO WEB
+          ======================================-->
+          <li class="nav-item">
+            <a href="{{ substr(url('/'),0,-11) }}" class="nav-link" target="_blank">
+              <i class="nav-icon fas fa-globe"></i>
+              <p>Ver sitio</p> <!-- Revisar url-->
+            </a> 
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
