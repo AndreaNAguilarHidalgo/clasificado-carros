@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('plantilla');
 });
 
+
 Auth::routes();
 
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');

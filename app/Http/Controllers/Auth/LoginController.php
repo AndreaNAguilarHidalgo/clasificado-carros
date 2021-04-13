@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\SocialProfile;
+use App\User;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -56,8 +59,41 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($driver)
     {
-        $user = Socialite::driver('github')->user();
 
+        $userSocialite = Socialite::driver($driver)->user();
+
+        // Verifica si existe registro
+        $user = User::where('email', $userSocialite->getEmail())->first();
+
+        if(!$user){
+            // Si no existe lo crea 
+            $user = User::create([
+                'name'=> $userSocialite->getName(),
+                'email'=> $userSocialite->getEmail(),
+
+
+            ]);
+        }
+        
+        // Verificar si en la tabla social_profile
+        $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
+                                        ->where('social_name', $driver)->first();
+
+        if(!$social_profile){
+            // Si no existe lo crea en la DB
+            SocialProfile::create([
+                'user_id' => $user->id,
+                'social_id'=> $userSocialite->getId(),
+                'social_name'=> $driver,
+                'social_avatar' => $userSocialite->getAvatar()
+            ]);
+        }
+
+        // login 
+        auth()->login($user);
+
+        // Redirección
+        return redirect()->route('/');
         // $user->token;
     }
 }
