@@ -61,7 +61,7 @@ class LoginController extends Controller
     {
 
         $userSocialite = Socialite::driver($driver)->user();
-
+        //dd($userSocialite);
         // Verifica si existe registro
         $user = User::where('email', $userSocialite->getEmail())->first();
 
@@ -93,7 +93,7 @@ class LoginController extends Controller
         auth()->login($user);
 
         // Redirección
-        return redirect()->route('/');
+        return redirect()->action('InicioController@index');
         // $user->token;
     }
 }

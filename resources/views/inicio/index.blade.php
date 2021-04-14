@@ -1,3 +1,6 @@
+@extends('plantilla')
+
+@section('content')
 <div class="content-wrapper" style="min-height: 1333.2px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -50,3 +53,4 @@
     </section>
     <!-- /.content -->
   </div>
+  @endsection

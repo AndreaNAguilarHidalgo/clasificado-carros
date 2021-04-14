@@ -14,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('plantilla');
-});
+Route::get('/', 'InicioController@index')->name('inicio.index');
 
-
+//Route::view('/', 'paginas.inicio');
 Auth::routes();
 
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
