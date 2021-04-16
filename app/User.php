@@ -2,10 +2,11 @@
 
 namespace App;
 
+use App\SocialProfile;
+use App\Notifications\ResetPassword;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use App\SocialProfile;
 
 class User extends Authenticatable
 {
@@ -38,9 +39,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
+
     public function adminlte_image()
     {
-        return 'https://picsum.photos/300/300';
+        $social_profile = $this->socialProfiles->first();
+
+        if($social_profile)
+        {
+            return $social_profile->social_avatar;
+        }
+        else
+        {
+            return 'https://picsum.photos/300/300';
+        }
     }
 
     public function adminlte_desc()
@@ -55,6 +77,6 @@ class User extends Authenticatable
 
     // Relación uno a muchos 
     public function socialProfiles(){
-        $this->hasMany(SocialProfile::class);
+        return $this->hasMany(SocialProfile::class);
     }
 }

@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'InicioController@index')->name('inicio.index');
 
-//Route::view('/', 'paginas.inicio');
+
+Route::view('/welcome', 'welcome');
+
 Auth::routes();
 
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\SocialProfile;
 use App\User;
 use Exception;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\SocialProfile;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -49,7 +50,15 @@ class LoginController extends Controller
      */
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->redirect();
+        $drives = ['facebook', 'google'];
+
+        if(in_array($driver, $drives))
+        {
+            return Socialite::driver($driver)->redirect();
+        }
+        else{
+            return redirect()->route('login')->with('info', $driver.' no es aplicación válida para poder logearse');
+        }
     }
 
     /**
@@ -57,29 +66,35 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback($driver)
+    public function handleProviderCallback(Request $request, $driver)
     {
+        // Para retornar a login si se cancela el inicio de sesión con las redes sociales
+        if($request->get('error')){
+            return redirect()->route('login');
+        }
 
         $userSocialite = Socialite::driver($driver)->user();
         //dd($userSocialite);
-        // Verifica si existe registro
-        $user = User::where('email', $userSocialite->getEmail())->first();
-
-        if(!$user){
-            // Si no existe lo crea 
-            $user = User::create([
-                'name'=> $userSocialite->getName(),
-                'email'=> $userSocialite->getEmail(),
-
-
-            ]);
-        }
         
         // Verificar si en la tabla social_profile
         $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
                                         ->where('social_name', $driver)->first();
 
-        if(!$social_profile){
+        if(!$social_profile)
+        {
+            // Verifica si existe registro
+            $user = User::where('email', $userSocialite->getEmail())->first();
+
+            if(!$user)
+            {
+                // Si no existe lo crea 
+                $user = User::create([
+                    'name'=> $userSocialite->getName(),
+                    'email'=> $userSocialite->getEmail(),
+
+
+                ]);
+            }
             // Si no existe lo crea en la DB
             SocialProfile::create([
                 'user_id' => $user->id,
@@ -90,7 +105,7 @@ class LoginController extends Controller
         }
 
         // login 
-        auth()->login($user);
+        auth()->login($social_profile->user);
 
         // Redirección
         return redirect()->action('InicioController@index');
