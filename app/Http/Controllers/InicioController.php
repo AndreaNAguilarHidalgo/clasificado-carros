@@ -10,8 +10,10 @@ class InicioController extends Controller
         $this->middleware(['auth', 'verified']);
     }
     
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['user', 'admin']);
+
         return view('inicio.index');
     }
 }

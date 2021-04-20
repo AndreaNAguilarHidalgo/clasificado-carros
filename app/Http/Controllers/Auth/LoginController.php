@@ -8,6 +8,7 @@ use App\SocialProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Role;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -74,37 +75,32 @@ class LoginController extends Controller
         }
 
         $userSocialite = Socialite::driver($driver)->user();
-        //dd($userSocialite);
         
-        // Verificar si en la tabla social_profile
         $social_profile = SocialProfile::where('social_id', $userSocialite->getId())
                                         ->where('social_name', $driver)->first();
 
-        if(!$social_profile)
-        {
-            // Verifica si existe registro
+
+        if(!$social_profile){
+
             $user = User::where('email', $userSocialite->getEmail())->first();
 
-            if(!$user)
-            {
-                // Si no existe lo crea 
+            if(!$user){
                 $user = User::create([
-                    'name'=> $userSocialite->getName(),
+                    'name' => $userSocialite->getName(),
                     'email'=> $userSocialite->getEmail(),
-
-
                 ]);
             }
-            // Si no existe lo crea en la DB
-            SocialProfile::create([
+
+
+            $social_profile = SocialProfile::create([
                 'user_id' => $user->id,
-                'social_id'=> $userSocialite->getId(),
-                'social_name'=> $driver,
-                'social_avatar' => $userSocialite->getAvatar()
+                'social_id' => $userSocialite->getId(),
+                'social_name' => $driver,
+                'social_avatar'  => $userSocialite->getAvatar()
             ]);
         }
 
-        // login 
+        
         auth()->login($social_profile->user);
 
         // Redirección
