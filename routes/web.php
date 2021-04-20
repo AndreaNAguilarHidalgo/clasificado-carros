@@ -19,7 +19,7 @@ Route::get('/', 'InicioController@index')->name('inicio.index');
 
 Route::view('/welcome', 'welcome');
 
-Auth::routes();
+Auth::routes(['verify' => true]); /*Activando la verificación de correo*/
 
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');

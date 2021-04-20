@@ -3,7 +3,9 @@
 return [
 
     'full_name'                   => 'Nombre completo',
+    'number'                      => 'Número de Telefóno',
     'email'                       => 'Email',
+    'date'                        => 'Tú Cumpleaños',
     'password'                    => 'Contraseña',
     'retype_password'             => 'Confirmar la contraseña',
     'remember_me'                 => 'Recordarme',
