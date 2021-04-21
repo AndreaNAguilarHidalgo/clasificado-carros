@@ -104,7 +104,7 @@ class LoginController extends Controller
         auth()->login($social_profile->user);
 
         // Redirección
-        return redirect()->action('InicioController@index');
+        return redirect()->action('DashboardController@index');
         // $user->token;
     }
 }

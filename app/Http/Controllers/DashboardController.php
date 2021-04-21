@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InicioController extends Controller
+class DashboardController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware(['auth', 'verified']);
     }
     
@@ -21,7 +22,7 @@ class InicioController extends Controller
         }
         else
         {
-            return view('dashboards.user');
+            return view('dashboards.anunciante');
         }
         
     }

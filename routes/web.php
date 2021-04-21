@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'InicioController@index')->name('inicio.index');
+Route::get('/', 'DashboardController@index')->name('dashboard');
 
 
 Route::view('/welcome', 'welcome');

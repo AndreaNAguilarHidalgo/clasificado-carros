@@ -1,3 +1,4 @@
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden;">
   <!-- Brand Logo -->
   <a href="{{url('/')}}" class="brand-link">
@@ -14,7 +15,7 @@
         <img src="{{ auth()->user()->adminlte_image() }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block"> Admin </a>
+        <a href="#" class="d-block"> Anunciante </a>
       </div>
     </div>
 
@@ -22,85 +23,48 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!--=====================================
-            Botón Blog
-            ======================================-->
+        Botón Blog
+        ======================================-->
         <li class="nav-item">
           <a href="{{ url('/')}}" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
-            <p>Catalogo</p>
+            <p>Principal</p>
           </a>
         </li>
 
         <!--=====================================
-            Botón Administradores
-            ======================================-->
-        <li class="nav-item">
-          <a href="{{ url('/administradores')}}" class="nav-link">
-            <i class="nav-icon fas fa-users-cog"></i>
-            <p>Administradores</p>
-          </a>
-        </li>
-
-        <!--=====================================
-          Botón Categorías
-          ======================================-->
-        <li class="nav-item">
-          <a href="{{ url('/categorias') }}" class="nav-link">
-            <i class="nav-icon fas fa-list-ul"></i>
-            <p>Categorías</p>
-          </a>
-        </li>
-
-        <!--=====================================
-          Botón Artículos
-          ======================================-->
-        <li class="nav-item">
-          <a href="{{ url('/articulos') }}" class="nav-link">
-            <i class="nav-icon fas fa-sticky-note"></i>
-            <p>Artículos</p>
-          </a>
-        </li>
-
-        <!--=====================================
-          Botón Opiniones
-          ======================================-->
-        <li class="nav-item">
-          <a href="{{ url('/opiniones') }}" class="nav-link">
-            <i class="nav-icon fas fa-user-check"></i>
-            <p>Opiniones</p>
-          </a>
-        </li>
-
-        <!--=====================================
-          Botón Banner
-          ======================================-->
-        <li class="nav-item">
-          <a href="{{ url('/banner') }}" class="nav-link">
-            <i class="nav-icon far fa-images"></i>
-            <p>Banner</p>
-          </a>
-        </li>
-
-        <!--=====================================
-          Botón Anuncios
-          ======================================-->
-        <li class="nav-item">
-          <a href="{{ url('/anuncios') }}" class="nav-link">
-            <i class="nav-icon fas fa-bullhorn"></i>
-            <p>Anuncios</p>
-          </a>
-        </li>
-
-        <!--=====================================
-          BOTÓN SITIO WEB
-          ======================================-->
-        <li class="nav-item">
-          <a href="{{ substr(url('/'),0,-11) }}" class="nav-link" target="_blank">
-            <i class="nav-icon fas fa-globe"></i>
-            <p>Ver sitio</p> <!-- Revisar url-->
-          </a>
-        </li>
-      </ul>
+        Botón Opciones con submenú
+        ======================================-->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Opciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/layout/top-nav.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Publicación(Anuncio)</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/top-nav.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Editar Publicación(Anuncio)</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Anuncios</p>
+                </a>
+              </li>
+            </ul><!-- fin ul submenú-->
+        </li><!--Fin de li-->
+      </ul><!--Fin de ul para botones-->
     </nav><!-- /.sidebar-menu -->
   </div> <!-- FIN SIDEBAR-->
 </aside>

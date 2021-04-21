@@ -4,7 +4,7 @@
     </div>
     <strong>Copyright ©
       @php
-        echo date("Y");
+        echo date(" Y ");
       @endphp 
-    <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+    <a href="https://www.devitm.com/">DevITM</a>.</strong>
   </footer>
