@@ -14,7 +14,11 @@ class AnuncioController extends Controller
      */
     public function index()
     {
-        //
+        $usuario = auth()->user();
+
+        $recetas = Anuncio::where('user_id', $usuario->id)->paginate(10);
+
+        return view('anuncios.index')->with('anuncios', $recetas)->with('usuario', $usuario);
     }
 
     /**
@@ -24,7 +28,7 @@ class AnuncioController extends Controller
      */
     public function create()
     {
-        //
+        return view('anuncios.create');
     }
 
     /**
@@ -35,7 +39,29 @@ class AnuncioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validación
+        $data = $request->validate([
+            'titulo'=> 'required|min:6',
+            'año' => 'required',
+            'total_puertas' => 'required',
+            'precio' => 'required',
+            'kilometraje'=>'required',
+            'descripcion' => 'required'
+
+        ]);
+
+        //Almacenar datos con modelo
+        auth()->user()->anuncios()->create([
+            'titulo'=> $data['titulo'],
+            'año' => $data['año'],
+            'total_puertas' => $data['total_puertas'],
+            'precio' => $data['precio'],
+            'kilometraje' => $data['kilometraje'],
+            'descripcion' => $data['descripcion'],
+        ]);
+
+        // Redirección
+        return redirect()->action('DashboardController@index');
     }
 
     /**
@@ -46,7 +72,7 @@ class AnuncioController extends Controller
      */
     public function show(Anuncio $anuncio)
     {
-        //
+        return view('anuncios.show', compact('anuncio'));
     }
 
     /**
@@ -57,7 +83,8 @@ class AnuncioController extends Controller
      */
     public function edit(Anuncio $anuncio)
     {
-        //
+
+        return view('anuncios.edit', compact('anuncio'));
     }
 
     /**

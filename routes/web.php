@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnuncioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::get('/', 'DashboardController@index')->name('dashboard.index');
 
+// Rutas de anuncios
+Route::get('/anuncios/create', 'AnuncioController@create')->name('anuncios.create');
+Route::get('/anuncios', 'AnuncioController@index')->name('anuncios.index');
+Route::get('/anuncios/{anuncio}/edit', 'AnuncioController@edit')->name('anuncios.edit');
+Route::put('/anuncios/{anuncio}', 'AnuncioController@update')->name('anuncios.update');
+Route::post('/anuncios', 'AnuncioController@store')->name('anuncios.store');
+Route::get('/anuncios/{anuncio}', 'AnuncioController@show')->name('anuncios.show');
 
 Route::view('/welcome', 'welcome');
 

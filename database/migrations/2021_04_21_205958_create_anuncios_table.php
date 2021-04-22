@@ -21,6 +21,8 @@ class CreateAnunciosTable extends Migration
             $table->double('precio');
             $table->double('kilometraje');
             $table->text('descripcion');
+            $table->foreignId('user_id')->references('id')->on('users')->comment('El usuario que crea el anuncio');
+
             $table->timestamps();
         });
     }

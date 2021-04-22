@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 	<title>Anunciante | Clasificado de carros</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +23,10 @@
 	{{-- google fonts --}}
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+	@yield('styles')
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
 	<!--=====================================
@@ -55,10 +59,15 @@
 
         @include('modulos.sidebaranu')
 
-        @yield('content')
+		@yield('botones')
+
+		@yield('content')
 
         @include('modulos.footer')
+
+		@yield('scripts')
     </div>
 </body>
+
 
 </html>

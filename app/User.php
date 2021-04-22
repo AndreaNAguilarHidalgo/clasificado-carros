@@ -122,4 +122,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles(){
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
+
+
+    // Relación 1:n Anuncios
+    public function anuncios(){
+        return $this->hasMany(Anuncio::class);
+    }
 }
