@@ -6,7 +6,8 @@
 	<title>Anunciante | Clasificado de carros</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
+	@yield('styles')
 	<!--=====================================
 	PLUGINS DE CSS
 	======================================-->
@@ -22,8 +23,6 @@
 
 	{{-- google fonts --}}
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-	@yield('styles')
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

@@ -24,6 +24,7 @@ Route::get('/anuncios/{anuncio}/edit', 'AnuncioController@edit')->name('anuncios
 Route::put('/anuncios/{anuncio}', 'AnuncioController@update')->name('anuncios.update');
 Route::post('/anuncios', 'AnuncioController@store')->name('anuncios.store');
 Route::get('/anuncios/{anuncio}', 'AnuncioController@show')->name('anuncios.show');
+Route::delete('/anuncios/{anuncio}', 'AnuncioController@destroy')->name('anuncios.destroy');
 
 Route::view('/welcome', 'welcome');
 

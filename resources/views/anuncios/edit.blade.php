@@ -17,7 +17,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
               <li class="breadcrumb-item active">Editar Publicación</li>
             </ol>
           </div>
@@ -37,7 +37,7 @@
 
                         <!-- Form -->
                         <div class="col-md-8 col-lg-12">
-                            <form method="POST" action="{{ route('anuncios.update', ['anuncio' => $anuncio->id] )}}" 
+                            <form method="POST" action="{{ route('anuncios.update', ['anuncio' => $anuncio->id]) }}" 
                             enctype="multipart/form-data" novalidate>
 
                                 @csrf
@@ -132,7 +132,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                  <input type="submit" class="btn btn-primary" value="Agregar publicación">
+                                  <input type="submit" class="btn btn-primary" value="Actualizar publicación">
                                 </div>
                             </form>
                         </div>
@@ -142,4 +142,10 @@
         </div> <!--end div container-fluid-->
     </section><!-- end section-->
 </div><!--Fin content-wrapper-->
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js" 
+    integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ==" 
+    crossorigin="anonymous" defer></script>
 @endsection

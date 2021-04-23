@@ -12,7 +12,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
               <li class="breadcrumb-item active">Lista de Publicaciones</li>
             </ol>
           </div>
@@ -40,7 +40,7 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body table-responsive p-0" style="height: 300px;">
+              <div class="card-body table-responsive p-0 " style="height: 450px;">
                 <table class="table table-head-fixed">
                   <thead>
                     <tr>
@@ -50,6 +50,7 @@
                       <th scole="col">Precio</th>
                       <th scole="col">Kilometraje</th>
                       <th scole="col">Descripción</th>
+                      <th scole="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -61,7 +62,22 @@
                             <td>{{$anuncio->total_puertas}}</td>
                             <td>{{$anuncio->precio}}</td>
                             <td>{{$anuncio->kilometraje}}</td>
-                            <td>{{$anuncio->descripcion}}</td>
+                            <td>{!! $anuncio->descripcion !!}</td>
+                            <td>
+                              <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
+                                @csrf
+                                  <input type="submit" class="btn btn-danger d-block mb-2 w-100" value="Eliminar &times;">
+
+                              </form>
+                              <a href="{{ route('anuncios.edit', ['anuncio' => $anuncio->id]) }}" 
+                                 class="btn btn-dark d-block mb-2 w-100">Editar
+                                    <i class="icono fas fa-edit"></i>
+                              </a>
+                              <a href="{{ route('anuncios.show', ['anuncio' => $anuncio->id]) }}" 
+                                    class="btn btn-success d-block mb-2 w-100">Ver
+                                    <i class="fas fa-eye"></i>
+                              </a>
+                            </td>
                         </tr>
                     @endforeach
                   </tbody>

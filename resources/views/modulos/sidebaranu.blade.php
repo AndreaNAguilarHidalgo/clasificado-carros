@@ -37,30 +37,23 @@
         ======================================-->
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+            <i class="fas fa-pager"></i>
               <p>
-                Opciones
+                Páginas
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('anuncios.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-plus-circle"></i>
                   <p>Crear Publicación(Anuncio)</p>
                 </a>
               </li>
 
-              
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Editar Publicación(Anuncio)</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                   <a href="{{ route('anuncios.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-th-list"></i>
                     <p>Lista de Anuncios</p>
                   </a>
                 </li>

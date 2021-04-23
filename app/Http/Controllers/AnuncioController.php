@@ -16,9 +16,9 @@ class AnuncioController extends Controller
     {
         $usuario = auth()->user();
 
-        $recetas = Anuncio::where('user_id', $usuario->id)->paginate(10);
+        $anuncios = Anuncio::where('user_id', $usuario->id)->paginate(10);
 
-        return view('anuncios.index')->with('anuncios', $recetas)->with('usuario', $usuario);
+        return view('anuncios.index')->with('anuncios', $anuncios)->with('usuario', $usuario);
     }
 
     /**
@@ -83,6 +83,8 @@ class AnuncioController extends Controller
      */
     public function edit(Anuncio $anuncio)
     {
+        //
+        $this->authorize('view', $anuncio);
 
         return view('anuncios.edit', compact('anuncio'));
     }
@@ -96,7 +98,32 @@ class AnuncioController extends Controller
      */
     public function update(Request $request, Anuncio $anuncio)
     {
-        //
+        // Revisar el policy
+        $this->authorize('update', $anuncio);
+
+        // Validación
+        $data = $request->validate([
+            'titulo'=> 'required|min:6',
+            'año' => 'required',
+            'total_puertas' => 'required',
+            'precio' => 'required',
+            'kilometraje'=>'required',
+            'descripcion' => 'required'
+
+        ]);
+
+        //Asignar valores
+        $anuncio->titulo = $data['titulo'];
+        $anuncio->año = $data['año'];
+        $anuncio->total_puertas = $data['total_puertas'];
+        $anuncio->precio = $data['precio'];
+        $anuncio->kilometraje = $data['kilometraje'];
+        $anuncio->descripcion = $data['descripcion'];
+
+        $anuncio->save();
+
+         // Redirección
+         return redirect()->action('AnuncioController@index');
     }
 
     /**
@@ -107,6 +134,12 @@ class AnuncioController extends Controller
      */
     public function destroy(Anuncio $anuncio)
     {
-        //
+        // Revisar el policy
+        $this->authorize('delete', $anuncio);
+
+        $anuncio->delete();
+
+        // Redireccionamiento
+        return redirect()->action('AnuncioController@index');
     }
 }
