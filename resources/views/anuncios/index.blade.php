@@ -46,6 +46,9 @@
                     <tr>
                       <th scole="col">Título</th>
                       <th scole="col">Año</th>
+                      <th scole="col">Categoría</th>
+                      <th scole="col">Tipo de Combustible</th>
+                      <th scole="col">Condición del Auto</th>
                       <th scole="col">Número de Puertas</th>
                       <th scole="col">Precio</th>
                       <th scole="col">Kilometraje</th>
@@ -57,18 +60,23 @@
 
                     @foreach ($anuncios as $anuncio)
                         <tr>
-                            <td>{{$anuncio->titulo}}</td>
-                            <td>{{$anuncio->año}}</td>
-                            <td>{{$anuncio->total_puertas}}</td>
-                            <td>{{$anuncio->precio}}</td>
-                            <td>{{$anuncio->kilometraje}}</td>
+                            <td>{{ $anuncio->titulo}}</td>
+                            <td>{{ $anuncio->año}}</td>
+                            <td>{{ $anuncio->tipoCarro->nombre }}</td>
+                            <td>{{ $anuncio->tipoCombustible->tipo }}</td>
+                            <td>{{ $anuncio->condicionCarro->estado }}</td>
+                            <td>{{ $anuncio->total_puertas}}</td>
+                            <td>{{ $anuncio->precio}}</td>
+                            <td>{{ $anuncio->kilometraje}}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
                             <td>
                               <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                   <input type="submit" class="btn btn-danger d-block mb-2 w-100" value="Eliminar &times;">
 
                               </form>
+                              <eliminar-anuncio></eliminar-anuncio>
                               <a href="{{ route('anuncios.edit', ['anuncio' => $anuncio->id]) }}" 
                                  class="btn btn-dark d-block mb-2 w-100">Editar
                                     <i class="icono fas fa-edit"></i>

@@ -70,6 +70,66 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="combustible">Tipo de Combustible</label>
+                                    <select name="combustible" class="form-control @error('combustible') is-invalid @enderror" id="combustible">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($tipoCombustible as $combustible)
+                                            <option value="{{ $combustible->id }}" 
+                                                    {{ $anuncio->combustible_id == $combustible->id ? 'selected' : '' }} > 
+                                                            {{ $combustible->tipo }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('combustible')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="condicion">Condición</label>
+                                    <select name="condicion" class="form-control @error('condicion') is-invalid @enderror" id="condicion">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($condicionCarro as $condicion)
+                                            <option value="{{ $condicion->id }}" 
+                                                    {{ $anuncio->condicion_id == $condicion->id ? 'selected' : '' }} > 
+                                                            {{ $condicion->estado }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('tipo_carro')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tipo_carro">Categoría</label>
+                                    <select name="tipo_carro" class="form-control @error('tipo_carro') is-invalid @enderror" id="tipo_carro">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($tipoCarros as $tipo_carro)
+                                            <option value="{{ $tipo_carro->id }}" 
+                                                    {{ $anuncio->carro_id == $tipo_carro->id ? 'selected' : '' }} > 
+                                                            {{ $tipo_carro->nombre }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('tipo_carro')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
                                     <label for="total_puertas">Número de Puertas</label>
                                     <input type="number" name="total_puertas" class="form-control @error('total_puertas') is-invalid @enderror"
                                             id="total_puertas" placeholder="Ej. 4"

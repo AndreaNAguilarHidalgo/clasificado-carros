@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Anuncio;
+use App\Combustible;
+use App\Condicion;
+use App\Condicione;
+use App\TipoCarros;
 use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
@@ -28,7 +32,11 @@ class AnuncioController extends Controller
      */
     public function create()
     {
-        return view('anuncios.create');
+        $tipoCarros = TipoCarros::all(['id', 'nombre']);
+        $combustible = Combustible::all(['id', 'tipo']);
+        $condicion = Condicion::all(['id', 'estado']);
+
+        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion'));
     }
 
     /**
@@ -43,6 +51,9 @@ class AnuncioController extends Controller
         $data = $request->validate([
             'titulo'=> 'required|min:6',
             'año' => 'required',
+            'combustible' => 'required',
+            'condicion' => 'required',
+            'tipo_carro'=>'required',
             'total_puertas' => 'required',
             'precio' => 'required',
             'kilometraje'=>'required',
@@ -54,6 +65,9 @@ class AnuncioController extends Controller
         auth()->user()->anuncios()->create([
             'titulo'=> $data['titulo'],
             'año' => $data['año'],
+            'carro_id'=> $data['tipo_carro'],
+            'combustible_id' => $data['combustible'],
+            'condicion_id' => $data['condicion'],
             'total_puertas' => $data['total_puertas'],
             'precio' => $data['precio'],
             'kilometraje' => $data['kilometraje'],
@@ -86,7 +100,11 @@ class AnuncioController extends Controller
         //
         $this->authorize('view', $anuncio);
 
-        return view('anuncios.edit', compact('anuncio'));
+        $tipoCarros = TipoCarros::all(['id', 'nombre']);
+        $tipoCombustible = Combustible::all(['id', 'tipo']);
+        $condicionCarro = Condicion::all(['id', 'estado']);
+
+        return view('anuncios.edit', compact('tipoCarros','tipoCombustible','condicionCarro','anuncio'));
     }
 
     /**
@@ -105,6 +123,9 @@ class AnuncioController extends Controller
         $data = $request->validate([
             'titulo'=> 'required|min:6',
             'año' => 'required',
+            'tipo_carro'=>'required',
+            'combustible'=>'required',
+            'condicion'=>'required',
             'total_puertas' => 'required',
             'precio' => 'required',
             'kilometraje'=>'required',
@@ -115,6 +136,9 @@ class AnuncioController extends Controller
         //Asignar valores
         $anuncio->titulo = $data['titulo'];
         $anuncio->año = $data['año'];
+        $anuncio->carro_id = $data['tipo_carro'];
+        $anuncio->combustible_id = $data['combustible'];
+        $anuncio->condicion_id = $data['condicion'];
         $anuncio->total_puertas = $data['total_puertas'];
         $anuncio->precio = $data['precio'];
         $anuncio->kilometraje = $data['kilometraje'];

@@ -88,7 +88,10 @@ class LoginController extends Controller
                 $user = User::create([
                     'name' => $userSocialite->getName(),
                     'email'=> $userSocialite->getEmail(),
+
                 ]);
+
+                $user->roles()->attach(Role::where('name', 'user')->first());
             }
 
 
