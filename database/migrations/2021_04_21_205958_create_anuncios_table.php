@@ -13,6 +13,31 @@ class CreateAnunciosTable extends Migration
      */
     public function up()
     {
+        // Tablas de municipios y estados 
+
+        Schema::create('estado', function (Blueprint $table){
+            $table -> id();
+            $table -> string('estado');
+
+            $table->timestamps();
+        });
+
+        Schema::create('municipios', function (Blueprint $table) {
+            $table->id();
+            $table->string('municipio');
+            
+            $table->foreignId('estado_id')
+                  ->references('id')
+                  ->on('estado')
+                  ->comment('Referencia del estado');
+
+
+            $table->timestamps();
+
+        });
+
+        /* ---------------------------------------------------------------------------- */
+
         // Tabla condición del auto
         Schema::create('condicions', function (Blueprint $table) {
             $table->id();
@@ -68,6 +93,13 @@ class CreateAnunciosTable extends Migration
                         ->comments(' Condición del Auto')
                         ->onDelete('cascade');
 
+            // FK de municipios
+            $table->foreignId('municipio_id')
+                  ->references('id')
+                  ->on('municipios')
+                  ->comments(' FK de municipios')
+                  ->onDelete('cascade');
+
             $table->timestamps();
 
         });
@@ -80,6 +112,8 @@ class CreateAnunciosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('estado');
+        Schema::dropIfExists('municipios');
         Schema::dropIfExists('combustibles');
         Schema::dropIfExists('condicions');
         Schema::dropIfExists('tipo_carros');
