@@ -1,15 +1,17 @@
 <?php
 
 namespace App;
-use App\Municipio;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Estado extends Model
 {
-    // Relación 1:n
-    public function estados(){
+    protected $fillable = ['id', 'estado'];
 
-        return $this->hasMany(Municipio::class);
+    
+    // Relación 1:n
+    public function municipios(){
+
+        return $this->belongsTo(Municipio::class);
     }
 }

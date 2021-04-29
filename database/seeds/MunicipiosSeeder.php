@@ -14,66 +14,77 @@ class MunicipiosSeeder extends Seeder
     {
         DB::table('municipios')->insert([
             'municipio'=> 'Toluca de Lerdo',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Metepec',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'San Miguel Zinacantepec',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Lerma',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'San Mateo Atenco',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Tenango del Valle',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Almoloya de Juárez',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Ixtlahuaca',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Calimaya',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Xonacatlán',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('municipios')->insert([
             'municipio'=> 'Temoaya',
+            'estado_id' => '1',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
