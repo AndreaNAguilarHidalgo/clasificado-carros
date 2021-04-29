@@ -1,4 +1,6 @@
-
+import Vue from 'vue';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -20,6 +22,9 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.use(VueSweetalert2);
+Vue.config.ignoredElements = ['trix-editor', 'trix-toolbar'];
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('eliminar-anuncio', require('./components/EliminaAnuncio.vue').default);
 
 /**

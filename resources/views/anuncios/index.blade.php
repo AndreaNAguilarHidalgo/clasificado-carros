@@ -70,13 +70,16 @@
                             <td>{{ $anuncio->kilometraje}}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
                             <td>
-                              <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
+                              <!-- <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                   <input type="submit" class="btn btn-danger d-block mb-2 w-100" value="Eliminar &times;">
 
-                              </form>
-                              <eliminar-anuncio></eliminar-anuncio>
+                              </form>-->
+
+                              <eliminar-anuncio anuncio-id={{ $anuncio->id }}
+                              ></eliminar-anuncio>
+
                               <a href="{{ route('anuncios.edit', ['anuncio' => $anuncio->id]) }}" 
                                  class="btn btn-dark d-block mb-2 w-100">Editar
                                     <i class="icono fas fa-edit"></i>

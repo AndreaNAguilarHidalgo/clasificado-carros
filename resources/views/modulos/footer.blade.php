@@ -7,4 +7,4 @@
         echo date(" Y ");
       @endphp 
     <a href="https://www.devitm.com/">DevITM</a>.</strong>
-  </footer>
+</footer>

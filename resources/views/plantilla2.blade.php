@@ -7,7 +7,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	@yield('styles')
+	
 	<!--=====================================
 	PLUGINS DE CSS
 	======================================-->
@@ -27,7 +27,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-
+	@yield('styles')
 	<!--=====================================
 	PLUGINS DE JS
 	======================================-->
@@ -50,23 +50,27 @@
     {{-- JS AdminLTE --}}
 	<script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 
+
+	{{-- Scripts --}}
+	 <script src="{{ asset('js/app.js') }}" defer></script>
+
 </head>
 
 <body class="sidebar-mini layout-fixed" style="height: auto;">
-    <div class="wrapper">
-        @include('modulos.header')
+	<div id="app">
+		<div class="wrapper">
+			@include('modulos.header')
 
-        @include('modulos.sidebaranu')
+			@include('modulos.sidebaranu')
 
-		@yield('botones')
+			@yield('botones')
 
-		@yield('content')
+			@yield('content')
 
-        @include('modulos.footer')
+			@include('modulos.footer')
 
-		@yield('scripts')
-    </div>
+			@yield('scripts')
+		</div>
+	</div>
 </body>
-
-
 </html>
