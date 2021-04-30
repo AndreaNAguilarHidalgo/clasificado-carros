@@ -94,11 +94,11 @@ class CreateAnunciosTable extends Migration
                         ->onDelete('cascade');
 
             // FK de municipios
-            $table->foreignId('municipio_id')
+            /*$table->foreignId('municipio_id')
                   ->references('id')
                   ->on('municipios')
                   ->comments(' FK de municipios')
-                  ->onDelete('cascade');
+                  ->onDelete('cascade');*/
 
             $table->timestamps();
 
