@@ -12,6 +12,6 @@ class Estado extends Model
     // Relación 1:n
     public function municipios(){
 
-        return $this->belongsTo(Municipio::class);
+        return $this->hasMany(Municipio::class);
     }
 }

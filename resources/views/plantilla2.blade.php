@@ -24,10 +24,7 @@
 	{{-- google fonts --}}
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-	@yield('styles')
+    
 	<!--=====================================
 	PLUGINS DE JS
 	======================================-->
@@ -53,6 +50,13 @@
 
 	{{-- Scripts --}}
 	 <script src="{{ asset('js/app.js') }}" defer></script>
+
+
+	 <!-- Styles -->
+	 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+	 @yield('styles')
+
 
 </head>
 

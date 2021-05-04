@@ -12,13 +12,13 @@ class EstadoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('estado')->insert([
+        DB::table('estados')->insert([
             'estado'=> 'Estado de México',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('estado')->insert([
+        DB::table('estados')->insert([
             'estado'=> 'CDMX',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

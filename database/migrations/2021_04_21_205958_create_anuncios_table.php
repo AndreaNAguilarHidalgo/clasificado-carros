@@ -15,7 +15,7 @@ class CreateAnunciosTable extends Migration
     {
         // Tablas de municipios y estados 
 
-        Schema::create('estado', function (Blueprint $table){
+        Schema::create('estados', function (Blueprint $table){
             $table -> id();
             $table -> string('estado');
 
@@ -28,7 +28,7 @@ class CreateAnunciosTable extends Migration
             
             $table->foreignId('estado_id')
                   ->references('id')
-                  ->on('estado')
+                  ->on('estados')
                   ->comment('Referencia del estado');
 
 
@@ -94,11 +94,11 @@ class CreateAnunciosTable extends Migration
                         ->onDelete('cascade');
 
             // FK de municipios
-            /*$table->foreignId('municipio_id')
+            $table->foreignId('municipio_id')
                   ->references('id')
                   ->on('municipios')
                   ->comments(' FK de municipios')
-                  ->onDelete('cascade');*/
+                  ->onDelete('cascade');
 
             $table->timestamps();
 
@@ -112,7 +112,7 @@ class CreateAnunciosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estado');
+        Schema::dropIfExists('estados');
         Schema::dropIfExists('municipios');
         Schema::dropIfExists('combustibles');
         Schema::dropIfExists('condicions');

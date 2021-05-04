@@ -83,8 +83,43 @@ class MunicipiosSeeder extends Seeder
         ]);
 
         DB::table('municipios')->insert([
-            'municipio'=> 'Temoaya',
+            'municipio'=> 'Nezahualcóyotl',
             'estado_id' => '1',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Naucalpan de Juárez',
+            'estado_id' => '1',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Ecatepec de Morelos',
+            'estado_id' => '1',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Iztapalapa',
+            'estado_id' => '2',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Gustavo A. Madero',
+            'estado_id' => '2',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Cuauhtémoc',
+            'estado_id' => '2',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
