@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Anuncio;
 use App\Combustible;
 use App\Condicion;
+use App\Estado;
+use App\Municipio;
 use App\TipoCarros;
 use Illuminate\Http\Request;
 
@@ -34,8 +36,10 @@ class AnuncioController extends Controller
         $tipoCarros = TipoCarros::all(['id', 'nombre']);
         $combustible = Combustible::all(['id', 'tipo']);
         $condicion = Condicion::all(['id', 'estado']);
+        $municipio = Municipio::all(['id', 'municipio']);
+        $estado = Estado::all(['id', 'estado']);
 
-        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion'));
+        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado'));
     }
 
     /**
@@ -70,6 +74,7 @@ class AnuncioController extends Controller
             'total_puertas' => $data['total_puertas'],
             'precio' => $data['precio'],
             'kilometraje' => $data['kilometraje'],
+            'municipio' => $data['municipio'],
             'descripcion' => $data['descripcion'],
         ]);
 

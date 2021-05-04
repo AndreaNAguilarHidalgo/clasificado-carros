@@ -32,4 +32,10 @@ class Anuncio extends Model
      {
          return $this->belongsTo(Condicion::class, 'condicion_id');
      }
+
+     //Obtener información del Municipio donde se encuentra el automóvil
+     public function municipioCarro()
+     {
+         return $this->belongsTo(Estado::class, 'municipio_id');
+     }
 }
