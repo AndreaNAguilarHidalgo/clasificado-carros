@@ -52,6 +52,8 @@
                       <th scole="col">Número de Puertas</th>
                       <th scole="col">Precio</th>
                       <th scole="col">Kilometraje</th>
+                      <th scole="col">Estado</th>
+                      <th scole="col">Municipio</th>
                       <th scole="col">Descripción</th>
                       <th scole="col">Acciones</th>
                     </tr>
@@ -68,6 +70,8 @@
                             <td>{{ $anuncio->total_puertas}}</td>
                             <td>{{ $anuncio->precio}}</td>
                             <td>{{ $anuncio->kilometraje}}</td>
+                            <td>{{ $anuncio->estadoCarro->estado }}</td>
+                            <td>{{ $anuncio->municipioCarro->municipio }}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
                             <td>
                               <!-- <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Anuncio extends Model
 {
     protected $fillable = [
-        'titulo', 'año', 'total_puertas', 'precio', 'kilometraje', 'descripcion', 'carro_id', 'condicion_id', 'combustible_id'
+        'titulo', 'año', 'total_puertas', 'precio', 
+        'kilometraje', 'descripcion', 'carro_id', 'condicion_id', 
+        'combustible_id', 'estado_id', 'municipio_id'
     ];
 
      // Obtener la información del usuario vía FK
@@ -36,6 +38,11 @@ class Anuncio extends Model
      //Obtener información del Municipio donde se encuentra el automóvil
      public function municipioCarro()
      {
-         return $this->belongsTo(Estado::class, 'municipio_id');
+         return $this->belongsTo(Municipio::class, 'municipio_id');
+     }
+
+     public function estadoCarro()
+     {
+         return $this->belongsTo(Estado::class, 'estado_id');
      }
 }

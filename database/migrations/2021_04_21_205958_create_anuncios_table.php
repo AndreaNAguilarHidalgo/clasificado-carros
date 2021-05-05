@@ -93,6 +93,13 @@ class CreateAnunciosTable extends Migration
                         ->comments(' Condición del Auto')
                         ->onDelete('cascade');
 
+            // FK de estados
+            $table->foreignId('estado_id')
+                  ->references('id')
+                  ->on('estados')
+                  ->comments(' FK de estados')
+                  ->onDelete('cascade');
+
             // FK de municipios
             $table->foreignId('municipio_id')
                   ->references('id')

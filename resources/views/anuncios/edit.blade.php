@@ -102,7 +102,7 @@
                                         @endforeach
                                     </select>
 
-                                    @error('tipo_carro')
+                                    @error('condicion')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{$message}}</strong>
                                         </span>
@@ -175,6 +175,46 @@
                                                 <strong>{{$message}}</strong>
                                             </span>
                                         @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="estado">Estado</label>
+                                    <select name="estado" class="form-control @error('estado') is-invalid @enderror" id="estado">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($estadoCarro as $estado)
+                                            <option value="{{ $estado->id }}" 
+                                                    {{ $anuncio->estado_id == $estado->id ? 'selected' : '' }} > 
+                                                            {{ $estado->estado }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('estado')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="municipio">Municipio</label>
+                                    <select name="municipio" class="form-control @error('municipio') is-invalid @enderror" id="municipio">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($municipioCarro as $municipio)
+                                            <option value="{{ $municipio->id }}" 
+                                                    {{ $anuncio->municipio_id == $municipio->id ? 'selected' : '' }} > 
+                                                            {{ $municipio->municipio }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('municipio')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group mt-3">

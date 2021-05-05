@@ -60,6 +60,8 @@ class AnuncioController extends Controller
             'total_puertas' => 'required',
             'precio' => 'required',
             'kilometraje'=>'required',
+            'municipio' => 'required',
+            'estado' => 'required',
             'descripcion' => 'required'
 
         ]);
@@ -74,7 +76,8 @@ class AnuncioController extends Controller
             'total_puertas' => $data['total_puertas'],
             'precio' => $data['precio'],
             'kilometraje' => $data['kilometraje'],
-            'municipio' => $data['municipio'],
+            'municipio_id' => $data['municipio'],
+            'estado_id' => $data['estado'],
             'descripcion' => $data['descripcion'],
         ]);
 
@@ -107,8 +110,11 @@ class AnuncioController extends Controller
         $tipoCarros = TipoCarros::all(['id', 'nombre']);
         $tipoCombustible = Combustible::all(['id', 'tipo']);
         $condicionCarro = Condicion::all(['id', 'estado']);
+        $municipioCarro = Municipio::all(['id', 'municipio']);
+        $estadoCarro = Estado::all(['id', 'estado']);
 
-        return view('anuncios.edit', compact('tipoCarros','tipoCombustible','condicionCarro','anuncio'));
+        return view('anuncios.edit', 
+               compact('tipoCarros','tipoCombustible','condicionCarro','anuncio','municipioCarro', 'estadoCarro'));
     }
 
     /**
@@ -133,6 +139,8 @@ class AnuncioController extends Controller
             'total_puertas' => 'required',
             'precio' => 'required',
             'kilometraje'=>'required',
+            'municipio' => 'required',
+            'estado' => 'required',
             'descripcion' => 'required'
 
         ]);
@@ -147,6 +155,8 @@ class AnuncioController extends Controller
         $anuncio->precio = $data['precio'];
         $anuncio->kilometraje = $data['kilometraje'];
         $anuncio->descripcion = $data['descripcion'];
+        $anuncio->municipio_id = $data['municipio'];
+        $anuncio->estado_id = $data['estado'];
 
         $anuncio->save();
 

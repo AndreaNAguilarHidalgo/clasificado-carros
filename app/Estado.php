@@ -14,4 +14,8 @@ class Estado extends Model
 
         return $this->hasMany(Municipio::class);
     }
+
+    public function anuncios(){
+        return $this->hasMany(Anuncio::class);
+    }
 }
