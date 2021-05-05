@@ -36,7 +36,7 @@ class AnuncioController extends Controller
         $tipoCarros = TipoCarros::all(['id', 'nombre']);
         $combustible = Combustible::all(['id', 'tipo']);
         $condicion = Condicion::all(['id', 'estado']);
-        $municipio = Municipio::all(['id', 'municipio']);
+        $municipio = Municipio::all(['id', 'municipio', 'estado_id']);
         $estado = Estado::all(['id', 'estado']);
 
         return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado'));

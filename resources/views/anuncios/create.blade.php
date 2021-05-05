@@ -181,11 +181,11 @@
 
                                 <div class="form-group">
                                     <label for="municipio">Municipio</label>
-                                    <select name="municipio" class="form-control @error('municipio') is-invalid @enderror" id="municipio">
+                                    <select name="municipio" class="form-control @error('municipio') is-invalid @enderror" 
+                                            id="municipio">
                                         <option value="">-- Seleccione --</option>
-
                                         @foreach ($municipio as $municipio)
-                                        <option value="{{ $municipio->id }}" 
+                                        <option value="{{ $municipio }}" 
                                                 {{ old('municipio') == $municipio->id ? 'selected' : '' }}> 
                                                 {{ $municipio->municipio }}
                                         </option>
