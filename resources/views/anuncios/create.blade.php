@@ -163,12 +163,10 @@
                                 <div class="form-group">
                                     <label for="estado">Estado</label>
                                     <select name="estado" class="form-control @error('estado') is-invalid @enderror" id="estado">
-                                        <option value="">-- Seleccione --</option>
+                                        <option value="">-- Selecciona un estado --</option>
 
                                         @foreach ($estado as $estado)
-                                        <option value="{{ $estado->id }}" 
-                                                {{ old('estado') == $estado->id ? 'selected' : '' }}> {{ $estado->estado }}
-                                        </option>
+                                        <option value="{{ $estado->id }}"> {{ $estado->estado }} </option>
                                         @endforeach
                                     </select>
 
@@ -183,13 +181,7 @@
                                     <label for="municipio">Municipio</label>
                                     <select name="municipio" class="form-control @error('municipio') is-invalid @enderror" 
                                             id="municipio">
-                                        <option value="">-- Seleccione --</option>
-                                        @foreach ($municipio as $municipio)
-                                        <option value="{{ $municipio }}" 
-                                                {{ old('municipio') == $municipio->id ? 'selected' : '' }}> 
-                                                {{ $municipio->municipio }}
-                                        </option>
-                                        @endforeach
+                                        <option value="">-- Selecciona un municipio --</option>
                                     </select>
 
                                     @error('municipio')
@@ -232,4 +224,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js" 
     integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ==" 
     crossorigin="anonymous" defer></script>
+    <script src=" {{ asset('js/select.js')}}"></script>
 @endsection

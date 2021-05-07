@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class AnuncioController extends Controller
 {
+
+    public function byState($id)
+    {
+        return Municipio::where('estado_id', $id)->get();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,13 +36,15 @@ class AnuncioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Estado $estado)
     {
         $tipoCarros = TipoCarros::all(['id', 'nombre']);
         $combustible = Combustible::all(['id', 'tipo']);
         $condicion = Condicion::all(['id', 'estado']);
-        $municipio = Municipio::all(['id', 'municipio', 'estado_id']);
-        $estado = Estado::all(['id', 'estado']);
+        $estado = Estado::all();
+        $municipio = Municipio::all(['id', 'municipio','estado_id']);
+
+        //dd($municipio1);
 
         return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado'));
     }
