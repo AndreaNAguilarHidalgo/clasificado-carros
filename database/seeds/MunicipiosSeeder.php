@@ -123,5 +123,54 @@ class MunicipiosSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Jojutla',
+            'estado_id' => '3',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Tepoztlán',
+            'estado_id' => '3',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Ocampo',
+            'estado_id' => '3',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Zacatepec',
+            'estado_id' => '3',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'San Miguel de Allende',
+            'estado_id' => '4',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Celaya',
+            'estado_id' => '4',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('municipios')->insert([
+            'municipio'=> 'Ocampo',
+            'estado_id' => '4',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
     }
 }
