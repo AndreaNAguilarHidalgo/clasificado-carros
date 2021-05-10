@@ -1,7 +1,14 @@
 @extends('plantilla2')
 
 @section('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css" integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css" 
+      integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg==" 
+      crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" 
+      integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" 
+      crossorigin="anonymous" />
+
 @endsection
 
 
@@ -204,6 +211,12 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="imagenes">Agregar Imágenes: </label>
+
+                                    <div id="dropzoneImg" class="dropzone rounded bg-gray-100"></div>
+                                </div>
+
+                                <div class="form-group">
                                     <input type="submit" class="btn btn-primary" value="Agregar publicación">
                                 </div>
                             </form>
@@ -222,7 +235,23 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js" 
-    integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ==" 
-    crossorigin="anonymous" defer></script>
+            integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ==" 
+            crossorigin="anonymous" defer></script>
     <script src=" {{ asset('js/select.js')}}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js" 
+            integrity="sha512-llCHNP2CQS+o3EUK2QFehPlOngm8Oa7vkvdUpEFN71dVOf3yAj9yMoPdS5aYRTy8AEdVtqUBIsVThzUSggT0LQ==" 
+            crossorigin="anonymous"></script>
+
+    <script>
+        Dropzone.autoDiscover = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dropzone
+
+            const dropzoneImg = new Dropzone('#dropzoneImg',{
+                url: "/imgs",
+            })
+        });
+    </script>
 @endsection
