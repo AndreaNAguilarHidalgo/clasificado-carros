@@ -55,7 +55,9 @@
                       <th scole="col">Estado</th>
                       <th scole="col">Municipio</th>
                       <th scole="col">Descripción</th>
+                      <th scole="col">Imágenes</th>
                       <th scole="col">Acciones</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
@@ -73,6 +75,7 @@
                             <td>{{ $anuncio->estadoCarro->estado }}</td>
                             <td>{{ $anuncio->municipioCarro->municipio }}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
+                            <td>{{ $anuncio->imagen }}</td>
                             <td>
                               <!-- <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
                                 @csrf

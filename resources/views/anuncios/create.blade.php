@@ -9,6 +9,8 @@
       integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" 
       crossorigin="anonymous" />
 
+<link rel="stylesheet" href=" {{ asset('css/app.css') }} ">
+
 @endsection
 
 
@@ -214,6 +216,16 @@
                                     <label for="imagenes">Agregar Imágenes: </label>
 
                                     <div id="dropzoneImg" class="dropzone rounded bg-gray-100"></div>
+                                    <input id="imagen" type="hidden" name="imagen" value=" {{ old('imagen') }} ">
+
+                                    @error('imagen')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
+                                    
+                                    <p id="error"></p>
+
                                 </div>
 
                                 <div class="form-group">
@@ -247,11 +259,67 @@
         Dropzone.autoDiscover = false;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Dropzone
 
+            // Dropzone
             const dropzoneImg = new Dropzone('#dropzoneImg',{
-                url: "/imgs",
-            })
-        });
+                url: "/anuncios/imagen",
+                dictDefaultMessage: 'Sube aquí tus imágenes',
+                acceptedFiles: ".png,.jpg,.jpeg,.gif,.bmp",
+                addRemoveLinks: true,
+                dictRemoveFile: "Borrar imagen",
+                maxFiles: 1,
+
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                },
+
+                init: function(){
+                    if( document.querySelector('#imagen').value.trim() ){
+                        let imagenPublicada = {};
+
+                        imagenPublicada.size = 1234;
+                        imagenPublicada.name = document.querySelector('#imagen').value;
+
+                        // Agregar hacía dropzone
+                        this.options.addedfile.call(this, imagenPublicada);
+                        this.options.thumbnail.call(this, imagenPublicada, `/storage/anuncios/${imagenPublicada.name}`);
+
+
+                        imagenPublicada.previewElement.classList.add('dz-sucess');
+                        imagenPublicada.previewElement.classList.add('dz-complete');
+
+                    }
+                },
+
+                success: function(file, response){
+                    console.log(response.correcto);
+                    document.querySelector('#error').textContent = '';
+
+                    // Colocar la respuesta del servidor en input hidden
+                    document.querySelector('#imagen').value = response.correcto;
+
+                    // Añadir al objeto de imagen el nombre del servidor
+                    file.nombreServidor = response.correcto;
+                },
+                maxfilesexceeded: function(file)
+                {
+                    if(this.files[1] != null)
+                    {
+                        this.removeFile(this.files[0]); // Eliminar el archivo anterior
+                        this.addFile(file); // Agrega el nuevo archivo
+                    }
+                },
+                removedfile: function(file, response){
+                    file.previewElement.parentNode.removeChild(file.previewElement);
+
+                    params = {
+                        imagen: file.nombreServidor ?? document.querySelector('#imagen').value
+                    }
+
+                    axios.post('/anuncios/borrarimagen', params)
+                        .then(respuesta => console.log(respuesta))
+                }
+            });
+        })
     </script>
 @endsection

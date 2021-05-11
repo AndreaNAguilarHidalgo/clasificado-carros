@@ -33,4 +33,8 @@ Auth::routes(['verify' => true]); /*Activando la verificación de correo*/
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
+// Ruta Para subir imágenes
+Route::post('/anuncios/imagen', 'AnuncioController@imagen')->name('anuncios.imagen');
+Route::post('/anuncios/borrarimagen', 'AnuncioController@borrarimagen')->name('anuncios.borrar');
+
 Route::get('/home', 'HomeController@index')->name('home');

@@ -69,6 +69,7 @@ class CreateAnunciosTable extends Migration
             $table->double('precio');
             $table->double('kilometraje');
             $table->text('descripcion');
+            $table->string('imagen');
             $table->foreignId('user_id')
                         ->references('id')
                         ->on('users')

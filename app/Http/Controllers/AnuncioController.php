@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Anuncio;
-use App\Combustible;
-use App\Condicion;
 use App\Estado;
+use App\Anuncio;
+use App\Condicion;
 use App\Municipio;
 use App\TipoCarros;
+use App\Combustible;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AnuncioController extends Controller
 {
@@ -59,7 +60,7 @@ class AnuncioController extends Controller
     {
         // Validación
         $data = $request->validate([
-            'titulo'=> 'required|min:6',
+            'titulo'=> 'required|min:2',
             'año' => 'required',
             'combustible' => 'required',
             'condicion' => 'required',
@@ -69,7 +70,8 @@ class AnuncioController extends Controller
             'kilometraje'=>'required',
             'municipio' => 'required',
             'estado' => 'required',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'imagen' => 'required'
 
         ]);
 
@@ -86,6 +88,7 @@ class AnuncioController extends Controller
             'municipio_id' => $data['municipio'],
             'estado_id' => $data['estado'],
             'descripcion' => $data['descripcion'],
+            'imagen' => $data['imagen'],
         ]);
 
         // Redirección
@@ -138,7 +141,7 @@ class AnuncioController extends Controller
 
         // Validación
         $data = $request->validate([
-            'titulo'=> 'required|min:6',
+            'titulo'=> 'required|min:2',
             'año' => 'required',
             'tipo_carro'=>'required',
             'combustible'=>'required',
@@ -148,7 +151,7 @@ class AnuncioController extends Controller
             'kilometraje'=>'required',
             'municipio' => 'required',
             'estado' => 'required',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
 
         ]);
 
@@ -186,5 +189,31 @@ class AnuncioController extends Controller
 
         // Redireccionamiento
         return redirect()->action('AnuncioController@index');
+    }
+
+    public function imagen(Request $request)
+    {
+        $imagen = $request->file('file');
+        $nombreImagen = time() . '.' . $imagen->extension();
+
+        $imagen->move(public_path('storage/anuncios'), $nombreImagen);
+
+        return response()->json(['correcto' => $nombreImagen]);
+    }
+
+    // Borrar imagen vía Ajax
+    public function borrarimagen(Request $request)
+    {
+        if($request->ajax())
+        {
+            $imagen =  $request->get('imagen');
+
+            if( File::exists( 'storage/anuncios/' . $imagen ) )
+            {
+                File::delete( 'storage/anuncios/' . $imagen );
+            }
+
+            return response('Imagen eliminada', 200);
+        }
     }
 }

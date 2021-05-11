@@ -9,7 +9,7 @@ class Anuncio extends Model
     protected $fillable = [
         'titulo', 'año', 'total_puertas', 'precio', 
         'kilometraje', 'descripcion', 'carro_id', 'condicion_id', 
-        'combustible_id', 'estado_id', 'municipio_id'
+        'combustible_id', 'estado_id', 'municipio_id', 'imagen'
     ];
 
      // Obtener la información del usuario vía FK
