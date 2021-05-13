@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AnuncioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnuncioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,7 @@ Route::put('/anuncios/{anuncio}', 'AnuncioController@update')->name('anuncios.up
 Route::post('/anuncios', 'AnuncioController@store')->name('anuncios.store');
 Route::get('/anuncios/{anuncio}', 'AnuncioController@show')->name('anuncios.show');
 Route::delete('/anuncios/{anuncio}', 'AnuncioController@destroy')->name('anuncios.destroy');
+//Route::resource('anuncios', AnuncioController::class);
 
 Route::view('/welcome', 'welcome');
 

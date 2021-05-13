@@ -10,7 +10,6 @@
       crossorigin="anonymous" />
 
 <link rel="stylesheet" href=" {{ asset('css/app.css') }} ">
-
 @endsection
 
 
@@ -213,7 +212,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="imagenes">Agregar Imágenes: </label>
+                                    <label for="imagen">Agregar Imágenes: </label>
 
                                     <div id="dropzoneImg" class="dropzone rounded bg-gray-100"></div>
                                     <input id="imagen" type="hidden" name="imagen" value=" {{ old('imagen') }} ">
@@ -276,7 +275,6 @@
                 init: function(){
                     if( document.querySelector('#imagen').value.trim() ){
                         let imagenPublicada = {};
-
                         imagenPublicada.size = 1234;
                         imagenPublicada.name = document.querySelector('#imagen').value;
 

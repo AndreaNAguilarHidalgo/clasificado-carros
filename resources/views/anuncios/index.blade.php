@@ -45,7 +45,7 @@
                   <thead>
                     <tr>
                       <th scole="col">Título</th>
-                      <th scole="col">Año</th>
+                      <th scole="col">Modelo</th>
                       <th scole="col">Categoría</th>
                       <th scole="col">Tipo de Combustible</th>
                       <th scole="col">Condición del Auto</th>
@@ -87,11 +87,11 @@
                               <eliminar-anuncio anuncio-id={{ $anuncio->id }}
                               ></eliminar-anuncio>
 
-                              <a href="{{ route('anuncios.edit', ['anuncio' => $anuncio->id]) }}" 
+                              <a href="{{ route('anuncios.edit', $anuncio->id) }}" 
                                  class="btn btn-dark d-block mb-2 w-100">Editar
                                     <i class="icono fas fa-edit"></i>
                               </a>
-                              <a href="{{ route('anuncios.show', ['anuncio' => $anuncio->id]) }}" 
+                              <a href="{{ route('anuncios.show', $anuncio->id) }}" 
                                     class="btn btn-success d-block mb-2 w-100">Ver
                                     <i class="fas fa-eye"></i>
                               </a>

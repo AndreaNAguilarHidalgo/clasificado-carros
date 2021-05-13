@@ -29,7 +29,7 @@ class AnuncioController extends Controller
 
         $anuncios = Anuncio::where('user_id', $usuario->id)->paginate(10);
 
-        return view('anuncios.index')->with('anuncios', $anuncios)->with('usuario', $usuario);
+        return view('anuncios.index', compact('anuncios', 'usuario'));
     }
 
     /**
@@ -37,7 +37,7 @@ class AnuncioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Estado $estado)
+    public function create()
     {
         $tipoCarros = TipoCarros::all(['id', 'nombre']);
         $combustible = Combustible::all(['id', 'tipo']);
@@ -194,7 +194,7 @@ class AnuncioController extends Controller
     public function imagen(Request $request)
     {
         $imagen = $request->file('file');
-        $nombreImagen = time() . '.' . $imagen->extension();
+        $nombreImagen = time().'.'.$imagen->extension();
 
         $imagen->move(public_path('storage/anuncios'), $nombreImagen);
 
@@ -208,9 +208,9 @@ class AnuncioController extends Controller
         {
             $imagen =  $request->get('imagen');
 
-            if( File::exists( 'storage/anuncios/' . $imagen ) )
+            if( File::exists( 'storage/anuncios/'.$imagen ) )
             {
-                File::delete( 'storage/anuncios/' . $imagen );
+                File::delete( 'storage/anuncios/'.$imagen );
             }
 
             return response('Imagen eliminada', 200);
