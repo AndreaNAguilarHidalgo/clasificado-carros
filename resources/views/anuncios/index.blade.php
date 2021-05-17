@@ -1,4 +1,6 @@
-@extends('plantilla2')
+@extends('layouts.anunciante')
+
+@section('title', 'Anuncios')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->

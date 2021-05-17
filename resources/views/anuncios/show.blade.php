@@ -1,4 +1,6 @@
-@extends('plantilla2')
+@extends('layouts.anunciante')
+
+@section('title', 'Ver anuncio')
 
 @section('content')
 <div class="content-wrapper">

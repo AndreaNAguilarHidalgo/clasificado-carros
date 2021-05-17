@@ -1,15 +1,15 @@
-@extends('plantilla2')
+@extends('layouts.anunciante')
+
+@section('title', 'Crear anuncio nuevo')
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css" 
       integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg==" 
       crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" 
-      integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" 
-      crossorigin="anonymous" />
-
-<link rel="stylesheet" href=" {{ asset('css/app.css') }} ">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.min.css" 
+            integrity="sha512-0ns35ZLjozd6e3fJtuze7XJCQXMWmb4kPRbb+H/hacbqu6XfIX0ZRGt6SrmNmv5btrBpbzfdISSd8BAsXJ4t1Q==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 
@@ -245,13 +245,15 @@
 @endsection
 
 @section('scripts')
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js" 
             integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ==" 
             crossorigin="anonymous" defer></script>
+
     <script src=" {{ asset('js/select.js')}}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js" 
-            integrity="sha512-llCHNP2CQS+o3EUK2QFehPlOngm8Oa7vkvdUpEFN71dVOf3yAj9yMoPdS5aYRTy8AEdVtqUBIsVThzUSggT0LQ==" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.min.js" 
+            integrity="sha256-OG/103wXh6XINV06JTPspzNgKNa/jnP1LjPP5Y3XQDY=" 
             crossorigin="anonymous"></script>
 
     <script>
@@ -259,62 +261,55 @@
 
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Dropzone
-            const dropzoneImg = new Dropzone('#dropzoneImg',{
+            const dropzoneImg = new Dropzone('#dropzoneImg', {
                 url: "/anuncios/imagen",
-                dictDefaultMessage: 'Sube aquí tus imágenes',
+                dictDefaultMessage: 'Sube aquí tu archivo',
                 acceptedFiles: ".png,.jpg,.jpeg,.gif,.bmp",
                 addRemoveLinks: true,
-                dictRemoveFile: "Borrar imagen",
+                dictRemoveFile: 'Borrar Archivo',
                 maxFiles: 1,
-
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
+                init: function() {
+                    if(document.querySelector('#imagen').value.trim() ) {
+                       let imagenPublicada = {};
+                       imagenPublicada.size = 1234;
+                       imagenPublicada.name = document.querySelector('#imagen').value;
+                       
+                       this.options.addedfile.call(this, imagenPublicada);
+                       this.options.thumbnail.call(this, imagenPublicada, `/storage/anuncios/${imagenPublicada.name}`);
 
-                init: function(){
-                    if( document.querySelector('#imagen').value.trim() ){
-                        let imagenPublicada = {};
-                        imagenPublicada.size = 1234;
-                        imagenPublicada.name = document.querySelector('#imagen').value;
-
-                        // Agregar hacía dropzone
-                        this.options.addedfile.call(this, imagenPublicada);
-                        this.options.thumbnail.call(this, imagenPublicada, `/storage/anuncios/${imagenPublicada.name}`);
-
-
-                        imagenPublicada.previewElement.classList.add('dz-sucess');
-                        imagenPublicada.previewElement.classList.add('dz-complete');
-
-                    }
+                       imagenPublicada.previewElement.classList.add('dz-sucess');
+                       imagenPublicada.previewElement.classList.add('dz-complete');
+                    } 
                 },
-
-                success: function(file, response){
+                success: function(file, response) {
+                    // console.log(file);
+                    // console.log(response);
                     console.log(response.correcto);
                     document.querySelector('#error').textContent = '';
 
-                    // Colocar la respuesta del servidor en input hidden
+                    // Coloca la respuesta del servidor en el input hidden
                     document.querySelector('#imagen').value = response.correcto;
 
-                    // Añadir al objeto de imagen el nombre del servidor
+                    // Añadir al objeto de archivo el nombre del servidor
                     file.nombreServidor = response.correcto;
                 },
-                maxfilesexceeded: function(file)
-                {
-                    if(this.files[1] != null)
-                    {
-                        this.removeFile(this.files[0]); // Eliminar el archivo anterior
-                        this.addFile(file); // Agrega el nuevo archivo
+                maxfilesexceeded: function(file) {
+                    if( this.files[1] != null ) {
+                        this.removeFile(this.files[0]); // eliminar el archivo anterior
+                        this.addFile(file); // Agregar el nuevo archivo 
                     }
-                },
-                removedfile: function(file, response){
+                }, 
+                removedfile: function(file, response) {
                     file.previewElement.parentNode.removeChild(file.previewElement);
 
                     params = {
                         imagen: file.nombreServidor ?? document.querySelector('#imagen').value
                     }
 
-                    axios.post('/anuncios/borrarimagen', params)
+                    axios.post('/anuncios/borrarimagen', params )
                         .then(respuesta => console.log(respuesta))
                 }
             });

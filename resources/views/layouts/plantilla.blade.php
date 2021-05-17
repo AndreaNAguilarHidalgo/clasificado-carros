@@ -2,14 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-
-	<title>Anunciante | Clasificado de carros</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Administración | Clasificado de carros</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
 	
 	<!--=====================================
 	PLUGINS DE CSS
@@ -27,12 +23,8 @@
 	{{-- google fonts --}}
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-	 <!-- Styles -->
-	 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-	 @yield('styles')
 
-    
 	<!--=====================================
 	PLUGINS DE JS
 	======================================-->
@@ -47,7 +39,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
 	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" defer></script>
 
     {{-- jquery.overlayScrollbars.min.js --}}
 	<script src="{{ url('/') }}/js/plugins/jquery.overlayScrollbars.min.js"></script>
@@ -55,33 +47,18 @@
     {{-- JS AdminLTE --}}
 	<script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 
-
-	{{-- Scripts --}}
-	<script src="{{ url('/') }}/js/app.js" defer></script>
-	<!--<script src="{{ asset('js/app.js') }}" defer></script>-->
-
-
-	
-
-
 </head>
 
 <body class="sidebar-mini layout-fixed" style="height: auto;">
-	<div id="app">
-		<div class="wrapper">
-			@include('modulos.header')
+    <div class="wrapper">
+        @include('modulos.header')
 
-			@include('modulos.sidebaranu')
+        @include('modulos.sidebar')
 
-			@yield('botones')
+        @yield('content')
 
-			@yield('content')
-
-			@include('modulos.footer')
-
-		</div>
-
-		@yield('scripts')
-	</div>
+        @include('modulos.footer')
+    </div>
 </body>
+
 </html>
