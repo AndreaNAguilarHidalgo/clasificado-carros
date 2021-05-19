@@ -1,8 +1,10 @@
 <?php
 
+use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnuncioController;
+use App\Http\Controllers\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,9 @@ Route::post('/anuncios/imagen', 'AnuncioController@imagen')->name('anuncios.imag
 Route::post('/anuncios/borrarimagen', 'AnuncioController@borrarimagen')->name('anuncios.borrar');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Pruebas para subir imagenes con dropzone
+Route::resource('gallery', 'GalleryController');
+Route::get('getimages', 'GalleryController@getImages');
+Route::post('image/delete', 'GalleryController@destroy');
