@@ -94,7 +94,9 @@ class GalleryController extends Controller
         $filename =  $request->get('filename');
         Gallery::where('filename',$filename)->delete();
         $path = public_path('uploads/gallery/').$filename;
-        if (file_exists($path)) {
+
+        if (file_exists($path))
+        {
             unlink($path);
         }
         return response()->json(['success'=>$filename]);
@@ -103,14 +105,20 @@ class GalleryController extends Controller
     public function getImages()
     {
         $images = Gallery::all()->toArray();
-        foreach($images as $image){
+
+        foreach($images as $image)
+        {
             $tableImages[] = $image['filename'];
         }
+
         $storeFolder = public_path('uploads/gallery');
         $file_path = public_path('uploads/gallery/');
         $files = scandir($storeFolder);
-        foreach ( $files as $file ) {
-            if ($file !='.' && $file !='..' && in_array($file,$tableImages)) {       
+
+        foreach ( $files as $file )
+        {
+            if ($file !='.' && $file !='..' && in_array($file, $tableImages))
+            {       
                 $obj['name'] = $file;
                 $file_path = public_path('uploads/gallery/').$file;
                 $obj['size'] = filesize($file_path);          
