@@ -38,14 +38,14 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-12">
+                <div class="col-sm-6 col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title"> Crear nueva publicación</h3>
                         </div><!-- card-header-->
 
                         <!-- Form -->
-                        <div class="col-md-8 col-lg-12">
+                        <div class="col-md-12 col">
                             <form method="POST" action="{{ route('anuncios.store' )}}" enctype="multipart/form-data" novalidate>
 
                                 @csrf

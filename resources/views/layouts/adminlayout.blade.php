@@ -22,14 +22,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- ======== Dropzone start css ======== -->
-    <link rel="stylesheet" href="{{ asset('css/dropzone/dropzone.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dropzone/custom-style.css') }}">
-
-    <script>
-        var delete_url = "{{ url('image/delete') }}";
-        var gallery = "{{ url('getimages') }}";
-    </script>
 
 </head>
 <body>
@@ -45,9 +37,6 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- LOAD DROPZONE JS FILE -->
-    <script src="{{ asset('js/dropzone/dropzone.min.js') }}"></script>
-    <!-- LOAD DROPZONE CUSTOM JS FILE -->
-    <script src="{{ asset('js/dropzone/dropzone-script.js') }}"></script>
+
 </body>
 </html>

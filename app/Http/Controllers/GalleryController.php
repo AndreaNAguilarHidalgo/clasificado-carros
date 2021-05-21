@@ -14,7 +14,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('gallery/index');
+        return view('gallery.index');
     }
 
     /**
@@ -35,18 +35,11 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('file');
-        $fileInfo = $image->getClientOriginalName();
-        $filename = pathinfo($fileInfo, PATHINFO_FILENAME);
-        $extension = pathinfo($fileInfo, PATHINFO_EXTENSION);
-        $file_name= $filename.'-'.time().'.'.$extension;
-        $image->move(public_path('uploads/gallery'),$file_name);
-            
-        $imageUpload = new Gallery;
-        $imageUpload->original_filename = $fileInfo;
-        $imageUpload->filename = $file_name;
-        $imageUpload->save();
-        return response()->json(['success'=>$file_name]);
+        $request->validate([
+            'file' => 'required|image|max:1024'
+        ]);
+
+        return $request->file('file')->store('public/images');
     }
 
     /**
@@ -102,7 +95,7 @@ class GalleryController extends Controller
         return response()->json(['success'=>$filename]);
     }
 
-    public function getImages()
+    /*public function getImages()
     {
         $images = Gallery::all()->toArray();
 
@@ -129,5 +122,5 @@ class GalleryController extends Controller
         }
         //dd($data);
         return response()->json($data);
-    }
+    }*/
 }

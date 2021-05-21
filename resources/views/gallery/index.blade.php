@@ -8,13 +8,17 @@
 <section class="content container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <h3 class="jumbotron">Multiples Imgs en laravel usando dropzone</h3>
-            <form method="POST" action="{{ url('gallery') }}" class="dropzone" id="dropzone" enctype="multipart/form-data">
-             {{ csrf_field() }}
+            <h3 class="jumbotron">Subir imagen</h3>
+            <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <input type="file" name="file" accept="image/*">
 
-             <div class="dz-default dz-message">
-                <h4>Drop files here or click to upload</h4>
-             </div>
+                    @error('file')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+                <button class="btn btn-primary" type="submit">Enviar</button>
             </form>
         </div>
     </div>

@@ -44,6 +44,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Pruebas para subir imagenes con dropzone
-Route::resource('gallery', 'GalleryController');
-Route::get('getimages', 'GalleryController@getImages');
-Route::post('image/delete', 'GalleryController@destroy');
+Route::get('gallery', 'GalleryController@index')->name('gallery.index');
+Route::post('gallery', 'GalleryController@store')->name('gallery.store');
