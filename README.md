@@ -6,9 +6,9 @@ CAC es una plataforma digital web que se encarga de el anuncio de cualquier auto
 
 Los requerimientos que necesitas para tener la configuración de entorno adecuada en su sistema local son:
 
-* [Apache]
-* [PHP]
-* [MariaDB]
+* [Apache]()
+* [PHP]()
+* [MariaDB]()
 * [Laravel](https://laravel.com/docs/7.x) en cualquiera de su versión de la 7
 * [Composer](https://getcomposer.org/download/)
 * La última versión de [NodeJS](https://nodejs.org/en/download/package-manager/)
@@ -28,14 +28,20 @@ En está instalación estaremos usando el SO Linux, en la siguiente tabla se mos
 | Fedora 25+    | [Instrucciones](https://docs.docker.com/engine/install/fedora/)
 
 ## Clonar Repositorio
-Para clonar repositorio necesitar ingresar el siguiente comando en tu terminal 
+Para clonar repositorio necesitar ingresar el siguiente comando en tu terminal
+
 ` git <link> `: ` git clone https://github.com/AndreaNAguilarHidalgo/clasificado-carros.git `,
+
 ó si quieres renombrar la carpeta en la que se hará la clonación coloca después del link el nombre que quieras
+
 ` git <link> nameApp `: ` git clone https://github.com/AndreaNAguilarHidalgo/clasificado-carros.git nameApp `
 
 Después de tener ya la carpeta con el proyecto cambiamos los permisos 
+
 ` sudo chown -R www-data.www-data /var/www/html/nameApp `
+
 ` sudo chmod -R 755 /var/www/html/nameApp `
+
 ` sudo chmod -R 777 /var/www/html/nameApp/storage `
 
 entramos a la carpeta en donde se encuentra el proyecto ` /nameApp ` y copiamos el archivo ` .env.example `
@@ -55,22 +61,26 @@ Si estás trabajando con apache, debes crear el archivo .conf en tu carpeta ` si
 
 ` sudo nano /etc/apache2/sites-available/nameApp.conf `
 
+
+```html
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost.com
 	ServerName server.name.com
 	DocumentRoot /var/www/html/nameApp/public
 	<Directory /var/www/html/nameApp>
-	    Options Indexes FollowSymLinks
+	    Options Indexes FollowSymLinkss
 	    AllowOverride All
 	    Require all granted
 	</Directory>
 </VirtualHost>
+```
 
 Guardamos los cambios y creamos un enlace sibólico 
 
 ` sudo ln -s /etc/apache2/sites-available/nameApp.conf /etc/apache2/sites-enabled/nameApp.conf `
 
 Y reiniciamos Apache
+
 ` sudo systemctl restart apache2 `
 ## License
 
