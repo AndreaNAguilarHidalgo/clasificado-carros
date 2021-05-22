@@ -22,6 +22,13 @@ En está instalación estaremos usando el SO Linux, en la siguiente tabla se mos
 | Ubuntu 18.04+ | [Instrucciones](https://docs.docker.com/engine/install/ubuntu/)
 | Fedora 25+    | [Instrucciones](https://docs.docker.com/engine/install/fedora/)
 
+## Clonar Repositorio
+Para clonar repositorio necesitar ingresar el siguiente comando en tu terminal 
+`git <link>`: `git clone https://github.com/AndreaNAguilarHidalgo/clasificado-carros.git`,
+ó si quieres renombrar la carpeta en la que se hará la clonación coloca después del link el nombre que quieras
+`git <link> nameFolder`: `git clone https://github.com/AndreaNAguilarHidalgo/clasificado-carros.git nameFolder`
+
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
