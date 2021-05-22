@@ -4,7 +4,8 @@
 
 CAC es una plataforma digital web que se encarga de el anuncio de cualquier automóvil que nuestros anunciantes registrados deseen publicar para que más adelante ellos los puedan vender, teniendo como principal meta la seguridad de aquellos usuarios que estén interesados por alguna de nuestras publicaciones.
 
-Los requerimientos que necesitas para tener la configuración de entorno adecuada en su sistema local son: 
+Los requerimientos que necesitas para tener la configuración de entorno adecuada en su sistema local son:
+
 * [Laravel](https://laravel.com/docs/7.x) en cualquiera de su versión de la 7
 * La última versión de [NodeJS](https://nodejs.org/en/download/package-manager/)
 

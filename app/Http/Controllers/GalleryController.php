@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
@@ -36,7 +38,7 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        /*$request->validate([
             'file' => 'required|image|max:1024'
         ]);
 
@@ -46,9 +48,25 @@ class GalleryController extends Controller
 
         Gallery::create([
             'url' => $url
+        ]);*/
+
+        //return redirect()->route('gallery.index');
+        $request->validate([
+            'file' => 'required|image'
         ]);
 
-        return redirect()->route('gallery.index');
+        $nameImage = Str::random(5).$request->file('file')->getClientOriginalName();
+        $ruta = storage_path().'/app/public/images/'.$nameImage;
+
+        Image::make($request->file('file'))
+                            ->resize(900, null, function ($constraint){
+                                $constraint->aspectRatio();
+                            })
+                            ->save($ruta);
+        Gallery::create([
+            'url' => '/storage/images/'.$nameImage
+        ]);
+
     }
 
     /**
