@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -39,7 +40,15 @@ class GalleryController extends Controller
             'file' => 'required|image|max:1024'
         ]);
 
-        return $request->file('file')->store('public/images');
+        $imagen = $request->file('file')->store('public/images');
+
+        $url = Storage::url($imagen);
+
+        Gallery::create([
+            'url' => $url
+        ]);
+
+        return redirect()->route('gallery.index');
     }
 
     /**

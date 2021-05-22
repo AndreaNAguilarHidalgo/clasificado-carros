@@ -11,7 +11,7 @@ Los requerimientos que necesitas para tener la configuración de entorno adecuad
 También existen varias opciones distintas que se pueden utilizar para poner en marcha un entorno de desarrollo local, en este proyecto se pueden usar:
 
 * Docker
-* *Apache
+* Apache
 
 # Instalación Docker
 En está instalación estaremos usando el SO Linux, en la siguiente tabla se mostrarán las versiones existentes, para que se localice la versión correcta para su SO, así podrá descargarlos y ejecutar el instalador para esa versión:
