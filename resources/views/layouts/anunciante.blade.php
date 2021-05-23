@@ -8,9 +8,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}" defer></script>
-
     @yield('styles')
 
     <!-- Styles -->
@@ -60,7 +57,11 @@
 			@include('modulos.footer')
 
 		</div>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
 		@yield('scripts')
+        @yield('js')
 	</div>
 </body>
 </html>
