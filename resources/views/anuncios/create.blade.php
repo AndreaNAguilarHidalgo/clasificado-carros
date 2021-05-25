@@ -7,9 +7,6 @@
         integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
         crossorigin="anonymous" />
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.min.css" 
-        integrity="sha512-0ns35ZLjozd6e3fJtuze7XJCQXMWmb4kPRbb+H/hacbqu6XfIX0ZRGt6SrmNmv5btrBpbzfdISSd8BAsXJ4t1Q==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css"
         integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -54,12 +51,44 @@
 
                                     @csrf
                                     <div class="form-group">
-                                        <label for="titulo">Título</label>
+                                        <label for="titulo">Nombre</label>
                                         <input type="text" name="titulo"
                                             class="form-control @error('titulo') is-invalid @enderror" id="titulo"
                                             placeholder="Ej. Ford Fiesta" value="{{ old('titulo') }}" />
 
                                         @error('titulo')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="marca">Marca</label>
+                                        <select name="marca" class="form-control @error('marca') is-invalid @enderror"
+                                            id="marca">
+                                            <option value="">-- Selecciona una marca --</option>
+
+                                            @foreach ($marca as $marca)
+                                                <option value="{{ $marca->id }}"> {{ $marca->marca }} </option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('marca')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="modelo">Modelo</label>
+                                        <select name="modelo"
+                                            class="form-control @error('modelo') is-invalid @enderror" id="modelo">
+                                            <option value="">-- Selecciona un modelo --</option>
+                                        </select>
+
+                                        @error('modelo')
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -244,7 +273,7 @@
                                     <div class="form-group">
                                         <label for="imagen">Agregar Imágenes: </label>
 
-                                        <div id="my-awesome-dropzone" class="dropzone rounded bg-gray-100"></div>
+                                        <div id="dropzoneImg" class="dropzone rounded bg-gray-100"></div>
                                         <input id="imagen" type="hidden" name="imagen" value=" {{ old('imagen') }} ">
 
                                         @error('imagen')
@@ -279,100 +308,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"
         integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ=="
         crossorigin="anonymous"></script>
-
-    <script src=" {{ asset('js/select.js') }}"></script>
-@endsection
-@section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+    <script src=" {{ asset('js/selectBrand.js') }}" defer></script>
+    <script src=" {{ asset('js/select.js') }}" defer></script>
 
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.min.js" 
-        integrity="sha256-OG/103wXh6XINV06JTPspzNgKNa/jnP1LjPP5Y3XQDY=" 
-        crossorigin="anonymous"></script> --}}
-
-    <script text="text/javascript">
-
-        Dropzone.options.myAwesomeDropzone = {
-            url: "/anuncios",
-            dictDefaultMessage: "Agregar imagénes aquí",
-            acceptedFiles: "image/*",
-            maxFiles: 4,
-        };
-        /*Dropzone.autoDiscover = false;
-
-        var myAwesomeDropzone = new Dropzone('#my-awesome-dropzone', {
-            dictDefaultMessage: "Agregar imagénes aquí",
-            acceptedFiles: "image/*",
-            maxFiles: 4,
-        });*/
-        // "myAwesomeDropzone" is the camelized version of the HTML element's ID
-        /*Dropzone.autoDiscover = false;
-        Dropzone.options.myAwesomeDropzone = {
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            dictDefaultMessage: "Agregar imagénes aquí",
-            acceptedFiles: "image/*",
-            maxFiles: 4,
-        };*/
-        /*Dropzone.autoDiscover = false;
-
-        document.addEventListener('DOMContentLoaded', () =>
-        {
-
-            const myAwesomeDropzone = new Dropzone('#my-awesome-dropzone', {
-                
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                url: "/anuncios/imagen",
-                dictDefaultMessage: 'Sube aquí tus imágenes',
-                acceptedFiles: "image/*",
-                addRemoveLinks: true,
-                dictRemoveFile: 'Borrar Archivo',
-                maxFiles: 4,
-                
-                /*init: function() {
-                    if(document.querySelector('#imagen').value.trim() ) {
-                       let imagenPublicada = {};
-                       imagenPublicada.size = 1234;
-                       imagenPublicada.name = document.querySelector('#imagen').value;
-                       
-                       this.options.addedfile.call(this, imagenPublicada);
-                       this.options.thumbnail.call(this, imagenPublicada, `/storage/anuncios/${imagenPublicada.name}`);
-
-                       imagenPublicada.previewElement.classList.add('dz-sucess');
-                       imagenPublicada.previewElement.classList.add('dz-complete');
-                    } 
-                },
-                success: function(file, response) {
-                    // console.log(file);
-                    // console.log(response);
-                    console.log(response.correcto);
-                    document.querySelector('#error').textContent = '';
-
-                    // Coloca la respuesta del servidor en el input hidden
-                    document.querySelector('#imagen').value = response.correcto;
-
-                    // Añadir al objeto de archivo el nombre del servidor
-                    file.nombreServidor = response.correcto;
-                },
-                maxfilesexceeded: function(file) {
-                    if( this.files[1] != null ) {
-                        this.removeFile(this.files[0]); // eliminar el archivo anterior
-                        this.addFile(file); // Agregar el nuevo archivo 
-                    }
-                }, 
-                removedfile: function(file, response) {
-                    file.previewElement.parentNode.removeChild(file.previewElement);
-
-                    params = {
-                        imagen: file.nombreServidor ?? document.querySelector('#imagen').value
-                    }
-
-                    axios.post('/anuncios/borrarimagen', params )
-                        .then(respuesta => console.log(respuesta))
-                }
-            });
-        });*/
-    </script>
+    
+    <script src=" {{ asset('js/dropzone/dropzone-custom.js') }} "></script>
 @endsection

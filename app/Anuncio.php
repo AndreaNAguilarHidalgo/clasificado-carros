@@ -9,7 +9,8 @@ class Anuncio extends Model
     protected $fillable = [
         'titulo', 'año', 'total_puertas', 'precio', 
         'kilometraje', 'descripcion', 'carro_id', 'condicion_id', 
-        'combustible_id', 'estado_id', 'municipio_id', 'imagen'
+        'combustible_id', 'estado_id', 'municipio_id', 'imagen',
+        'modelo_id', 'marca_id'
     ];
 
      // Obtener la información del usuario vía FK
@@ -44,5 +45,16 @@ class Anuncio extends Model
      public function estadoCarro()
      {
          return $this->belongsTo(Estado::class, 'estado_id');
+     }
+
+     //Obtener información de la Marca y modelo de el automóvil
+     public function marcaCarro()
+     {
+         return $this->belongsTo(Marca::class, 'marca_id');
+     }
+
+     public function modeloCarro()
+     {
+         return $this->belongsTo(Modelo::class, 'modelo_id');
      }
 }

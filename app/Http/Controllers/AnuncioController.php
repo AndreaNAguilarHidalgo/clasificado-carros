@@ -8,6 +8,8 @@ use App\Condicion;
 use App\Municipio;
 use App\TipoCarros;
 use App\Combustible;
+use App\Marca;
+use App\Modelo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -18,6 +20,13 @@ class AnuncioController extends Controller
     {
         return Municipio::where('estado_id', $id)->get();
     }
+
+    public function byMarcas($id)
+    {
+        return Modelo::where('marca_id', $id)->get();
+    }
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -44,10 +53,12 @@ class AnuncioController extends Controller
         $condicion = Condicion::all(['id', 'estado']);
         $estado = Estado::all();
         $municipio = Municipio::all(['id', 'municipio','estado_id']);
+        $marca = Marca::all(['id', 'marca']);
+        $modelo = Modelo::all(['id', 'modelo','marca_id']);
 
         //dd($municipio1);
 
-        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado'));
+        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado', 'marca', 'modelo'));
     }
 
     /**
@@ -71,13 +82,16 @@ class AnuncioController extends Controller
             'municipio' => 'required',
             'estado' => 'required',
             'descripcion' => 'required',
-            'imagen' => 'required'
+            'marca' => 'required',
+            'modelo'=>'required',
 
         ]);
 
         //Almacenar datos con modelo
         auth()->user()->anuncios()->create([
             'titulo'=> $data['titulo'],
+            'marca_id' => $data['marca'],
+            'modelo_id' => $data['modelo'],
             'año' => $data['año'],
             'carro_id'=> $data['tipo_carro'],
             'combustible_id' => $data['combustible'],
@@ -88,7 +102,7 @@ class AnuncioController extends Controller
             'municipio_id' => $data['municipio'],
             'estado_id' => $data['estado'],
             'descripcion' => $data['descripcion'],
-            'imagen' => $data['imagen'],
+            //'imagen' => $data['imagen'],
         ]);
 
         // Redirección

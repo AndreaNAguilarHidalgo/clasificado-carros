@@ -46,7 +46,7 @@
 
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label for="titulo">Título</label>
+                                    <label for="titulo">Nombre</label>
                                     <input type="text" name="titulo" class="form-control @error('titulo') is-invalid @enderror"
                                             id="titulo" placeholder="Ej. Ford Fiesta"
                                             value="{{ $anuncio->titulo }}"/>
@@ -56,6 +56,46 @@
                                                 <strong>{{$message}}</strong>
                                             </span>
                                         @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="marca">Marca</label>
+                                    <select name="marca" class="form-control @error('marca') is-invalid @enderror" id="marca">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($marcaCarro as $marca)
+                                            <option value="{{ $marca->id }}" 
+                                                    {{ $anuncio->marca_id == $marca->id ? 'selected' : '' }} > 
+                                                            {{ $marca->marca }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('marca')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="modelo">modelo</label>
+                                    <select name="modelo" class="form-control @error('modelo') is-invalid @enderror" id="modelo">
+                                        <option value="">-- Seleccione --</option>
+
+                                        @foreach ($modeloCarro as $modelo)
+                                            <option value="{{ $modelo->id }}" 
+                                                    {{ $anuncio->modelo_id == $modelo->id ? 'selected' : '' }} > 
+                                                            {{ $modelo->modelo }}</option>
+                                        
+                                        @endforeach
+                                    </select>
+
+                                    @error('municipio')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{$message}}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">

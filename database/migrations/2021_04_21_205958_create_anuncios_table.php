@@ -13,6 +13,25 @@ class CreateAnunciosTable extends Migration
      */
     public function up()
     {
+        // Tabla marca y modelo
+        Schema::create('marcas', function (Blueprint $table){
+            $table -> id();
+            $table -> string('marca');
+
+            $table->timestamps();
+        });
+
+        Schema::create('modelos', function (Blueprint $table){
+            $table -> id();
+            $table -> string('modelo');
+
+            $table->foreignId('marca_id')
+                  ->references('id')
+                  ->on('marcas')
+                  ->comment('Referencia de la marca del auto');
+
+            $table->timestamps();
+        });
         // Tablas de municipios y estados 
 
         Schema::create('estados', function (Blueprint $table){
@@ -69,7 +88,7 @@ class CreateAnunciosTable extends Migration
             $table->double('precio');
             $table->double('kilometraje');
             $table->text('descripcion');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->foreignId('user_id')
                         ->references('id')
                         ->on('users')
@@ -108,6 +127,16 @@ class CreateAnunciosTable extends Migration
                   ->comments(' FK de municipios')
                   ->onDelete('cascade');
 
+            $table->foreignId('marca_id')
+                  ->references('id')
+                  ->on('marcas')
+                  ->comment('Referencia de la marca');
+
+            $table->foreignId('modelo_id')
+                  ->references('id')
+                  ->on('marcas')
+                  ->comment('Referencia del modelo');
+
             $table->timestamps();
 
         });
@@ -120,6 +149,8 @@ class CreateAnunciosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('modelos');
         Schema::dropIfExists('estados');
         Schema::dropIfExists('municipios');
         Schema::dropIfExists('combustibles');
