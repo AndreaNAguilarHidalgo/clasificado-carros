@@ -22,4 +22,4 @@ function onSelectStateChange() {
             $('#municipio').html(html_select);
         }
     });
-};
+}

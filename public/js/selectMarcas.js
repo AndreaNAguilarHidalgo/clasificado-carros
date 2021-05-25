@@ -1,5 +1,5 @@
 $(function() {
-    
+
     $('#marca').on('change', onSelectStateChange);
 });
 
@@ -22,4 +22,4 @@ function onSelectStateChange() {
             $('#modelo').html(html_select);
         }
     });
-};
+}

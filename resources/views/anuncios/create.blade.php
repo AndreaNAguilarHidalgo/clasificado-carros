@@ -309,8 +309,8 @@
         integrity="sha512-/1nVu72YEESEbcmhE/EvjH/RxTg62EKvYWLG3NdeZibTCuEtW5M4z3aypcvsoZw03FAopi94y04GhuqRU9p+CQ=="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
-    <script src=" {{ asset('js/selectBrand.js') }}" defer></script>
-    <script src=" {{ asset('js/select.js') }}" defer></script>
+    <script src=" {{ asset('js/selectMarcas.js') }}"></script>
+    <script src=" {{ asset('js/select.js') }}"></script>
 
     
     <script src=" {{ asset('js/dropzone/dropzone-custom.js') }} "></script>

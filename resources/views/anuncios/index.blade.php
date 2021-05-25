@@ -46,8 +46,10 @@
                 <table class="table table-head-fixed">
                   <thead>
                     <tr>
-                      <th scole="col">Título</th>
+                      <th scole="col">Nombre</th>
+                      <th scole="col">Año</th>
                       <th scole="col">Modelo</th>
+                      <th scole="col">Marca</th>
                       <th scole="col">Categoría</th>
                       <th scole="col">Tipo de Combustible</th>
                       <th scole="col">Condición del Auto</th>
@@ -67,6 +69,8 @@
                     @foreach ($anuncios as $anuncio)
                         <tr>
                             <td>{{ $anuncio->titulo}}</td>
+                            <td>{{ $anuncio->marcaCarro->marca}}</td>
+                            <td>{{ $anuncio->modeloCarro->modelo}}</td>
                             <td>{{ $anuncio->año}}</td>
                             <td>{{ $anuncio->tipoCarro->nombre }}</td>
                             <td>{{ $anuncio->tipoCombustible->tipo }}</td>
