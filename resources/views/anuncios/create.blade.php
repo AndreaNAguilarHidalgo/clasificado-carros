@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css"
         integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{{ asset('css/dropzone/custom-style.css') }}">
 @endsection
 
 
@@ -47,7 +49,7 @@
                             <!-- Form -->
                             <div class="col-md-12 col">
                                 <form method="POST" action="{{ route('anuncios.store') }}" enctype="multipart/form-data"
-                                    novalidate>
+                                      class="dropzone">
 
                                     @csrf
                                     <div class="form-group">
@@ -270,11 +272,11 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    {{--<div class="form-group">
                                         <label for="imagen">Agregar Imágenes: </label>
 
-                                        <div id="dropzoneImg" class="dropzone rounded bg-gray-100"></div>
-                                        <input id="imagen" type="hidden" name="imagen" value=" {{ old('imagen') }} ">
+                                        <div id="myDropzone" class="dropzone rounded bg-gray-100"></div>
+                                        <input id="imagen" type="hidden" name="imagen" value="">
 
                                         @error('imagen')
                                             <span class="invalid-feedback d-block" role="alert">
@@ -284,6 +286,12 @@
 
                                         <p id="error"></p>
 
+                                    </div>--}}
+                                    <div class="form-group">
+                                        <div id="myDropzone" class="dz-default dz-message myDropzone">
+                                            <span>Cargar Imágenes</span>
+                                        </div>
+                                        <div class="dropzone-previews"></div>
                                     </div>
 
                                     <div class="form-group">

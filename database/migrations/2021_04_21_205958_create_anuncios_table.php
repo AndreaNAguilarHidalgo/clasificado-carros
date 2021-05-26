@@ -88,7 +88,6 @@ class CreateAnunciosTable extends Migration
             $table->double('precio');
             $table->double('kilometraje');
             $table->text('descripcion');
-            $table->string('imagen')->nullable();
             $table->foreignId('user_id')
                         ->references('id')
                         ->on('users')
@@ -136,6 +135,7 @@ class CreateAnunciosTable extends Migration
                   ->references('id')
                   ->on('marcas')
                   ->comment('Referencia del modelo');
+
 
             $table->timestamps();
 

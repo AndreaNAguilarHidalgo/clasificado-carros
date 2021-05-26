@@ -10014,13 +10014,3 @@ trix-editor {
 .icono {
   width: 10px;
 }
-
-.dropzone {
-  border: 2px dashed #c1c1c1;
-}
-.dropzone .dz-error {
-  display: none;
-}
-.dropzone .dx-message .dz-button {
-  color: #666;
-}

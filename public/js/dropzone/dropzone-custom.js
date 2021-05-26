@@ -1,12 +1,11 @@
-Dropzone.options.dropzoneImg = {
+Dropzone.options.myDropzone = {
     headers: {
         'X-CSRF-TOKEN': "{{ csrf_token() }}"
     },
     url: "/images",
-    dictDefaultMessage: "Agregar imagénes aquí",
-    acceptedFiles: "image/*",
-    maxFiles: 4,
-};
+    dictDefaultMessage: "Agregar imágenes",
+    acceptedFiles: "image/*"
+}
 /*Dropzone.autoDiscover = false;
 
 var myAwesomeDropzone = new Dropzone('#dropzoneImg', {

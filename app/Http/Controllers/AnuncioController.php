@@ -208,11 +208,14 @@ class AnuncioController extends Controller
     public function imagen(Request $request)
     {
         $imagen = $request->file('file');
-        $nombreImagen = time().'.'.$imagen->extension();
 
-        $imagen->move(public_path('storage/anuncios'), $nombreImagen);
+        $nameImage = time().'.'.$imagen->extension();
 
-        return response()->json(['correcto' => $nombreImagen]);
+        $ruta = storage_path().'/app/public/images/'.$nameImage;
+
+        dd($ruta);
+        
+        return response()->json(['correcto' => $nameImage]);
     }
 
     // Borrar imagen vía Ajax
@@ -222,9 +225,9 @@ class AnuncioController extends Controller
         {
             $imagen =  $request->get('imagen');
 
-            if( File::exists( 'storage/anuncios/'.$imagen ) )
+            if( File::exists( 'storage/images/'.$imagen ) )
             {
-                File::delete( 'storage/anuncios/'.$imagen );
+                File::delete( 'storage/images/'.$imagen );
             }
 
             return response('Imagen eliminada', 200);

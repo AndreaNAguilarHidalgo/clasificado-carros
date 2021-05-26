@@ -6,7 +6,18 @@
 	display: block !important;
 }
 .dropzone {
-	border: 2px dashed #028AF4 !important;;
+	border: 0px 2px 20px 0px #f2f2f2;
+    border-radius: 10px;
+}
+.myDropzoneArea
+{
+    background-color: #fbfdff;
+    border: 1px dashed #c0ccda;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
 }
 .dropzone .dz-preview.dz-complete .dz-success-mark {
     opacity: 1;

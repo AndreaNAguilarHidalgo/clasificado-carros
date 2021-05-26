@@ -37,12 +37,14 @@ Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');
 
 // Ruta Para subir imágenes
-Route::post('/anuncios/imagen', 'AnuncioController@imagen')->name('anuncios.imagen');
-Route::post('/anuncios/borrarimagen', 'AnuncioController@borrarimagen')->name('anuncios.borrar');
+/*Route::post('/anuncios/imagen', 'AnuncioController@imagen')->name('anuncios.imagen');
+Route::post('/anuncios/borrarimagen', 'AnuncioController@borrarimagen')->name('anuncios.borrar');*/
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Pruebas para subir imagenes con dropzone
 Route::get('gallery', 'GalleryController@index')->name('gallery.index');
-Route::post('gallery', 'GalleryController@store')->name('gallery.store');
+//Route::post('/storedata', 'GalleryController@storeData')->name('form.data');
+Route::post('/gallery', 'GalleryController@store')->name('gallery.store');
+Route::post('/storeimages', 'GalleryController@storeImages');
