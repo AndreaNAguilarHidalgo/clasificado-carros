@@ -21,7 +21,7 @@ class AnuncioController extends Controller
         return Municipio::where('estado_id', $id)->get();
     }
 
-    public function byMarcas($id)
+    public function byBrands($id)
     {
         return Modelo::where('marca_id', $id)->get();
     }

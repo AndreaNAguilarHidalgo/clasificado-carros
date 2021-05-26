@@ -1,18 +1,19 @@
 $(function() {
 
-    $('#marca').on('change', onSelectStateChange);
+    $('#marca').on('change', onselectionchange);
 });
 
-function onSelectStateChange() {
+function onselectionchange() {
     
     var brand_id = $(this).val();
+    console.log(brand_id);
 
     if(! brand_id)
         $('#modelo').html('<option value="">-- Selecciona un modelo --</option>');
     
 
     // AJAX
-    $.get('/api/create/'+brand_id+'/marcas', function(data) {
+    $.get('/api/create/'+brand_id+'/brands', function(data) {
 
         var html_select = '<option value="">-- Selecciona un modelo --</option>';
         

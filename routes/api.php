@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/create/{id}/marcas', 'AnuncioController@byMarcas');
+Route::get('/create/{id}/brands', 'AnuncioController@byBrands');
 Route::get('/create/{id}/towns', 'AnuncioController@byState');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

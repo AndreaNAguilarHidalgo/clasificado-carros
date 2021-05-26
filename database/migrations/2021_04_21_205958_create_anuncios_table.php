@@ -133,7 +133,7 @@ class CreateAnunciosTable extends Migration
 
             $table->foreignId('modelo_id')
                   ->references('id')
-                  ->on('marcas')
+                  ->on('modelo')
                   ->comment('Referencia del modelo');
 
 

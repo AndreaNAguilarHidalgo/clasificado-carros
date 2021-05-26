@@ -6,6 +6,7 @@ $(function() {
 function onSelectStateChange() {
     
     var state_id = $(this).val();
+    console.log(state_id);
 
     if(! state_id)
         $('#municipio').html('<option value="">-- Selecciona un municipio --</option>');
