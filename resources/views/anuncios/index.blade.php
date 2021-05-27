@@ -47,9 +47,9 @@
                   <thead>
                     <tr>
                       <th scole="col">Nombre</th>
-                      <th scole="col">Año</th>
-                      <th scole="col">Modelo</th>
                       <th scole="col">Marca</th>
+                      <th scole="col">Modelo</th>
+                      <th scole="col">Año</th>
                       <th scole="col">Categoría</th>
                       <th scole="col">Tipo de Combustible</th>
                       <th scole="col">Condición del Auto</th>

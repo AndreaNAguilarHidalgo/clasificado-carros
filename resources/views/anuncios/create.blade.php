@@ -7,10 +7,10 @@
         integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
         crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css"
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css"
         integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
+    <link rel="stylesheet" href="{{ asset('css/dropzone/dropzone.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropzone/custom-style.css') }}">
 @endsection
 
@@ -288,7 +288,7 @@
 
                                     </div>--}}
                                     <div class="form-group">
-                                        <div id="myDropzone" class="dz-default dz-message myDropzone">
+                                        <div id="myDropzoneArea" class="dz-default dz-message myDropzoneArea">
                                             <span>Cargar Imágenes</span>
                                         </div>
                                         <div class="dropzone-previews"></div>

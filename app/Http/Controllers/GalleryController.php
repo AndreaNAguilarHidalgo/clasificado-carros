@@ -38,6 +38,17 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
+        $datos = $request->validate([
+            'name' => 'required|2',
+            'email' => 'required',
+            'file' => 'required|image'
+        ]);
+
+        if($request->file('file')){
+            $img = $request->file('file');
+
+            
+        }
         /*$request->validate([
             'file' => 'required|image|max:1024'
         ]);
@@ -48,10 +59,10 @@ class GalleryController extends Controller
 
         Gallery::create([
             'url' => $url
-        ]);*/
+        ]);
 
         //return redirect()->route('gallery.index');
-        $request->validate([
+        /*$request->validate([
             'file' => 'required|image'
         ]);
 
@@ -65,7 +76,7 @@ class GalleryController extends Controller
                             ->save($ruta);
         Gallery::create([
             'url' => '/storage/images/'.$nameImage
-        ]);
+        ]);*/
 
     }
 
