@@ -42,11 +42,10 @@
                     <button type="submit">Submit data and files!</button>
                 </form> --}}
 
-                <form action="{{ route('gallery.store') }}" name="demoform" id="demoform" enctype="multipart/form-data"
-                    method="POST" class="dropzone">
+                <form action="{{ route('form.data') }}" name="demoform" id="demoform" enctype="multipart/form-data"
+                    method="POST" class="dropzone" novalidate>
                     @csrf
                     <div class="form-group">
-                        <input type="hidden" class="userid" name="userid" id="userid" value="">
 
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name" placeholder="Enter your name" class="form-control" required
@@ -77,12 +76,12 @@
 
     <script>
         Dropzone.autoDiscover = false;
-        // Dropzone.options.demoform = false;	
+        //Dropzone.options.demoform = false;	
         let token = $('meta[name="csrf-token"]').attr('content');
         $(function() {
             var myDropzone = new Dropzone("div#myDropzoneArea", {
                 paramName: "file",
-                url: "{{ url('gallery') }}",
+                url: "{{ route('store.image') }}",
                 previewsContainer: 'div.dropzone-previews',
                 addRemoveLinks: true,
                 autoProcessQueue: true,
@@ -96,14 +95,39 @@
                 init: function() {
                     var myDropzone = this;
 
+                    $("form[name='demoform']").submit(function(event) {
+                        // Para asegurarse que el formulario no se envía realmente
+                        event.preventDefault();
+                        URL = $("#demoform").attr('action');
+                        formData = $('#demoform').serialize();
+                        $.ajax({
+                            type: 'POST',
+                            url: URL,
+                            data: formData,
+                            success: function(result) {
+                                if (result.status == "success") {
+                                    myDropzone.processQueue();
+                                } else {
+                                    console.log("error", result.status);
+                                }
+                            }
+                        });
+                    });
+
                     //Gets triggered when we submit the image.
                     this.on('sending', function(file, xhr, formData) {
                         //fetch the user id from hidden input field and send that userid with our image
+                        //formData.append();
                     });
 
                     this.on("success", function(file, response) {
-;
+                        // Reset the form+
+                        $('#demoform')[0].reset();
+
+                        // Reset dropzone
+                        $('.dropzone-previews').empty();
                     });
+
                     this.on("queuecomplete", function() {
 
                     });

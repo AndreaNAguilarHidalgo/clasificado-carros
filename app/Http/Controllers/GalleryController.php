@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use http\Env\Response;
 
 class GalleryController extends Controller
 {
@@ -38,17 +39,46 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $datos = $request->validate([
+        /*$galeria = new Gallery($request->all());
+
+        if($request->file('file'))
+        {
+            $img = $request->file('file');
+
+            $nameImage = time().'.'.$img->clientExtension();
+
+            $ruta = storage_path().'/app/public/images/'.$nameImage;
+
+            $galeria->file = $ruta;
+            $galeria->save();
+        }
+
+        return redirect()->route('gallery.index')->with('message_success', 'Se ha registrado una nueva galeria con éxito.');*/
+        /*$data = $request->validate([
             'name' => 'required|2',
             'email' => 'required',
-            'file' => 'required|image'
         ]);
+
+        $galeria->name = $data['name'];
+        $galeria->email = $data['email'];
 
         if($request->file('file')){
             $img = $request->file('file');
 
-            
+            $nameImage = time().'.'.$img->extension();
+
+            $ruta = storage_path().'/app/public/images/'.$nameImage;
+
+            Image::make($request->file('file'))
+                            ->resize(900, null, function ($constraint){
+                                $constraint->aspectRatio();
+                            })
+                            ->save($ruta);   
         }
+
+        Gallery::create([
+            'file' => '/storage/images/'.$nameImage
+        ]);*/
         /*$request->validate([
             'file' => 'required|image|max:1024'
         ]);
@@ -161,4 +191,45 @@ class GalleryController extends Controller
         //dd($data);
         return response()->json($data);
     }*/
+
+    public function storeData(Request $request)
+	{
+			$user = new Gallery();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->save();
+		return response()->json(['status'=>"success"]);
+	}
+
+
+
+	// We are submitting are image along with userid and with the help of user id we are updateing our record
+	public function storeImages(Request $request)
+	{
+		if($request->file('file')){
+
+            $img = $request->file('file');
+
+            $imageName = time().'.'.$img->clientExtension();
+            $user_image = new Gallery();
+            $original_name = $img->getClientOriginalName();
+            $user_image->image = $imageName;
+
+            if(!is_dir(storage_path() . '/app/public/images/')){
+                mkdir(storage_path() . '/app/public/images/', 0777, true);
+            }
+
+            $request->file('file')->move(storage_path() . '/app/public/images/', $imageName);
+        /*$request->file('file')->storage_path().'/app/public/images/'.$imageName;*/
+
+        /*if(!is_dir(public_path() . '/uploads/images/')){
+            mkdir(public_path() . '/uploads/images/', 0777, true);
+        }
+
+        $request->file('file')->move(public_path() . '/uploads/images/', $imageName);*/
+
+
+        return response()->json(['status'=>"success",'imgdata'=>$original_name]);
+        }
+	}
 }

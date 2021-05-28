@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('layouts.plantilla')
 
 @section('content')
 <div class="content-wrapper" style="min-height: 1333.2px;">

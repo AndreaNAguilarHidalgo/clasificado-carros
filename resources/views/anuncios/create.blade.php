@@ -322,4 +322,7 @@
 
     
     <script src=" {{ asset('js/dropzone/dropzone-custom.js') }} "></script>
+    <script>
+        Dropzone.autoDiscover = false;
+    </script>
 @endsection
