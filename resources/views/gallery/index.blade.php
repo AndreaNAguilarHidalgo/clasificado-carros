@@ -42,9 +42,10 @@
                     <button type="submit">Submit data and files!</button>
                 </form> --}}
 
-                <form action="{{ route('form.data') }}" name="demoform" id="demoform" enctype="multipart/form-data"
-                    method="POST" class="dropzone" novalidate>
+                <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
+                    
                     @csrf
+
                     <div class="form-group">
 
                         <label for="name">Name</label>
@@ -78,13 +79,14 @@
         Dropzone.autoDiscover = false;
         //Dropzone.options.demoform = false;	
         let token = $('meta[name="csrf-token"]').attr('content');
+
         $(function() {
             var myDropzone = new Dropzone("div#myDropzoneArea", {
                 paramName: "file",
-                url: "{{ route('store.image') }}",
+                url: "{{ url('/storeimages') }}",
                 previewsContainer: 'div.dropzone-previews',
                 addRemoveLinks: true,
-                autoProcessQueue: true,
+                autoProcessQueue: false,
                 uploadMultiple: false,
                 parallelUploads: 1,
                 maxFiles: 1,
@@ -98,11 +100,14 @@
                     $("form[name='demoform']").submit(function(event) {
                         // Para asegurarse que el formulario no se envía realmente
                         event.preventDefault();
+
                         URL = $("#demoform").attr('action');
                         formData = $('#demoform').serialize();
+
                         $.ajax({
-                            type: 'POST',
                             url: URL,
+                            type: 'POST',
+                            
                             data: formData,
                             success: function(result) {
                                 if (result.status == "success") {

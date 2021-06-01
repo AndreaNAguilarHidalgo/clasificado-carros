@@ -8,6 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Scripts -->
+	<script src="{{ asset('js/app.js') }}" defer></script>
+
     @yield('styles')
 
     <!-- Styles -->
@@ -32,8 +35,6 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
     <!-- jquery.overlayScrollbars.min.js -->
     <script src="{{ asset('js/plugins/jquery.overlayScrollbars.min.js') }}"></script>
@@ -41,28 +42,18 @@
     <!-- JS AdminLTE -->
     <script src="{{ asset('js/plugins/adminlte.js') }}"></script>
 
-
     <title>@yield('title', 'Clasificado de Carros')</title>
 </head>
 <body class="sidebar-mini layout-fixed" style="height: auto;">
 	<div id="app">
 		<div class="wrapper">
-			@include('modulos.header')
-
-			@include('modulos.sidebaranu')
-
-			@yield('botones')
 
 			@yield('content')
 
 			@include('modulos.footer')
 
 		</div>
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
 		@yield('scripts')
-        @yield('js')
 	</div>
 </body>
 </html>

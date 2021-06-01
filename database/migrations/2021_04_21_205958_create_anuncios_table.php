@@ -82,7 +82,6 @@ class CreateAnunciosTable extends Migration
 
         Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
             $table->string('año');
             $table->integer('total_puertas');
             $table->double('precio');

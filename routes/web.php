@@ -16,8 +16,11 @@ use App\Http\Controllers\GalleryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Ruta de Inicio
+Route::get('/', 'InicioController@index')->name('inicio.index');
 
-Route::get('/', 'DashboardController@index')->name('dashboard.index');
+// Rutas Del Dashboard
+Route::get('/dashboards', 'DashboardController@index')->name('dashboard.index');
 
 // Rutas de anuncios
 Route::get('/anuncios/create', 'AnuncioController@create')->name('anuncios.create');
@@ -29,7 +32,6 @@ Route::get('/anuncios/{anuncio}', 'AnuncioController@show')->name('anuncios.show
 Route::delete('/anuncios/{anuncio}', 'AnuncioController@destroy')->name('anuncios.destroy');
 //Route::resource('anuncios', AnuncioController::class);
 
-Route::view('/welcome', 'welcome');
 
 Auth::routes(['verify' => true]); /*Activando la verificación de correo*/
 

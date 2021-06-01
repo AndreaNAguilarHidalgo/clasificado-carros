@@ -46,19 +46,6 @@
 
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label for="titulo">Nombre</label>
-                                    <input type="text" name="titulo" class="form-control @error('titulo') is-invalid @enderror"
-                                            id="titulo" placeholder="Ej. Ford Fiesta"
-                                            value="{{ $anuncio->titulo }}"/>
-
-                                        @error('titulo')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{$message}}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-
-                                <div class="form-group">
                                     <label for="marca">Marca</label>
                                     <select name="marca" class="form-control @error('marca') is-invalid @enderror" id="marca">
                                         <option value="">-- Seleccione --</option>

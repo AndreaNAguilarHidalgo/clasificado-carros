@@ -194,9 +194,10 @@ class GalleryController extends Controller
 
     public function storeData(Request $request)
 	{
-			$user = new Gallery();
+			$user = new Gallery;
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->file = $request->file;
             $user->save();
 		return response()->json(['status'=>"success"]);
 	}

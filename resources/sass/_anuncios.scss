@@ -1,23 +1,13 @@
 body {
+    font-family: $parrafos-font-family;
     background-color: #fffffff5;
 }
+
 trix-editor {
-    min-height: 400px;
-    overflow: auto;
+    min-height: 150px;
+    overflow: auto!important;
 }
 
 .icono {
     width: 10px;
-}
-
-.dropzone{ 
-    border: 2px dashed #c1c1c1;
-
-    .dz-error{
-        display: none;
-    }
-
-    .dx-message .dz-button{
-        color: #666;
-    }
 }

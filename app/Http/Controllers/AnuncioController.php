@@ -71,7 +71,6 @@ class AnuncioController extends Controller
     {
         // Validación
         $data = $request->validate([
-            'titulo'=> 'required|min:2',
             'año' => 'required',
             'combustible' => 'required',
             'condicion' => 'required',
@@ -89,7 +88,6 @@ class AnuncioController extends Controller
 
         //Almacenar datos con modelo
         auth()->user()->anuncios()->create([
-            'titulo'=> $data['titulo'],
             'marca_id' => $data['marca'],
             'modelo_id' => $data['modelo'],
             'año' => $data['año'],
@@ -136,9 +134,12 @@ class AnuncioController extends Controller
         $condicionCarro = Condicion::all(['id', 'estado']);
         $municipioCarro = Municipio::all(['id', 'municipio']);
         $estadoCarro = Estado::all(['id', 'estado']);
+        $marcaCarro = Marca::all(['id', 'marca']);
+        $modeloCarro = Modelo::all(['id', 'modelo']);
 
         return view('anuncios.edit', 
-               compact('tipoCarros','tipoCombustible','condicionCarro','anuncio','municipioCarro', 'estadoCarro'));
+               compact('tipoCarros','tipoCombustible','condicionCarro','anuncio',
+               'municipioCarro', 'estadoCarro', 'marcaCarro', 'modeloCarro'));
     }
 
     /**
@@ -155,7 +156,6 @@ class AnuncioController extends Controller
 
         // Validación
         $data = $request->validate([
-            'titulo'=> 'required|min:2',
             'año' => 'required',
             'tipo_carro'=>'required',
             'combustible'=>'required',
@@ -166,11 +166,14 @@ class AnuncioController extends Controller
             'municipio' => 'required',
             'estado' => 'required',
             'descripcion' => 'required',
+            'marca' => 'required',
+            'modelo'=>'required',
 
         ]);
 
         //Asignar valores
-        $anuncio->titulo = $data['titulo'];
+        $anuncio->marca_id = $data['marca'];
+        $anuncio->modelo_id = $data['modelo'];
         $anuncio->año = $data['año'];
         $anuncio->carro_id = $data['tipo_carro'];
         $anuncio->combustible_id = $data['combustible'];
@@ -205,7 +208,7 @@ class AnuncioController extends Controller
         return redirect()->action('AnuncioController@index');
     }
 
-    public function imagen(Request $request)
+    /*public function imagen(Request $request)
     {
         $imagen = $request->file('file');
 
@@ -232,5 +235,5 @@ class AnuncioController extends Controller
 
             return response('Imagen eliminada', 200);
         }
-    }
+    }*/
 }

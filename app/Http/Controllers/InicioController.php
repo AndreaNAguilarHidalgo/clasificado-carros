@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Anuncio;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class InicioController extends Controller
-{
-    public function __construct(){
-        $this->middleware(['auth', 'verified']);
-    }
-    
-    public function index(Request $request)
+{   
+    public function index()
     {
-        $request->user()->authorizeRoles(['user', 'admin']);
+        $nuevos = Anuncio::latest()->take(6)->get();
 
-        if(($request->user()->hasRole('admin')))
-        {
-            return view('dashboards.admin');
-        }
-        else
-        {
-            return view('dashboards.user');
-        }
-        
+         // Agrupar las recetas por categoria
+         $anuncios = [];
+
+         $marcas = [];
+
+         foreach($marcas as $marca) {
+             $recetas[ Str::slug( $marca->nombre ) ][] = Anuncio::where('marca_id', $marca->id )->take(3)->get();
+         }
+
+        return view('inicio.index', compact('nuevos', 'marcas'));
     }
 }

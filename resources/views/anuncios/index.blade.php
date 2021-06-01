@@ -46,7 +46,6 @@
                 <table class="table table-head-fixed">
                   <thead>
                     <tr>
-                      <th scole="col">Nombre</th>
                       <th scole="col">Marca</th>
                       <th scole="col">Modelo</th>
                       <th scole="col">Año</th>
@@ -59,7 +58,6 @@
                       <th scole="col">Estado</th>
                       <th scole="col">Municipio</th>
                       <th scole="col">Descripción</th>
-                      <th scole="col">Imágenes</th>
                       <th scole="col">Acciones</th>
                       
                     </tr>
@@ -68,7 +66,6 @@
 
                     @foreach ($anuncios as $anuncio)
                         <tr>
-                            <td>{{ $anuncio->titulo}}</td>
                             <td>{{ $anuncio->marcaCarro->marca}}</td>
                             <td>{{ $anuncio->modeloCarro->modelo}}</td>
                             <td>{{ $anuncio->año}}</td>
@@ -81,7 +78,6 @@
                             <td>{{ $anuncio->estadoCarro->estado }}</td>
                             <td>{{ $anuncio->municipioCarro->municipio }}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
-                            <td>{{ $anuncio->imagen }}</td>
                             <td>
                               <!-- <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
                                 @csrf

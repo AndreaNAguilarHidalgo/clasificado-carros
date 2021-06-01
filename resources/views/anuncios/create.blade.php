@@ -6,12 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css"
         integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg=="
         crossorigin="anonymous" />
-
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css"
-        integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
-    <link rel="stylesheet" href="{{ asset('css/dropzone/dropzone.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dropzone/custom-style.css') }}">
 @endsection
 
 
@@ -48,23 +42,9 @@
 
                             <!-- Form -->
                             <div class="col-md-12 col">
-                                <form method="POST" action="{{ route('anuncios.store') }}" enctype="multipart/form-data"
-                                      class="dropzone">
+                                <form method="POST" action="{{ route('anuncios.store') }}" enctype="multipart/form-data">
 
                                     @csrf
-                                    <div class="form-group">
-                                        <label for="titulo">Nombre</label>
-                                        <input type="text" name="titulo"
-                                            class="form-control @error('titulo') is-invalid @enderror" id="titulo"
-                                            placeholder="Ej. Ford Fiesta" value="{{ old('titulo') }}" />
-
-                                        @error('titulo')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
                                     <div class="form-group">
                                         <label for="marca">Marca</label>
                                         <select name="marca" class="form-control @error('marca') is-invalid @enderror"
@@ -272,28 +252,6 @@
                                         @enderror
                                     </div>
 
-                                    {{--<div class="form-group">
-                                        <label for="imagen">Agregar Imágenes: </label>
-
-                                        <div id="myDropzone" class="dropzone rounded bg-gray-100"></div>
-                                        <input id="imagen" type="hidden" name="imagen" value="">
-
-                                        @error('imagen')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-
-                                        <p id="error"></p>
-
-                                    </div>--}}
-                                    <div class="form-group">
-                                        <div id="myDropzoneArea" class="dz-default dz-message myDropzoneArea">
-                                            <span>Cargar Imágenes</span>
-                                        </div>
-                                        <div class="dropzone-previews"></div>
-                                    </div>
-
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-primary" value="Agregar publicación">
                                     </div>
@@ -319,10 +277,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
     <script src=" {{ asset('js/selectMarcas.js') }}"></script>
     <script src=" {{ asset('js/select.js') }}"></script>
-
-    
-    <script src=" {{ asset('js/dropzone/dropzone-custom.js') }} "></script>
-    <script>
-        Dropzone.autoDiscover = false;
-    </script>
 @endsection
