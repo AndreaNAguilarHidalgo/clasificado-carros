@@ -1,5 +1,4 @@
 body {
-    font-family: $parrafos-font-family;
     background-color: #fffffff5;
 }
 
@@ -20,4 +19,11 @@ trix-editor {
     display: inline-block;
     padding-bottom: .5rem;
     padding-right: 2rem;
+}
+
+.owl-carousel .owl-stage { display: flex; }
+.card {
+    display: flex;
+    flex: 1 0 auto;
+    height: 100%;
 }

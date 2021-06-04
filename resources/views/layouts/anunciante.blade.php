@@ -5,16 +5,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    @yield('styles')
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @yield('styles')
+    <!-- Scripts -->
+    {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
 
     <!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- BOOTSTRAP 4 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- OverlayScrollbars.min.css -->
     <link rel="stylesheet" href="{{ asset('css/plugins/OverlayScrollbars.min.css') }}">
@@ -25,9 +24,12 @@
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
+
+
+    <!-- BOOTSTRAP 4 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -41,7 +43,9 @@
     <!-- JS AdminLTE -->
     <script src="{{ asset('js/plugins/adminlte.js') }}"></script>
 
-
+    <!-- Scripts -->
+	<script src="{{ asset('js/app.js') }}" defer></script>
+    
     <title>@yield('title', 'Clasificado de Carros')</title>
 </head>
 <body class="sidebar-mini layout-fixed" style="height: auto;">
@@ -56,13 +60,8 @@
 			@yield('content')
 
 			@include('modulos.footer')
-
-		</div>
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
-		@yield('scripts')
-        @yield('js')
+        </div>
 	</div>
+    @yield('scripts')
 </body>
 </html>

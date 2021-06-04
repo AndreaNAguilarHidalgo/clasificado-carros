@@ -1,7 +1,9 @@
-import 'vue';
+import Vue from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11,7 +13,7 @@ import 'owl.carousel';
 
 require('./bootstrap');
 
-window.Vue = require('vue').default;
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -42,8 +44,9 @@ const app = new Vue({
 
 /*** Carousel con OWL */
 
-jQuery(document).ready(function() {
-    jQuery('.owl-carousel').owlCarousel({
+/*jQuery(document).ready(function() {
+    jQuery(".owl-carousel").owlCarousel({
+
         margin:10,
         loop: true,
         autoplay: true,
@@ -60,4 +63,27 @@ jQuery(document).ready(function() {
             }
         }
     });
-});
+});*/
+
+(function($){
+    $(document).ready(function() {
+        $(".owl-carousel").owlCarousel({
+    
+            margin:10,
+            loop: true,
+            autoplay: true,
+            autoplayHoverPause: true,
+            responsive: {
+                0 : {
+                    items: 1
+                }, 
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+    });
+})(jQuery);

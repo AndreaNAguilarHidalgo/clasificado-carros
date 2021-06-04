@@ -79,13 +79,6 @@
                             <td>{{ $anuncio->municipioCarro->municipio }}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
                             <td>
-                              <!-- <form action="{{ route('anuncios.destroy', ['anuncio' => $anuncio->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                  <input type="submit" class="btn btn-danger d-block mb-2 w-100" value="Eliminar &times;">
-
-                              </form>-->
-
                               <eliminar-anuncio anuncio-id={{ $anuncio->id }}
                               ></eliminar-anuncio>
 
