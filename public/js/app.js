@@ -34774,9 +34774,9 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
   !*** ./node_modules/owl.carousel/dist/owl.carousel.js ***!
   \********************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery, jQuery) {/**
  * Owl Carousel v2.3.4
  * Copyright 2013-2018 David Deutsch
  * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
@@ -36530,7 +36530,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 	 */
 	$.fn.owlCarousel.Constructor = Owl;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * AutoRefresh Plugin
@@ -36642,7 +36642,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.AutoRefresh = AutoRefresh;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Lazy Plugin
@@ -36792,7 +36792,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.Lazy = Lazy;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * AutoHeight Plugin
@@ -36925,7 +36925,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.AutoHeight = AutoHeight;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Video Plugin
@@ -37253,7 +37253,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.Video = Video;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Animate Plugin
@@ -37375,7 +37375,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.Animate = Animate;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Autoplay Plugin
@@ -37609,7 +37609,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.autoplay = Autoplay;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Navigation Plugin
@@ -38016,7 +38016,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.Navigation = Navigation;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Hash Plugin
@@ -38139,7 +38139,7 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 
 	$.fn.owlCarousel.Constructor.Plugins.Hash = Hash;
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
 /**
  * Support Plugin
@@ -38223,8 +38223,9 @@ module.exports = "/images/vendor/owl.carousel/dist/owl.video.play.png?4a37f80089
 		$.support.transform3d = tests.csstransforms3d();
 	}
 
-})(window.Zepto || window.jQuery, window, document);
+})(window.Zepto || __webpack_provided_window_dot_jQuery, window, document);
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -57676,7 +57677,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* WEBPACK VAR INJECTION */(function(jQuery) {/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/index.js");
 /* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
@@ -57766,6 +57767,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     });
   });
 })(jQuery);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -57776,7 +57778,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -57785,7 +57787,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
-  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+  window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
@@ -57811,6 +57813,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
