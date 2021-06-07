@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.vue('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
     .autoload({
         jquery: ['$','window.jQuery', 'jQuery']
-    })
-    .sass('resources/sass/app.scss', 'public/css');
+    });
