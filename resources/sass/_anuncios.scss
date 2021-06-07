@@ -28,6 +28,17 @@ trix-editor {
     height: 100%;
 }
 
+.anuncio-meta p {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btn-anuncio,
+.btn-anuncio:hover {
+    background-color: #ED4646 !important;
+    border: none;
+}
+
 .hero-categorias {
     background-image: linear-gradient(to bottom, rgba(70, 70, 70, 0.4), rgba(53, 53, 53, 0.571)),
 url('../imgs/carsbackg.jpg');

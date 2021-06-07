@@ -1,4 +1,4 @@
-@extends('layouts.anunciante')
+@extends('layouts.app')
 
 @section('title', 'Ver anuncio')
 
@@ -21,8 +21,53 @@
       </div><!-- /.container-fluid -->
     </section>
 
+    <article class="contenido-anuncio bg-white p-5 shadow">
+      <h1 class="text-center mb-4">{{$anuncio->marcaCarro->marca}}</h1>
 
-    <h1>{{$anuncio}}</h1>
+      <div class="anuncio-meta mt-3">
+          <p>
+              <span class="font-weight-bold text-primary">Escrito en:</span>
+              <a class="text-dark" href="">
+                  {{$anuncio->marcaCarro->marca}}
+              </a>
 
+          </p>
+          <p>
+              <span class="font-weight-bold text-primary">Autor:</span>
+              <a class="text-dark" href="">
+                  {{$anuncio->autor->name}}
+              </a>
+          </p>
+
+          <p>
+              <span class="font-weight-bold text-primary">Fecha:</span>
+              @php
+                  $fecha = $anuncio->created_at
+              @endphp
+
+              <fecha-receta fecha="{{$fecha}}" ></fecha-receta>
+          </p>
+
+          <div class="descripcion">
+              <h2 class="my-3 text-primary">Descripción:</h2>
+
+              {!! $anuncio->descripcion !!}
+          </div>
+
+          {{--<div class="preparacion">
+              <h2 class="my-3 text-primary">Preparación</h2>
+
+              {!! $anuncio->preparacion !!}
+          </div>
+
+          <div class="justify-content-center row text-center">
+              <like-button
+                  anuncio-id="{{$receta->id}}"
+                  like="{{$like}}"
+                  likes="{{$likes}}"
+              ></like-button>
+          </div>--}}
+      </div>
+  </article>
 </div>
 @endsection

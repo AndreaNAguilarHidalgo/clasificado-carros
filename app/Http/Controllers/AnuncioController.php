@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\File;
 
 class AnuncioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show', 'search']]);
+    }
 
     public function byState($id)
     {

@@ -35,31 +35,23 @@
         <!--=====================================
         Botón Opciones con submenú
         ======================================-->
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-            <i class="fas fa-pager"></i>
-              <p>
-                Páginas
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('anuncios.create')}}" class="nav-link">
-                  <i class="fas fa-plus-circle"></i>
-                  <p>Crear Publicación(Anuncio)</p>
-                </a>
-              </li>
+        <li class="nav-header">
+          <i class="fas fa-pager"></i> Páginas
+        </li>
 
-                <li class="nav-item">
-                  <a href="{{ route('anuncios.index')}}" class="nav-link">
-                    <i class="fas fa-th-list"></i>
-                    <p>Lista de Anuncios</p>
-                  </a>
-                </li>
-              
-            </ul><!-- fin ul submenú-->
-        </li><!--Fin de li-->
+        <li class="nav-item">
+          <a href="{{ route('anuncios.create')}}" class="nav-link">
+            <i class="fas fa-plus-circle"></i>
+            <p>Crear Publicación(Anuncio)</p>
+          </a>
+        </li>
+
+          <li class="nav-item">
+            <a href="{{ route('anuncios.index')}}" class="nav-link">
+              <i class="fas fa-th-list"></i>
+              <p>Lista de Anuncios</p>
+            </a>
+          </li>
       </ul><!--Fin de ul para botones-->
     </nav><!-- /.sidebar-menu -->
   </div> <!-- FIN SIDEBAR-->
