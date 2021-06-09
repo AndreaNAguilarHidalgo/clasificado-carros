@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
         integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--Plugin CSS file with desired skin-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 @endsection
 
 @section('hero')
@@ -69,7 +71,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
-                                        <input type="range" class="custom-range" id="priceRange">
+                                        <input id="range_1" type="text" name="range_1" value="">
                                       </div>
                                 </div>
                             </div>
@@ -116,4 +118,9 @@
             </div>
         </div>
     @endforeach
+@endsection
+@section('scripts')
+    <script src=" {{ asset('js/ionRange/ionRange.js') }}"></script>
+    <!--Plugin JavaScript file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>  
 @endsection

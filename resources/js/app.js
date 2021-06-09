@@ -13,6 +13,7 @@ import 'owl.carousel';
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.ionRangeSlider = require("ion-rangeslider");
 
 /**
  * The following block of code may be used to automatically register your
