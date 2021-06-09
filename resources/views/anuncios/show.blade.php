@@ -45,7 +45,7 @@
                   $fecha = $anuncio->created_at
               @endphp
 
-              <fecha-receta fecha="{{$fecha}}" ></fecha-receta>
+              <fecha-anuncio fecha="{{$fecha}}" ></fecha-anuncio>
           </p>
 
           <div class="descripcion">

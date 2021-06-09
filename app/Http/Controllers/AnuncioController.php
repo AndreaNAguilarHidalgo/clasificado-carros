@@ -212,32 +212,15 @@ class AnuncioController extends Controller
         return redirect()->action('AnuncioController@index');
     }
 
-    /*public function imagen(Request $request)
+
+    public function search(Request $request)
     {
-        $imagen = $request->file('file');
+        // $busqueda = $request['buscar'];
+        $busqueda = $request->get('marca');
 
-        $nameImage = time().'.'.$imagen->extension();
+        $anuncios = Anuncio::where('marca_id', '%' . $busqueda . '%')->paginate(10);
+        $anuncios->appends(['marca' => $busqueda]);
 
-        $ruta = storage_path().'/app/public/images/'.$nameImage;
-
-        dd($ruta);
-        
-        return response()->json(['correcto' => $nameImage]);
+        return view('busquedas.show', compact('anuncios', 'busqueda'));
     }
-
-    // Borrar imagen vía Ajax
-    public function borrarimagen(Request $request)
-    {
-        if($request->ajax())
-        {
-            $imagen =  $request->get('imagen');
-
-            if( File::exists( 'storage/images/'.$imagen ) )
-            {
-                File::delete( 'storage/images/'.$imagen );
-            }
-
-            return response('Imagen eliminada', 200);
-        }
-    }*/
 }

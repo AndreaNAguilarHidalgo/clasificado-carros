@@ -44,6 +44,9 @@ Route::post('/anuncios/borrarimagen', 'AnuncioController@borrarimagen')->name('a
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Buscador de Recetas
+Route::get('/buscar', 'AnuncioController@search')->name('buscar.show');
+
 
 // Pruebas para subir imagenes con dropzone
 Route::get('gallery', 'GalleryController@index')->name('gallery.index');

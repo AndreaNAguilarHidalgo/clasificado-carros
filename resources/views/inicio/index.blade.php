@@ -7,7 +7,7 @@
 
 @section('hero')
     <div class="hero-categorias">
-        <form class="container h-100">
+        <form class="container h-100" action="{{ route('buscar.show') }}">
             <div class="row h-100 align-items-center">
                 <div class="col-md-4 texto-buscar">
                     <p class="display-4">Encuentra tú próximo automóvil</p>
@@ -18,6 +18,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="marca">Marca</label>
                                         <select name="marca" class="form-control" id="marca">
                                             <option value="">-- Elige la marca --</option>
                                             @foreach ($marcas as $marca)
@@ -27,15 +28,22 @@
                                     </div>
                                     <!--FIN FORM-GROUP-->
                                     <div class="form-group">
+                                        <label for="doors">Puertas</label>
                                         <select name="doors" class="form-control" id="doors">
                                             <option value="">-- Elige Núm de puertas --</option>
-                                        </select>
-                                    </div>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select><!-- FIN SELECT # DOORS -->
+                                    </div><!-- FORM-GROUP -->
                                 </div>
                                 <!--FIN COL-MD-6-->
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="tipoCarro">Tipo de Carro</label>
                                         <select name="tipoCarro" class="form-control" id="tipoCarro">
                                             <option value="">-- Elige el tipo de auto --</option>
                                             @foreach ($tipoAuto as $tipo)
@@ -46,23 +54,35 @@
                                     </div>
                                     <!--FIN FORM-GROUP-->
                                     <div class="form-group">
+                                        <label for="combustible">Tipo de Combustible</label>
                                         <select name="combustible" class="form-control" id="combustible">
                                             <option value="">-- Tipo de combustible --</option>
                                             @foreach ($combustible as $combustible)
-                                                <option value="{{ $combustible->id }}"> {{ $combustible->tipo }} </option>
+                                                <option value="{{ $combustible->id }}"> {{ $combustible->tipo }}
+                                                </option>
                                             @endforeach
-                                        </select>
+                                        </select><!-- FIN SELECT COMBUSTIBLE -->
+                                    </div><!-- FIN FORM-GROUP -->
+                                </div><!--FIN COL-MD-6-->
+                            </div><!--FIN ROW-->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="priceRange">Rango de precio</label>
+                                        <input type="range" class="custom-range" id="priceRange">
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group" style="text-align: end">
+                                        <input type="submit" name="buscar" class="btn btn-primary" value="Buscar">
                                     </div>
                                 </div>
-                                <!--FIN COL-MD-6-->
-                                <div class="form-group">
-                                    <input type="range" class="custom-range" id="customRange1">
-                                </div>
-                                </div>
-                            </div><!--FIN ROW-->
+                            </div>
                         </div><!-- FIN CARD-BODY-->
                     </div><!-- FIN CARD-->
-                </div>
+                </div><!-- FIN ROW -->
             </div><!-- FIN ROW h-100-->
         </form><!-- FORM-->
     </div><!-- FIN HERO-->

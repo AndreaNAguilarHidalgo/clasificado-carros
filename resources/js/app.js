@@ -28,6 +28,7 @@ window.Vue = require('vue');
 Vue.use(VueSweetalert2);
 Vue.config.ignoredElements = ['trix-editor', 'trix-toolbar'];
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('fecha-anuncio', require('./components/FechaAnuncio.vue').default);
 Vue.component('eliminar-anuncio', require('./components/EliminaAnuncio.vue').default);
 
 /**
