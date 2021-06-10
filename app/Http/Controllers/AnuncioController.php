@@ -216,11 +216,15 @@ class AnuncioController extends Controller
     public function search(Request $request)
     {
         // $busqueda = $request['buscar'];
-        $busqueda = $request->get('marca');
+        $searchBrand = $request->get('marca');
+        $searchFuel = $request->get('combustible');
+        $searchCar = $request->get('tipoCarro');
+        $searchDoors = $request->get('doors');
+        $searchPrice = $request->get('priceRange');
 
-        $anuncios = Anuncio::where('marca_id', '%' . $busqueda . '%')->paginate(10);
-        $anuncios->appends(['marca' => $busqueda]);
+        $anuncios = Anuncio::where('marca_id', '%' . $searchBrand . '%')->paginate(10);
+        $anuncios->appends(['marca' => $searchBrand]);
 
-        return view('busquedas.show', compact('anuncios', 'busqueda'));
+        return view('busquedas.show', compact('anuncios', 'searchBrand'));
     }
 }

@@ -1,6 +1,6 @@
 $(function () {
     /* ION SLIDER */
-    $('#range_1').ionRangeSlider({
+    $('#priceRange').ionRangeSlider({
         min: 0,
         max: 5000,
         from: 1000,

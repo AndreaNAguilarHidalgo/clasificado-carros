@@ -4,9 +4,8 @@
 @section('content')
     <div class="container">
         <h2 class="titulo-categoria text-uppercase mt-5 mb-4">
-            Resultados Búsqueda: {{ $busqueda }}
+            Resultados Búsqueda: {{ $searchBrand }}
         </h2>
-
         <div class="row">
             @foreach ($anuncios as $anuncio)
                 @include('ui.anuncio')

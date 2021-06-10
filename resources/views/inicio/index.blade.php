@@ -4,7 +4,8 @@
         integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Plugin CSS file with desired skin-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
 @endsection
 
 @section('hero')
@@ -18,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-sm-4">
                                     <div class="form-group">
                                         <label for="marca">Marca</label>
                                         <select name="marca" class="form-control" id="marca">
@@ -65,14 +66,16 @@
                                             @endforeach
                                         </select><!-- FIN SELECT COMBUSTIBLE -->
                                     </div><!-- FIN FORM-GROUP -->
-                                </div><!--FIN COL-MD-6-->
-                            </div><!--FIN ROW-->
+                                </div>
+                                <!--FIN COL-MD-6-->
+                            </div>
+                            <!--FIN ROW-->
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
-                                        <input id="range_1" type="text" name="range_1" value="">
-                                      </div>
+                                        <input id="priceRange" type="text" name="priceRange" value="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -106,21 +109,28 @@
         </div>
     </div>
 
-    @foreach ($anuncios as $key => $grupo)
-        <div class="container">
-            <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">{{ str_replace('-', ' ', $key) }}</h2>
+    <div class="container">
+        @foreach ($anuncios as $key => $grupo)
             <div class="row">
-                @foreach ($grupo as $anuncios)
-                    @foreach ($anuncios as $anuncio)
-                        @include('ui.anuncio')
-                    @endforeach
-                @endforeach
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">{{ str_replace('-', ' ', $key) }}</h2>
+                    </div>
+                    <div class="card-body">
+                        @foreach ($grupo as $anuncios)
+                            @foreach ($anuncios as $anuncio)
+                                @include('ui.anuncio')
+                            @endforeach
+                        @endforeach
+                    </div>
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
+
 @endsection
 @section('scripts')
     <script src=" {{ asset('js/ionRange/ionRange.js') }}"></script>
     <!--Plugin JavaScript file-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 @endsection

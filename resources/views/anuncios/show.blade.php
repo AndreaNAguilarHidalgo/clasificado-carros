@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Mis Publicaciones</h1>
+            <h1>Anuncios</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Home</a></li>
-              <li class="breadcrumb-item active">Mis Publicaciones</li>
+              <li class="breadcrumb-item"><a href="{{route('inicio.index')}}">Home</a></li>
+              <li class="breadcrumb-item active">Anuncios</li>
             </ol>
           </div>
         </div>
@@ -53,20 +53,6 @@
 
               {!! $anuncio->descripcion !!}
           </div>
-
-          {{--<div class="preparacion">
-              <h2 class="my-3 text-primary">Preparación</h2>
-
-              {!! $anuncio->preparacion !!}
-          </div>
-
-          <div class="justify-content-center row text-center">
-              <like-button
-                  anuncio-id="{{$receta->id}}"
-                  like="{{$like}}"
-                  likes="{{$likes}}"
-              ></like-button>
-          </div>--}}
       </div>
   </article>
 </div>
