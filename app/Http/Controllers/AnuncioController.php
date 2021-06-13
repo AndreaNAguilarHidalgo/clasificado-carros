@@ -17,11 +17,12 @@ class AnuncioController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'search']]);
+        $this->middleware('auth', ['except' => ['show', 'search', 'byState', 'byBrands']]);
     }
 
     public function byState($id)
     {
+        
         return Municipio::where('estado_id', $id)->get();
     }
 
@@ -215,16 +216,34 @@ class AnuncioController extends Controller
 
     public function search(Request $request)
     {
-        // $busqueda = $request['buscar'];
-        $searchBrand = $request->get('marca');
-        $searchFuel = $request->get('combustible');
-        $searchCar = $request->get('tipoCarro');
-        $searchDoors = $request->get('doors');
-        $searchPrice = $request->get('priceRange');
+        if(empty($request->marca) && empty($request->combustible) && 
+            empty($request->tipoCarro) && empty($request->doors) &&
+            empty($request->priceRange))
+        {
+            return redirect()->action('InicioController@index');
+        }
+        else
+        {
+            // $busqueda = $request['buscar'];
+            $searchBrand = $request->get('marca');
+            $searchFuel = $request->get('combustible');
+            $searchCar = $request->get('tipoCarro');
+            $searchDoors = $request->get('doors');
+            $searchPrice = $request->get('priceRange');
 
-        $anuncios = Anuncio::where('marca_id', '%' . $searchBrand . '%')->paginate(10);
-        $anuncios->appends(['marca' => $searchBrand]);
+            $anuncios = Anuncio::where('marca_id', 'like', '%' . $searchBrand . '%')->paginate(5);
+            $anuncios->appends(['marca' => $searchBrand]);
 
-        return view('busquedas.show', compact('anuncios', 'searchBrand'));
+            /*$anuncios = Anuncio::where('combustible_id', 'like', '%' . $searchFuel . '%')->paginate(5);
+            $anuncios->appends(['combustible' => $searchFuel]);*/
+
+            /*$anuncios = Anuncio::where('total_puertas', 'like', '%' . $searchDoors . '%')->paginate(5);
+            $anuncios->appends(['doors' => $searchDoors]);*/
+
+            /*$anuncios = Anuncio::where('carro_id', 'like', '%' . $searchCar . '%')->paginate(5);
+            $anuncios->appends(['tipoCarro' => $searchCar]);*/
+
+            return view('busquedas.show', compact('anuncios', 'searchBrand', 'searchFuel', 'searchDoors', 'searchCar'));
+        }
     }
 }

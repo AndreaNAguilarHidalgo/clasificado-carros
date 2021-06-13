@@ -3,8 +3,6 @@
 use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnuncioController;
-use App\Http\Controllers\GalleryController;
 
 /*
 |--------------------------------------------------------------------------

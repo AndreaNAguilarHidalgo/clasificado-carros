@@ -3,7 +3,7 @@
         <div class="card-body">
             <h3 class="card-title">{{$anuncio->marca}}</h3>
 
-            <div class="meta-receta d-flex justify-content-between">
+            <div class="anuncio-meta d-flex justify-content-between">
                 @php
                     $fecha = $anuncio->created_at
                 @endphp

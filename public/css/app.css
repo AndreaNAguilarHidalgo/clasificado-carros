@@ -23,6 +23,15 @@ trix-editor {
   padding-right: 2rem;
 }
 
+.fecha {
+  color: #ED4646 !important;
+}
+
+.anuncio-meta p {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .owl-carousel .owl-stage {
   display: flex;
 }

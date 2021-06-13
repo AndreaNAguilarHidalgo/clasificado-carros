@@ -70,14 +70,14 @@
                                 <!--FIN COL-MD-6-->
                             </div>
                             <!--FIN ROW-->
-                            <div class="row">
+                            {{--<div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
                                         <input id="priceRange" type="text" name="priceRange" value="">
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group" style="text-align: end">
@@ -108,27 +108,20 @@
             @endforeach
         </div>
     </div>
-
-    <div class="container">
-        @foreach ($anuncios as $key => $grupo)
+    @foreach ($anuncios as $key => $grupo)
+        <div class="container">
+            <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">{{ str_replace('-', ' ', $key) }}</h2>
             <div class="row">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">{{ str_replace('-', ' ', $key) }}</h2>
-                    </div>
-                    <div class="card-body">
-                        @foreach ($grupo as $anuncios)
-                            @foreach ($anuncios as $anuncio)
-                                @include('ui.anuncio')
-                            @endforeach
-                        @endforeach
-                    </div>
-                </div>
+                @foreach ($grupo as $anuncios)
+                    @foreach ($anuncios as $anuncio)
+                        @include('ui.anuncio')
+                    @endforeach
+                @endforeach
             </div>
-        @endforeach
-    </div>
-
+        </div>
+    @endforeach
 @endsection
+
 @section('scripts')
     <script src=" {{ asset('js/ionRange/ionRange.js') }}"></script>
     <!--Plugin JavaScript file-->
