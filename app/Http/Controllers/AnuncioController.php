@@ -224,15 +224,26 @@ class AnuncioController extends Controller
         }
         else
         {
-            // $busqueda = $request['buscar'];
             $searchBrand = $request->get('marca');
+            $searchDoors = $request->get('doors');
             $searchFuel = $request->get('combustible');
             $searchCar = $request->get('tipoCarro');
-            $searchDoors = $request->get('doors');
             $searchPrice = $request->get('priceRange');
 
-            $anuncios = Anuncio::where('marca_id', 'like', '%' . $searchBrand . '%')->paginate(5);
-            $anuncios->appends(['marca' => $searchBrand]);
+            $anuncios = Anuncio::where([
+                        ['marca_id', 'like', '%' . $searchBrand . '%'],
+                        ['total_puertas', 'like', '%' . $searchDoors . '%'],
+                        ['combustible_id', 'like', '%' . $searchFuel . '%'],
+                        ['carro_id', 'like', '%' . $searchCar . '%']
+                    ])->paginate(6);
+
+            
+            $anuncios->appends(
+                ['marca' => $searchBrand], ['doors' => $searchDoors],
+                ['combustible' => $searchFuel], ['tipoCarro' => $searchCar]
+            );
+            /*// $busqueda = $request['buscar'];
+            
 
             /*$anuncios = Anuncio::where('combustible_id', 'like', '%' . $searchFuel . '%')->paginate(5);
             $anuncios->appends(['combustible' => $searchFuel]);*/
@@ -243,7 +254,8 @@ class AnuncioController extends Controller
             /*$anuncios = Anuncio::where('carro_id', 'like', '%' . $searchCar . '%')->paginate(5);
             $anuncios->appends(['tipoCarro' => $searchCar]);*/
 
-            return view('busquedas.show', compact('anuncios', 'searchBrand', 'searchFuel', 'searchDoors', 'searchCar'));
+            return view('busquedas.show', compact('anuncios', 'searchBrand', 'searchDoors', 
+                                                    'searchFuel', 'searchCar', 'searchPrice'));
         }
     }
 }

@@ -1,8 +1,7 @@
 <div class="col-md-4 mt-4">
     <div class="card shadow">
         <div class="card-body">
-            <h3 class="card-title">{{$anuncio->marca}}</h3>
-
+            <h3>{{ Str::title($anuncio->marcaCarro->marca) }}</h3>
             <div class="anuncio-meta d-flex justify-content-between">
                 @php
                     $fecha = $anuncio->created_at

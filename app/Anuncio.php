@@ -57,4 +57,12 @@ class Anuncio extends Model
      {
          return $this->belongsTo(Modelo::class, 'modelo_id');
      }
+
+     // Querys scope
+     public function scopeBrand($query, $marca)
+    {
+        if($marca)
+            return $query->where('marca_id', 'LIKE', "%$marca%");
+    }
+
 }

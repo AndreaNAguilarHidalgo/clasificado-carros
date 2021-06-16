@@ -16,10 +16,9 @@ class InicioController extends Controller
     {
         $nuevas = Anuncio::latest()->take(6)->get();
 
-         
-         $marcas = Marca::all();
-         $tipoAuto = TipoCarros::all();
-         $combustible = Combustible::all();
+        $marcas = Marca::all();
+        $tipoAuto = TipoCarros::all();
+        $combustible = Combustible::all();
         // Agrupar los anuncios por marca
          $anuncios = [];
 
@@ -27,6 +26,6 @@ class InicioController extends Controller
              $anuncios[ Str::slug( $marca->marca ) ][] = Anuncio::where('marca_id', $marca->id )->take(3)->get();
          }
 
-        return view('inicio.index', compact( 'nuevas', 'anuncios', 'marcas', 'tipoAuto', 'combustible'));
+        return view('inicio.index', compact('nuevas', 'anuncios', 'marcas', 'tipoAuto', 'combustible'));
     }
 }

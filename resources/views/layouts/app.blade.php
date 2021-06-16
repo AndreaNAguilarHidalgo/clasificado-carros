@@ -88,7 +88,10 @@
         @yield('hero')
         <div class="container">
             <div class="row">
-                <main class="py-4 mt-5 col-12">
+                <div class="py-2 mt-5 col-12">
+                    @yield('botones')
+                </div>
+                <main class="py-2 mt-3 col-12">
                     @yield('content')
                 </main>
                 <footer>
