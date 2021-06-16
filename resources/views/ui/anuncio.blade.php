@@ -4,13 +4,40 @@
             <h3>{{ Str::title($anuncio->marcaCarro->marca) }}</h3>
             <div class="anuncio-meta d-flex justify-content-between">
                 @php
-                    $fecha = $anuncio->created_at
+                    $fecha = $anuncio->created_at;
                 @endphp
             </div>
 
-            <p> {{ Str::words(  strip_tags( $anuncio->descripcion ), 20, ' ...' ) }} </p>
+            <ul class="nav nav-tabs py-2 mb-3">
+                <li class="nav-item">
+                    <i class="fas fa-door-closed"></i>
+                    {{ $anuncio->total_puertas }}
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-dollar-sign"></i>
+                    {{ $anuncio->precio }}
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-car-side"></i>
+                    {{ $anuncio->modeloCarro->modelo }}
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-gas-pump"></i>
+                    {{ $anuncio->tipoCombustible->tipo }}
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-motorcycle"></i>
+                    {{ $anuncio->tipoCarro->nombre }}
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-car"></i>
+                    {{ $anuncio->condicionCarro->estado }}
+                </li>
+            </ul>
 
-            <a href="{{ route('anuncios.show', ['anuncio' => $anuncio->id ])}}"
+            <p> {{ Str::words(strip_tags($anuncio->descripcion), 20, ' ...') }} </p>
+
+            <a href="{{ route('anuncios.show', ['anuncio' => $anuncio->id]) }}"
                 class="btn btn-primary d-block btn-anuncio">Ver anuncio
             </a>
         </div>
