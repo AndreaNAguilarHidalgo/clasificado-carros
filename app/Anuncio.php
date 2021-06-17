@@ -65,4 +65,9 @@ class Anuncio extends Model
             return $query->where('marca_id', 'LIKE', "%$marca%");
     }
 
+    public function randomImage()
+    {
+        return 'https://picsum.photos/245/150';
+    }
+
 }

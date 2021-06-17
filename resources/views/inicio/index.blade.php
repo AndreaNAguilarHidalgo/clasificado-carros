@@ -70,14 +70,14 @@
                                 <!--FIN COL-MD-6-->
                             </div>
                             <!--FIN ROW-->
-                            {{--<div class="row">
+                            {{-- <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
                                         <input id="priceRange" type="text" name="priceRange" value="">
                                     </div>
                                 </div>
-                            </div>--}}
+                            </div> --}}
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group" style="text-align: end">
@@ -95,20 +95,38 @@
 
 @section('content')
     <div class="container nuevos-anuncios">
-        <h2 class="titulo-anuncio text-uppercase-mb-4">Últimos anuncios</h2>
+        <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">Últimos anuncios</h2>
 
         <div class="owl-carousel owl-theme">
             @foreach ($nuevas as $nuevo)
                 <div class="card">
+                    <div class="image">
+                        <img src="{{ $nuevo->randomImage() }}" class="elevation-2" alt="User Image">
+                    </div>
                     <div class="card-body h-100">
+
                         <h3>{{ Str::title($nuevo->marcaCarro->marca) }}</h3>
                         <p>{{ Str::words(strip_tags($nuevo->descripcion), 15) }}</p>
+
+                        <a href="{{ route('anuncios.show', ['anuncio' => $nuevo->id]) }}"
+                            class="btn btn-primary d-block btn-anuncio">Ver anuncio
+                        </a>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-    @foreach ($anuncios as $key => $grupo)
+
+    <div class="container">
+        <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">Ver todos los anuncios</h2>
+        <div class="row">
+            @foreach ($nuevas as $anuncio)
+                @include('ui.anuncio')
+            @endforeach
+        </div>
+    </div>
+
+    {{--@foreach ($anuncios as $key => $grupo)
         <div class="container">
             <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">{{ str_replace('-', ' ', $key) }}</h2>
             <div class="row">
@@ -119,7 +137,12 @@
                 @endforeach
             </div>
         </div>
-    @endforeach
+    @endforeach--}}
+@endsection
+@section('questions')
+<div class="container">
+    <h2>Do yo have a question?</h2>
+</div>
 @endsection
 
 @section('scripts')

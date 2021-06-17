@@ -91,12 +91,11 @@
         @yield('hero')
         <div class="container">
             <div class="row">
-                <div class="py-2 mt-5 col-12">
-                    @yield('botones')
-                </div>
+                @yield('botones')
                 <main class="py-2 mt-3 col-12">
                     @yield('content')
                 </main>
+                @yield('questions')
                 <footer>
                     @include('modulos.footer')
                 </footer>

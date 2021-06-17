@@ -7,7 +7,9 @@
                     $fecha = $anuncio->created_at;
                 @endphp
             </div>
-
+            <div class="image">
+                <img src="{{ $anuncio->randomImage() }}" class="rounded mx-auto d-block" alt="User Image">
+            </div>
             <ul class="nav nav-tabs py-2 mb-3">
                 <li class="nav-item">
                     <i class="fas fa-door-closed"></i>
