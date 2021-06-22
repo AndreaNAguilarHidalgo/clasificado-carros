@@ -2,7 +2,9 @@ import Vue from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'owl.carousel';
-
+import 'ion-rangeslider';
+import Dropzone from "dropzone";
+import "dropzone/dist/dropzone.css";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -13,7 +15,7 @@ import 'owl.carousel';
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.ionRangeSlider = require("ion-rangeslider");
+//window.ionRangeSlider = require("ion-rangeslider");
 
 /**
  * The following block of code may be used to automatically register your

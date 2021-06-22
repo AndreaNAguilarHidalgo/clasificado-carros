@@ -1,11 +1,11 @@
-Dropzone.options.myDropzone = {
+/*Dropzone.options.myDropzone = {
     headers: {
         'X-CSRF-TOKEN': "{{ csrf_token() }}"
     },
     url: "/images",
     dictDefaultMessage: "Agregar imágenes",
     acceptedFiles: "image/*"
-}
+}*/
 /*Dropzone.autoDiscover = false;
 
 var myAwesomeDropzone = new Dropzone('#dropzoneImg', {
@@ -84,3 +84,99 @@ document.addEventListener('DOMContentLoaded', () =>
         }
     });
 });*/
+
+/*Dropzone.autoDiscover = false;
+//Dropzone.options.demoform = false;	
+let token = $('meta[name="csrf-token"]').attr('content');
+
+$(function() {
+    var myDropzone = new Dropzone("div#myDropzoneArea", {
+        paramName: "file",
+        url: "{{ url('/storeimages') }}",
+        previewsContainer: 'div.dropzone-previews',
+        addRemoveLinks: true,
+        autoProcessQueue: true,
+        uploadMultiple: false,
+        parallelUploads: 1,
+        maxFiles: 2,
+        params: {
+            _token: token
+        },
+        accept(file, done) {
+            return done();
+          },
+        // The setting up of the dropzone
+        init: function() {
+            var myDropzone = this;
+
+            $("form[name='demoform']").submit(function(event) {
+                // Para asegurarse que el formulario no se envía realmente
+                event.preventDefault();
+
+                URL = $("#demoform").attr('action');
+                formData = $('#demoform').serialize();
+
+                $.ajax({
+                    url: URL,
+                    type: 'POST',
+                    
+                    data: formData,
+                    success: function(result) {
+                        if (result.status == "success") {
+                            myDropzone.processQueue();
+                        } else {
+                            console.log("error", result.status);
+                        }
+                    }
+                });
+            });
+
+            //Gets triggered when we submit the image.
+            this.on('sending', function(file, xhr, formData) {
+                //fetch the user id from hidden input field and send that userid with our image
+                //formData.append();
+            });
+
+            this.on("success", function(file, response) {
+                // Reset the form+
+                $('#demoform')[0].reset();
+
+                // Reset dropzone
+                $('.dropzone-previews').empty();
+            });
+
+            this.on("queuecomplete", function() {
+
+            });
+
+            // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+            // of the sending event because uploadMultiple is set to true.
+            this.on("sendingmultiple", function() {
+                // Gets triggered when the form is actually being sent.
+                // Hide the success button or the complete form.
+            });
+
+            this.on("successmultiple", function(files, response) {
+                // Gets triggered when the files have successfully been sent.
+                // Redirect user or notify of success.
+            });
+
+            this.on("errormultiple", function(files, response) {
+                // Gets triggered when there was an error sending the files.
+                // Maybe show form again, and notify user of error
+            });
+        }
+    });
+});*/
+Dropzone.options.myDropzoneArea = {
+    paramName: "file",
+    maxFilesize: 2,
+    accept: function(file, done){
+        if(file.name == "justinbieber.jpg"){
+            done("naha, you don't");
+        }
+        else{
+            done();
+        }
+    }
+};

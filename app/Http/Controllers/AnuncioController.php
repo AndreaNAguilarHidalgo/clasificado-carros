@@ -218,7 +218,7 @@ class AnuncioController extends Controller
     {
         if(empty($request->marca) && empty($request->combustible) && 
             empty($request->tipoCarro) && empty($request->doors) &&
-            empty($request->priceRange))
+            !empty($request->priceRange))
         {
             return redirect()->action('InicioController@index');
         }
@@ -242,17 +242,6 @@ class AnuncioController extends Controller
                 ['marca' => $searchBrand], ['doors' => $searchDoors],
                 ['combustible' => $searchFuel], ['tipoCarro' => $searchCar]
             );
-            /*// $busqueda = $request['buscar'];
-            
-
-            /*$anuncios = Anuncio::where('combustible_id', 'like', '%' . $searchFuel . '%')->paginate(5);
-            $anuncios->appends(['combustible' => $searchFuel]);*/
-
-            /*$anuncios = Anuncio::where('total_puertas', 'like', '%' . $searchDoors . '%')->paginate(5);
-            $anuncios->appends(['doors' => $searchDoors]);*/
-
-            /*$anuncios = Anuncio::where('carro_id', 'like', '%' . $searchCar . '%')->paginate(5);
-            $anuncios->appends(['tipoCarro' => $searchCar]);*/
 
             return view('busquedas.show', compact('anuncios', 'searchBrand', 'searchDoors', 
                                                     'searchFuel', 'searchCar', 'searchPrice'));
