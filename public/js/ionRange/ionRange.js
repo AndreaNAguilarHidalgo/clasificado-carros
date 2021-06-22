@@ -2,9 +2,9 @@ $(function () {
     /* ION SLIDER */
     $('#priceRange').ionRangeSlider({
         min: 0,
-        max: 5000,
-        from: 1000,
-        to: 4000,
+        max: 10000000,
+        from: 100000,
+        to: 400000,
         type: 'double',
         step: 1,
         prefix: '$',

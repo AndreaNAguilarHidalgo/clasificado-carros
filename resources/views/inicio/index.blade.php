@@ -70,14 +70,14 @@
                                 <!--FIN COL-MD-6-->
                             </div>
                             <!--FIN ROW-->
-                            {{-- <div class="row">
+                            <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
                                         <input id="priceRange" type="text" name="priceRange" value="">
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div> 
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group" style="text-align: end">
