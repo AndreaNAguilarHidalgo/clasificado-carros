@@ -16,31 +16,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3 class="jumbotron">Subir imagen</h3>
-                {{-- <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <input type="file" name="file" accept="image/*">
-
-                        @error('file')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <button class="btn btn-primary" type="submit">Enviar</button>
-                </form> --}}
-
-                {{-- <form action="{{ route('gallery.store') }}" method="POST" class="dropzone" 
-                      id="my-awesome-dropzone">
-                </form> --}}
-
-                {{-- <form id="my-awesome-dropzone" class="dropzone">
-                    <div class="dropzone-previews"></div> <!-- this is were the previews should be shown. -->
-                    
-                    <!-- Now setup your input fields -->
-                    <input type="email" name="username" />
-                    <input type="password" name="password" />
-                  
-                    <button type="submit">Submit data and files!</button>
-                </form> --}}
 
                 <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
                     
@@ -59,12 +34,11 @@
                     </div>
                     <div class="form-group">
                         <div id="myDropzoneArea" class="dz-default dz-message myDropzoneArea">
-                            <span>Cargar Imágenes</span>
                         </div>
                         <div class="dropzone-previews"></div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-md btn-primary">create</button>
+                        <input type="submit" class="btn btn-primary" value="Create">
                     </div>
                 </form>
             </div>
@@ -72,5 +46,8 @@
     </section>
 @endsection
 @section('scripts')
-<script src=" {{ asset('js/dropzone/dropzone-custom.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" 
+        integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src=" {{ asset('js/dropzone/dropzone-custom.js') }}"></script>
 @endsection

@@ -1,4 +1,4 @@
-/*Dropzone.options.myDropzone = {
+/*Dropzone.options.myDropzoneArea = {
     headers: {
         'X-CSRF-TOKEN': "{{ csrf_token() }}"
     },
@@ -29,7 +29,7 @@ Dropzone.options.myAwesomeDropzone = {
 document.addEventListener('DOMContentLoaded', () =>
 {
 
-    const myAwesomeDropzone = new Dropzone('#my-awesome-dropzone', {
+    const myAwesomeDropzone = new Dropzone('div#myDropzoneArea', {
         
         headers: {
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () =>
         dictRemoveFile: 'Borrar Archivo',
         maxFiles: 4,
         
-        /*init: function() {
+        function() {
             if(document.querySelector('#imagen').value.trim() ) {
                let imagenPublicada = {};
                imagenPublicada.size = 1234;
@@ -90,21 +90,18 @@ document.addEventListener('DOMContentLoaded', () =>
 let token = $('meta[name="csrf-token"]').attr('content');
 
 $(function() {
-    var myDropzone = new Dropzone("div#myDropzoneArea", {
+     myDropzone = new Dropzone("div#myDropzoneArea", {
         paramName: "file",
         url: "{{ url('/storeimages') }}",
         previewsContainer: 'div.dropzone-previews',
         addRemoveLinks: true,
-        autoProcessQueue: true,
+        autoProcessQueue: false,
         uploadMultiple: false,
         parallelUploads: 1,
         maxFiles: 2,
         params: {
             _token: token
         },
-        accept(file, done) {
-            return done();
-          },
         // The setting up of the dropzone
         init: function() {
             var myDropzone = this;
@@ -134,7 +131,7 @@ $(function() {
             //Gets triggered when we submit the image.
             this.on('sending', function(file, xhr, formData) {
                 //fetch the user id from hidden input field and send that userid with our image
-                //formData.append();
+                formData.append();
             });
 
             this.on("success", function(file, response) {
@@ -168,8 +165,10 @@ $(function() {
         }
     });
 });*/
-Dropzone.options.myDropzoneArea = {
+
+/*Dropzone.options.myDropzoneArea = {
     paramName: "file",
+    maxFiles: 2,
     maxFilesize: 2,
     accept: function(file, done){
         if(file.name == "justinbieber.jpg"){
@@ -179,4 +178,13 @@ Dropzone.options.myDropzoneArea = {
             done();
         }
     }
+};*/
+
+Dropzone.options.myDropzoneArea = {
+    url: "{{ url('/storeimages') }}",
+    autoProcessQueue: false,
+    uploadMultiple: true,
+    maxFiles: 3,
+    acceptedFiles: 'image/*',
+    addRemoveLinks: true,
 };
