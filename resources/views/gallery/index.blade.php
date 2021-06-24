@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <h3 class="jumbotron">Subir imagen</h3>
 
-                <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data">
+                <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data" novalidate>
                     
                     @csrf
 
@@ -34,6 +34,7 @@
                     </div>
                     <div class="form-group">
                         <div id="myDropzoneArea" class="dz-default dz-message myDropzoneArea">
+                            <span>Agrear Imágenes</span>
                         </div>
                         <div class="dropzone-previews"></div>
                     </div>

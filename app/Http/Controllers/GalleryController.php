@@ -6,6 +6,7 @@ use App\Gallery;
 use http\Env\Response;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\GalleryRequest;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -192,7 +193,7 @@ class GalleryController extends Controller
         return response()->json($data);
     }*/
 
-    public function storeData(Request $request)
+    public function storeData(GalleryRequest $request)
 	{
 			$user = new Gallery($request->all());
             $user->name = $request->name;
@@ -202,11 +203,10 @@ class GalleryController extends Controller
                 $path = 'public/images';
                 $img = $request->file('file');
                 $imageName = time().'.'.$img->clientExtension();
-
+                //dd($imageName);
                 $direccion = $img->storeAs($path, $imageName);
                 $user->save();
             }
-            
 		return response()->json(['status'=>"success"]);
         //return redirect()->route('gallery.index')->with('message_succes');
 	}
