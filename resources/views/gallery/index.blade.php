@@ -1,9 +1,6 @@
 @extends('layouts.adminlayout')
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css"
-        integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/dropzone/custom-style.css') }}">
 @endsection
 
@@ -17,7 +14,7 @@
             <div class="col-sm-12">
                 <h3 class="jumbotron">Subir imagen</h3>
 
-                <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" class="dropzone" enctype="multipart/form-data" novalidate>
+                <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" enctype="multipart/form-data" novalidate>
                     
                     @csrf
 
@@ -33,22 +30,17 @@
                             required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <div id="myDropzoneArea" class="dz-default dz-message myDropzoneArea">
-                            <span>Agrear Imágenes</span>
-                        </div>
-                        <div class="dropzone-previews"></div>
+                        <div id="myDropzoneArea" class="dropzone"></div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Create">
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
 @endsection
-@section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" 
-        integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src=" {{ asset('js/dropzone/dropzone-custom.js') }}"></script>
+
+@section('script')
+    <script type="module" src="{{ asset('js/dropzone/dropzone-custom.js') }}"></script>
 @endsection

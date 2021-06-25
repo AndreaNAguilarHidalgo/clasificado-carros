@@ -193,7 +193,7 @@ class GalleryController extends Controller
         return response()->json($data);
     }*/
 
-    public function storeData(GalleryRequest $request)
+    public function storeData(Request $request)
 	{
 			$user = new Gallery($request->all());
             $user->name = $request->name;
@@ -205,9 +205,11 @@ class GalleryController extends Controller
                 $imageName = time().'.'.$img->clientExtension();
                 //dd($imageName);
                 $direccion = $img->storeAs($path, $imageName);
+                $user->file = $direccion;
                 $user->save();
             }
-		return response()->json(['status'=>"success"]);
+            dd($user);
+		//return response()->json(['status'=>"success"]);
         //return redirect()->route('gallery.index')->with('message_succes');
 	}
 

@@ -1,248 +1,32 @@
-/*Dropzone.options.myDropzoneArea = {
-    headers: {
-        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    url: "/images",
-    dictDefaultMessage: "Agregar imágenes",
-    acceptedFiles: "image/*"
-}*/
-/*Dropzone.autoDiscover = false;
-
-var myAwesomeDropzone = new Dropzone('#myDropzoneArea', {
-    url: "/",
-    dictDefaultMessage: "Agregar imagénes aquí",
-    acceptedFiles: "image/*",
-    maxFiles: 4,
-});*/
-// "myAwesomeDropzone" is the camelized version of the HTML element's ID
-/*Dropzone.autoDiscover = false;
-Dropzone.options.myAwesomeDropzone = {
-    headers: {
-        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    dictDefaultMessage: "Agregar imagénes aquí",
-    acceptedFiles: "image/*",
-    maxFiles: 4,
-};*/
-/*Dropzone.autoDiscover = false;
-
-document.addEventListener('DOMContentLoaded', () =>
-{
-
-    const myAwesomeDropzone = new Dropzone('div#myDropzoneArea', {
-        
-        headers: {
-            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        },
-        url: "/anuncios/imagen",
-        dictDefaultMessage: 'Sube aquí tus imágenes',
-        acceptedFiles: "image/*",
-        addRemoveLinks: true,
-        dictRemoveFile: 'Borrar Archivo',
-        maxFiles: 4,
-        
-        function() {
-            if(document.querySelector('#imagen').value.trim() ) {
-               let imagenPublicada = {};
-               imagenPublicada.size = 1234;
-               imagenPublicada.name = document.querySelector('#imagen').value;
-               
-               this.options.addedfile.call(this, imagenPublicada);
-               this.options.thumbnail.call(this, imagenPublicada, `/storage/anuncios/${imagenPublicada.name}`);
-
-               imagenPublicada.previewElement.classList.add('dz-sucess');
-               imagenPublicada.previewElement.classList.add('dz-complete');
-            } 
-        },
-        success: function(file, response) {
-            // console.log(file);
-            // console.log(response);
-            console.log(response.correcto);
-            document.querySelector('#error').textContent = '';
-
-            // Coloca la respuesta del servidor en el input hidden
-            document.querySelector('#imagen').value = response.correcto;
-
-            // Añadir al objeto de archivo el nombre del servidor
-            file.nombreServidor = response.correcto;
-        },
-        maxfilesexceeded: function(file) {
-            if( this.files[1] != null ) {
-                this.removeFile(this.files[0]); // eliminar el archivo anterior
-                this.addFile(file); // Agregar el nuevo archivo 
-            }
-        }, 
-        removedfile: function(file, response) {
-            file.previewElement.parentNode.removeChild(file.previewElement);
-
-            params = {
-                imagen: file.nombreServidor ?? document.querySelector('#imagen').value
-            }
-
-            axios.post('/anuncios/borrarimagen', params )
-                .then(respuesta => console.log(respuesta))
-        }
-    });
-});*/
-
-/*Dropzone.autoDiscover = false;
-//Dropzone.options.demoform = false;	
 let token = $('meta[name="csrf-token"]').attr('content');
 
-$(function() {
-     myDropzone = new Dropzone("div#myDropzoneArea", {
-        paramName: "file",
-        url: "{{ url('/storeimages') }}",
-        previewsContainer: 'div.dropzone-previews',
-        addRemoveLinks: true,
-        autoProcessQueue: false,
-        uploadMultiple: false,
-        parallelUploads: 1,
-        maxFiles: 2,
-        params: {
-            _token: token
-        },
-        // The setting up of the dropzone
-        init: function() {
-            var myDropzone = this;
-
-            $("form[name='demoform']").submit(function(event) {
-                // Para asegurarse que el formulario no se envía realmente
-                event.preventDefault();
-
-                URL = $("#demoform").attr('action');
-                formData = $('#demoform').serialize();
-
-                $.ajax({
-                    url: URL,
-                    type: 'POST',
-                    
-                    data: formData,
-                    success: function(result) {
-                        if (result.status == "success") {
-                            myDropzone.processQueue();
-                        } else {
-                            console.log("error", result.status);
-                        }
-                    }
-                });
-            });
-
-            //Gets triggered when we submit the image.
-            this.on('sending', function(file, xhr, formData) {
-                //fetch the user id from hidden input field and send that userid with our image
-                formData.append();
-            });
-
-            this.on("success", function(file, response) {
-                // Reset the form+
-                $('#demoform')[0].reset();
-
-                // Reset dropzone
-                $('.dropzone-previews').empty();
-            });
-
-            this.on("queuecomplete", function() {
-
-            });
-
-            // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-            // of the sending event because uploadMultiple is set to true.
-            this.on("sendingmultiple", function() {
-                // Gets triggered when the form is actually being sent.
-                // Hide the success button or the complete form.
-            });
-
-            this.on("successmultiple", function(files, response) {
-                // Gets triggered when the files have successfully been sent.
-                // Redirect user or notify of success.
-            });
-
-            this.on("errormultiple", function(files, response) {
-                // Gets triggered when there was an error sending the files.
-                // Maybe show form again, and notify user of error
-            });
-        }
-    });
-});*/
-
-/*Dropzone.options.myDropzoneArea = {
-    paramName: "file",
-    maxFiles: 2,
-    maxFilesize: 2,
-    accept: function(file, done){
-        if(file.name == "justinbieber.jpg"){
-            done("naha, you don't");
-        }
-        else{
-            done();
-        }
-    }
-};*/
 Dropzone.options.myDropzoneArea = {
     url: "/",
-    addRemoveLinks: true,
-    acceptedFiles: 'image/*',
-    maxFiles: 3,
-    maxFilesize:3,
-    autoProcessQueue: true,
-    uploadMultiple: true,
-    
-};
-
-var arrayFiles = [];
-
-/*$(".myDropzoneArea").dropzone({
-
-    headers: {
-        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    url: "/anuncios/imagen",
-    dictDefaultMessage: 'Sube aquí tus imágenes',
+    dictDefaultMessage: 'Arrastra o agrega aquí tus imágenes',
     acceptedFiles: "image/*",
     addRemoveLinks: true,
+    autoProcessQueue: false,
     dictRemoveFile: 'Borrar Archivo',
-    maxFiles: 4,
-
-    function() {
-        if (document.querySelector('#imagen').value.trim()) {
-            let imagenPublicada = {};
-            imagenPublicada.size = 1234;
-            imagenPublicada.name = document.querySelector('#imagen').value;
-
-            this.options.addedfile.call(this, imagenPublicada);
-            this.options.thumbnail.call(this, imagenPublicada, `/storage/anuncios/${imagenPublicada.name}`);
-
-            imagenPublicada.previewElement.classList.add('dz-sucess');
-            imagenPublicada.previewElement.classList.add('dz-complete');
-        }
+    maxFiles: 3,
+    maxFilesize: 3,
+    params: {
+        _token: token
     },
-    success: function (file, response) {
-        // console.log(file);
-        // console.log(response);
-        console.log(response.correcto);
-        document.querySelector('#error').textContent = '';
+    init: function() {
+        var myDropzone = this; // Makes sure that 'this' is understood inside the functions below.
 
-        // Coloca la respuesta del servidor en el input hidden
-        document.querySelector('#imagen').value = response.correcto;
+        // for Dropzone to process the queue (instead of default form behavior):
+        $("#submit-all").on("click", function(e) {
+            // Make sure that the form isn't actually being sent.
+            e.preventDefault();
+            e.stopPropagation();
+            myDropzone.processQueue();
+        });
 
-        // Añadir al objeto de archivo el nombre del servidor
-        file.nombreServidor = response.correcto;
-    },
-    maxfilesexceeded: function (file) {
-        if (this.files[1] != null) {
-            this.removeFile(this.files[0]); // eliminar el archivo anterior
-            this.addFile(file); // Agregar el nuevo archivo 
-        }
-    },
-    removedfile: function (file, response) {
-        file.previewElement.parentNode.removeChild(file.previewElement);
-
-        params = {
-            imagen: file.nombreServidor ?? document.querySelector('#imagen').value
-        }
-
-        axios.post('/anuncios/borrarimagen', params)
-            .then(respuesta => console.log(respuesta))
+        //send all the form data along with the files:
+        this.on("sendingmultiple", function(data, xhr, formData) {
+            formData.append("name", jQuery("#name").val());
+            formData.append("email", jQuery("#email").val());
+        });
     }
-})*/
+};

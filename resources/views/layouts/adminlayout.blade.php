@@ -9,14 +9,27 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- 
+        ==================
+        =     CSS        =
+        ==================
+    -->
+
      <!-- BOOTSTRAP 4 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!--JQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- 
+        ==================
+        =     JS         =
+        ==================
+    -->
+
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,11 +48,10 @@
             </main>
         </div>
     </div>
+    @yield('script')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
-
-    @yield('js')
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>

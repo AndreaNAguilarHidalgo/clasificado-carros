@@ -12,9 +12,8 @@
 #myDropzoneArea
 {
     background-color: #fbfdff;
-    border: 1px dashed #c0ccda;
+    border: 1px dashed #343a40;
     border-radius: 6px;
-    padding: 10px;
     text-align: center;
     margin-bottom: 15px;
     cursor: pointer;
