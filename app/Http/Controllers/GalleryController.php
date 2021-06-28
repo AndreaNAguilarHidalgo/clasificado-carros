@@ -208,8 +208,8 @@ class GalleryController extends Controller
                 $user->file = $direccion;
                 $user->save();
             }
-            dd($user);
-		//return response()->json(['status'=>"success"]);
+
+		return response()->json(['status'=>"success"]);
         //return redirect()->route('gallery.index')->with('message_succes');
 	}
 

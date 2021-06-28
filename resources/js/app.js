@@ -3,8 +3,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'owl.carousel';
 import 'ion-rangeslider';
-import Dropzone from "dropzone";
-import "dropzone/dist/dropzone.css";
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
