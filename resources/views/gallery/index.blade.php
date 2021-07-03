@@ -30,7 +30,7 @@
                             required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <div id="myDropzoneArea" class="dropzone"></div>
+                        <my-dropzone-area></my-dropzone-area>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Create</button>
@@ -42,5 +42,4 @@
 @endsection
 
 @section('script')
-    <script type="module" src="{{ asset('js/dropzone/dropzone-custom.js') }}"></script>
 @endsection

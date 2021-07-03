@@ -4,6 +4,7 @@
 </template>
 
 <script>
+
 export default 
 {
     props: ['anuncioId'],

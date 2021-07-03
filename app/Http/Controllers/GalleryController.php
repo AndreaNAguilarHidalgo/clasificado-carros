@@ -108,7 +108,6 @@ class GalleryController extends Controller
         Gallery::create([
             'url' => '/storage/images/'.$nameImage
         ]);*/
-
     }
 
     /**
@@ -154,14 +153,13 @@ class GalleryController extends Controller
     public function destroy(Request $request)
     {
         $filename =  $request->get('filename');
-        Gallery::where('filename',$filename)->delete();
-        $path = public_path('uploads/gallery/').$filename;
+        Gallery::where('filename', $filename)->delete();
+        $path = public_path('uploads/gallery/') . $filename;
 
-        if (file_exists($path))
-        {
+        if (file_exists($path)) {
             unlink($path);
         }
-        return response()->json(['success'=>$filename]);
+        return response()->json(['success' => $filename]);
     }
 
     /*public function getImages()
@@ -194,46 +192,58 @@ class GalleryController extends Controller
     }*/
 
     public function storeData(Request $request)
-	{
-			$user = new Gallery($request->all());
-            $user->name = $request->name;
-            $user->email = $request->email;
+    {
+        if($request->file('file')){
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            $filename = str_replace(' ', '', $filename);
 
-            if($request->file('file')){
-                $path = 'public/images';
-                $img = $request->file('file');
-                $imageName = time().'.'.$img->clientExtension();
-                //dd($imageName);
-                $direccion = $img->storeAs($path, $imageName);
-                $user->file = $direccion;
-                $user->save();
+            $path = $file->storeAs('images', $filename);
+            //$path = $request->file('file')->store('images');
+
+            if($path){
+                return response()->json(['message'=> 'file uploaded'], 200);
             }
+        }
+        /*$user = new Gallery($request->all());
+        $user->name = $request->name;
+        $user->email = $request->email;
 
-		return response()->json(['status'=>"success"]);
+        if ($request->file('file')) {
+            $path = 'public/images';
+            $img = $request->file('file');
+            $imageName = time() . '.' . $img->clientExtension();
+            //dd($imageName);
+            $direccion = $img->storeAs($path, $imageName);
+            $user->file = $direccion;
+            $user->save();
+        }
+
+        return response()->json(['status' => "success"]);*/
         //return redirect()->route('gallery.index')->with('message_succes');
-	}
+    }
 
 
 
-	// We are submitting are image along with userid and with the help of user id we are updateing our record
-	public function storeImages(Request $request)
-	{
+    // We are submitting are image along with userid and with the help of user id we are updateing our record
+    public function storeImages(Request $request)
+    {
 
-		if($request->file('file')){
+        if ($request->file('file')) {
 
             $img = $request->file('file');
 
-            $imageName = time().'.'.$img->clientExtension();
+            $imageName = time() . '.' . $img->clientExtension();
             $user_image = new Gallery();
             $original_name = $img->getClientOriginalName();
             $user_image->image = $imageName;
 
-            if(!is_dir(storage_path() . '/app/public/images/')){
+            if (!is_dir(storage_path() . '/app/public/images/')) {
                 mkdir(storage_path() . '/app/public/images/', 0777, true);
             }
 
             $request->file('file')->move(storage_path() . '/app/public/images/', $imageName);
-        return response()->json(['status'=>"success",'imgdata'=>$original_name]);
+            return response()->json(['status' => "success", 'imgdata' => $original_name]);
         }
-	}
+    }
 }

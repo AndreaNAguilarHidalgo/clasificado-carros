@@ -1,5 +1,7 @@
 window.Dropzone;
 
+Dropzone.autoDiscover = false;
+
 Dropzone.options.myDropzoneArea = {
     /*url: "/storedata",
     dictDefaultMessage: 'Arrastra o agrega aquí tus imágenes',
