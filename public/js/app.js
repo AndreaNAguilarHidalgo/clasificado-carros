@@ -2040,7 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-dropzone */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.js");
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone__WEBPACK_IMPORTED_MODULE_1__);
@@ -2052,6 +2052,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var url = "{{ route('gallery.store') }}";
+console.log(url);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2060,14 +2062,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      sendSuccess: false,
+      name: "",
+      email: "",
       dropzoneOptions: {
-        url: "https://localhost/storedata",
+        type: "POST",
+        headers: {
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        },
+        url: "/sendMessage",
         addRemoveLinks: true,
         thumbnailWidth: 150,
         maxFilesize: 3,
         parallelUploads: 3,
         maxFiles: 3,
-        uploadMultiple: true
+        uploadMultiple: true,
+        acceptedFiles: "image/*" //autoProcessQueue:false,
+
       }
     };
   },
@@ -2098,9 +2109,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return afterUploadComplete;
+    }(),
+    shootMessage: function () {
+      var _shootMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.$refs.myVueDropzone.processQueue();
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function shootMessage() {
+        return _shootMessage.apply(this, arguments);
+      }
+
+      return shootMessage;
+    }(),
+    sendMessage: function () {
+      var _sendMessage = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(files, xhr, formData) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                formData.append("name", $("name").val());
+                formData.append("email", $("email").val());
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function sendMessage(_x2, _x3, _x4) {
+        return _sendMessage.apply(this, arguments);
+      }
+
+      return sendMessage;
     }()
   }
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -20093,11 +20150,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("vue-dropzone", {
-    ref: "myVueDropzone",
-    attrs: { id: "dropzone", options: _vm.dropzoneOptions },
-    on: { "vdropzone-complete": _vm.afterUploadComplete }
-  })
+  return _c(
+    "div",
+    [
+      _vm.sendSuccess
+        ? _c("div", { staticClass: "px-12 text-base text-center mx-auto" }, [
+            _vm._v("Thank You, Message has been sent")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "vue-dropzone",
+        {
+          ref: "myVueDropzone",
+          attrs: {
+            id: "dropzone",
+            options: _vm.dropzoneOptions,
+            useCustomSlot: true
+          },
+          on: {
+            "vdropzone-complete": _vm.afterUploadComplete,
+            "vdropzone-sending-multiple": _vm.sendMessage
+          }
+        },
+        [
+          _c("div", { staticClass: "dropzone-custom-content" }, [
+            _c("h3", { staticClass: "dropzone-custom-title" }, [
+              _vm._v("Arrastra y suelta para subir imágenes")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "subtitle" }, [
+              _vm._v("...o haga clic para elegirlo desde la computadora")
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-2 w-full" }, [
+        _c(
+          "button",
+          {
+            staticClass:
+              "flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg",
+            on: { click: _vm.shootMessage }
+          },
+          [_vm._v("Send Message")]
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -21,16 +21,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <!-- 
-        ==================
-        =     JS         =
-        ==================
-    -->
-
-    <!--JQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -49,8 +39,16 @@
         </div>
     </div>
     @yield('script')
+    <!-- 
+        ==================
+        =     JS         =
+        ==================
+    -->
 
-    <!-- Scripts -->
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- APP.JS -->
     <script src="{{ asset('js/app.js') }}"></script>
 
 </body>

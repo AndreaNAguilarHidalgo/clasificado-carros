@@ -1,9 +1,5 @@
 @extends('layouts.adminlayout')
 
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/dropzone/custom-style.css') }}">
-@endsection
-
 @section('content')
     <section class="content-header">
         <h1>Gallery</h1>
@@ -14,7 +10,7 @@
             <div class="col-sm-12">
                 <h3 class="jumbotron">Subir imagen</h3>
 
-                <form action="{{ route('form.data') }}" name="demoform" id="demoform" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ route('gallery.store') }}" name="demoform" id="demoform" method="POST" enctype="multipart/form-data" novalidate>
                     
                     @csrf
 
@@ -32,14 +28,9 @@
                     <div class="form-group">
                         <my-dropzone-area></my-dropzone-area>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
+                    
                 </form>
             </div>
         </div>
     </section>
-@endsection
-
-@section('script')
 @endsection
