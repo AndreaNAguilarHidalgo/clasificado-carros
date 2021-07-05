@@ -15,9 +15,12 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
             $table->string('file');
+            $table->string('path');
+            //$table->unsignedBigInteger('posts_id');
+            /*$table->foreign('posts_id')
+                  ->references('id')
+                  ->on('posts');*/
             $table->timestamps();
         });
     }

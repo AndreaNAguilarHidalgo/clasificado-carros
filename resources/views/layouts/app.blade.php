@@ -95,7 +95,10 @@
                 <main class="py-2 mt-3 col-12">
                     @yield('content')
                 </main>
-                @yield('questions')
+                <div class="py-2 mt-3 col-12">
+                    @yield('questions')
+                </div>
+                
                 <footer>
                     @include('modulos.footer')
                 </footer>

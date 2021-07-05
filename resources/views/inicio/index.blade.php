@@ -140,9 +140,11 @@
     @endforeach--}}
 @endsection
 @section('questions')
-<div class="container">
-    <h2>Do yo have a question?</h2>
-</div>
+    <div class="questions">
+        <div class="col-md-4 texto-buscar">
+            <p class="display-4">Contactate con nostros</p>
+        </diV>
+    </div>
 @endsection
 
 @section('scripts')

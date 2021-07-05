@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Gallery;
+use App\Posts;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller
 {
@@ -35,24 +37,45 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
+        $posts = new Posts();
         //use the request to do what we want
 
         // Check if the request has files
         if ($request->file('file')) {
             $path = 'public/images';
+
             /* Multiple file upload */
             $files = $request->file('file');
+
             if (!is_array($files)) {
                 $files = [$files];
             }
 
             //loop throu the array 
             for ($i = 0; $i < count($files); $i++) {
-                $file = $files[$i]; 
-                $filename = time() ."_$i". '.' . $file->clientExtension();
+
+                $file = $files[$i];
+                $filename = time() . "_$i" . '.' . $file->clientExtension();
                 $file= $file->storeAs($path, $filename);
+
+                $images = new Gallery();
+                $images->file = $filename;
+                $images->path = $file;
+                $images->save();
+
+                
+                
+                
+                $posts->images = $file;
+                $posts->name = $request->name;
+                $posts->email = $request->email;
+                $posts->save();
+                
             }
-            return response()->json(['message' => 'file uploaded', 'data' => $request->email], 200);
+
+            
+            
+            return response()->json(['message' => 'file uploaded'], 200);
         } else {
             return response()->json(['message' => 'error uploading file'], 503);
         }

@@ -3,7 +3,6 @@
 use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +52,7 @@ Route::post('/sendMessage', 'GalleryController@store')->name('gallery.store');
 Route::get('/gallery', 'GalleryController@index')->name('gallery.index');
 //Route::post('/storedata', 'GalleryController@storeData')->name('form.data');
 //Route::post('/storeimages', 'GalleryController@storeImages')->name('store.image');
+
+Route::get('/posts/create', 'PostsController@create')->name('posts.create');
+Route::post('/posts/create', 'PostsController@store')->name('posts.store');
+Route::get('/posts', 'PostsController@index')->name('posts.index');

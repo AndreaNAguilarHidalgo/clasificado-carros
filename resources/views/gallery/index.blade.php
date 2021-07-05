@@ -10,10 +10,9 @@
             <div class="col-sm-12">
                 <h3 class="jumbotron">Subir imagen</h3>
 
-                <form action="{{ route('gallery.store') }}" name="demoform" id="demoform" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="{{ route('posts.store') }}" name="demoform" id="demoform" method="POST" enctype="multipart/form-data" novalidate>
                     
                     @csrf
-
                     <div class="form-group">
 
                         <label for="name">Name</label>
@@ -28,7 +27,9 @@
                     <div class="form-group">
                         <my-dropzone-area></my-dropzone-area>
                     </div>
-                    
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" name="create" value="Create"/>
+                    </div>
                 </form>
             </div>
         </div>
