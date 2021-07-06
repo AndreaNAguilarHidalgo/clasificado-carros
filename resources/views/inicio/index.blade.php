@@ -16,10 +16,10 @@
                     <p class="display-4">Encuentra tú próximo automóvil</p>
                 </diV>
                 <div class="row">
-                    <div class="card">
+                    <div class="card col-lg-12 col-md-6 col-sm-4">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6 col-sm-4">
+                                <div class="col-lg-6 col-md-6 col-sm-4">
                                     <div class="form-group">
                                         <label for="marca">Marca</label>
                                         <select name="marca" class="form-control" id="marca">
@@ -44,7 +44,7 @@
                                 </div>
                                 <!--FIN COL-MD-6-->
 
-                                <div class="col-md-6">
+                                <div class="col-lg-6 col-md-6 col-sm-4">
                                     <div class="form-group">
                                         <label for="tipoCarro">Tipo de Carro</label>
                                         <select name="tipoCarro" class="form-control" id="tipoCarro">
@@ -71,7 +71,7 @@
                             </div>
                             <!--FIN ROW-->
                             <div class="row">
-                                <div class="col">
+                                <div class="col-lg-12 col-md-4 col-sm-4">
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
                                         <input id="priceRange" type="text" name="priceRange" value="">
@@ -79,7 +79,7 @@
                                 </div>
                             </div> 
                             <div class="row">
-                                <div class="col">
+                                <div class="col-lg-12 col-md-4 col-sm-4">
                                     <div class="form-group" style="text-align: end">
                                         <input type="submit" name="buscar" class="btn btn-primary" value="Buscar">
                                     </div>
@@ -140,15 +140,17 @@
     @endforeach--}}
 @endsection
 @section('questions')
-    <div class="questions">
-        <div class="col-md-4 texto-buscar">
-            <p class="display-4">Contactate con nostros</p>
+    <div class="questions py-3 mt-3 col-12">
+        <div class="col-md-4 texto">
+            <p class="display-3" >Contactate con nostros</p>
         </diV>
+        @include('ui.contact')
     </div>
 @endsection
 
 @section('scripts')
     <script src=" {{ asset('js/ionRange/ionRange.js') }}"></script>
+
     <!--Plugin JavaScript file-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 @endsection

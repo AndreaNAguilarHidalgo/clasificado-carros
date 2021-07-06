@@ -1,0 +1,85 @@
+public function create(Request $request)
+{   
+    $validator = Validator::make($request->all(), [
+      //Other products input
+        'file' => 'nullable|mimes:jpeg,jpg,png,gif|max:2048',
+
+    ]);
+
+    //$products = new Products 
+    //$products->save();
+
+   $photos = $request->file('file');
+    return var_dump($photos);
+
+    if (!is_array($photos)) {
+        $photos = [$photos];
+    }
+    for ($i = 0; $i < count($photos); $i++) {
+
+        $photo = $photos[$i];
+        $savename = sha1(time() . '.' . $request->get('name'))."_$i";
+
+        $images = new ProductImages ([
+            'name' => $request->get('name'),
+            'post_id'=> $products->id,
+            'path'=> public_path('uploads') . '/' . $savename,
+            'main'=> 0,
+        ]);
+        $images->save();
+
+        Image::make($photo)
+            ->resize(250, null, function ($constraints) {
+                $constraints->aspectRatio();
+            })
+            ->save(public_path('uploads'). '/' . $savename);
+        $photo->move(public_path('uploads'),  $savename);
+    }
+    return redirect()->back();
+}
+
+
+
+//use the request to do what we want
+
+        // Check if the request has files
+        if ($request->file('file')) {
+            $path = 'public/images';
+            /* Multiple file upload */
+            $files = $request->file('file');
+            if (!is_array($files)) {
+                $files = [$files];
+            }
+
+            //loop throu the array 
+            for ($i = 0; $i < count($files); $i++) {
+                $file = $files[$i]; 
+                $filename = time() ."_$i". '.' . $file->clientExtension();
+                $file= $file->storeAs($path, $filename);
+            }
+            return response()->json(['message' => 'file uploaded', 'data' => $request->email], 200);
+        } else {
+            return response()->json(['message' => 'error uploading file'], 503);
+        }
+
+
+
+
+$table->id();
+            $table->string('file');
+            $table->string('path');
+            $table->unsignedBigInteger('posts_id');
+            $table->foreign('posts_id')
+                  ->references('id')
+                  ->on('posts');
+            $table->timestamps();
+
+
+protected $table = 'galleries';
+    /*protected $fillable = ['file', 'path'];
+
+    public function posts()
+    {
+        //Relación n - 1 
+        return $this->belongsTo(Posts::class);
+    }*/

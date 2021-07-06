@@ -56,3 +56,7 @@ Route::get('/gallery', 'GalleryController@index')->name('gallery.index');
 Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 Route::post('/posts/create', 'PostsController@store')->name('posts.store');
 Route::get('/posts', 'PostsController@index')->name('posts.index');
+
+// Rutas para formulario de contacto
+Route::get('/contacts/create', 'ContactController@create')->name('contacts.create');
+Route::post('/contacts', 'ContactController@store')->name('contacts.store');

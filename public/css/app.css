@@ -67,14 +67,19 @@ trix-editor {
 
 .questions {
   background-image: linear-gradient(to bottom, rgba(70, 70, 70, 0.4), rgba(53, 53, 53, 0.571)), url("/images/contact-us.jpg");
-  height: 20rem;
+  height: 25rem;
   background-size: cover;
   background-position: top center;
 }
 
-.questions .texto-buscar p {
+.questions .texto {
+  padding: 1rem;
+}
+
+.questions .texto p {
   font-size: 1.4rem;
   color: #FFF;
+  font-family: "Cabin", sans-serif;
 }
 
 ul li {
@@ -83,6 +88,10 @@ ul li {
 
 h3 {
   text-align: center;
+}
+
+textarea {
+  width: 840px;
 }
 
 /*!

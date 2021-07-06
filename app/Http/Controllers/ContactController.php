@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Gallery;
-use App\Posts;
+use App\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class PostsController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        //
     }
 
     /**
@@ -25,7 +25,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('inicio.index');
     }
 
     /**
@@ -36,38 +36,43 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Posts();
-        $imagenes = Gallery::all();
+        $data = $request->validate([
+            'nombre' => 'required|min:2',
+            'apellido' => 'required|min:2',
+            'email' => 'required|email',
+            'telefono' => 'required|max:10',
+            'descripcion' => 'required|max:255',
+        ]);
 
-        $post->name = $request->name;
-        $post->email = $request->email;
-        foreach ($imagenes as $imagen) {
-            $post->images = $imagen;
-        }
-        $post->save();
-        dd($post);
+        DB::table('contacts')->insert([
+            'nombre' => $data['nombre'],
+            'apellido' => $data['apellido'],
+            'email' => $data['email'],
+            'telefono' => $data['telefono'],
+            'descripcion' => $data['descripcion'],
+        ]);
 
-        return response()->json(['message' => 'form success', 'data' => $request->email],200);
+        return redirect()->action('InicioController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Posts  $posts
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Posts $posts)
+    public function show(Contact $contact)
     {
-        
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Posts  $posts
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Posts $posts)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -76,10 +81,10 @@ class PostsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Posts  $posts
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, Contact $contact)
     {
         //
     }
@@ -87,10 +92,10 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Posts  $posts
+     * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Posts $posts)
+    public function destroy(Contact $contact)
     {
         //
     }

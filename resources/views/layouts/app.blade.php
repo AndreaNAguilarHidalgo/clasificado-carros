@@ -28,8 +28,10 @@
     <!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @yield('scripts')
     <!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
 </head>
 <body>
     <div id="app">
@@ -92,20 +94,15 @@
         <div class="container">
             <div class="row">
                 @yield('botones')
-                <main class="py-2 mt-3 col-12">
+                <main class="py-4 mt-3 col-12">
                     @yield('content')
                 </main>
-                <div class="py-2 mt-3 col-12">
-                    @yield('questions')
-                </div>
-                
-                <footer>
+                @yield('questions')
+                <div class="py-3 mt-3">
                     @include('modulos.footer')
                 </footer>
             </div>
         </div>
-        
     </div>
-    @yield('scripts')
 </body>
 </html>

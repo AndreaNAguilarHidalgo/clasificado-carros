@@ -62,14 +62,6 @@ class GalleryController extends Controller
                 $images->file = $filename;
                 $images->path = $file;
                 $images->save();
-
-                
-                
-                
-                $posts->images = $file;
-                $posts->name = $request->name;
-                $posts->email = $request->email;
-                $posts->save();
                 
             }
 
