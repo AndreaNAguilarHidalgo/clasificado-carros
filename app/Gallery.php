@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Gallery extends Model
 {
     protected $table = 'galleries';
-    protected $fillable = ['file', 'path'];
+    protected $fillable = ['url'];
 
-    public function posts()
+    public function imageable()
     {
-        //Relación n - 1 
-        return $this->belongsTo(Posts::class);
+        return $this->morphTo();
     }
 }

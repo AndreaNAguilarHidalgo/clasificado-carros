@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
 {
-    protected $fillable = ['name', 'email','images'];
+    protected $fillable = ['name', 'email'];
 
-    public function imgs()
+    public function images()
     {
-        // Relación 1 - n
-        return $this->hasMany(Gallery::class);
+        return $this->morphMany('App\Gallery', 'imageable');
     }
 }

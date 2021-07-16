@@ -8,7 +8,11 @@
                 @endphp
             </div>
             <div class="image">
-                <img src="{{ $anuncio->randomImage() }}" class="rounded mx-auto d-block" alt="User Image">
+                @if ($anuncio->images->count() <= 0)
+                    <img style="height: 150px;    width: 250px;" src="/imagenes/avatar.png" class="rounded-circle">
+                @else
+                    <img style="height: 150px;    width: 280px;" src="{{ $anuncio->images->random()->url }}">
+                @endif
             </div>
             <ul class="nav nav-tabs py-2 mb-3">
                 <li class="nav-item">
@@ -40,7 +44,7 @@
             <p> {{ Str::words(strip_tags($anuncio->descripcion), 20, ' ...') }} </p>
 
             <a href="{{ route('anuncios.show', ['anuncio' => $anuncio->id]) }}"
-                class="btn btn-primary d-block btn-anuncio">Ver anuncio
+                class="btn btn-primary d-block btn-anuncio">Ver más...
             </a>
         </div>
     </div>

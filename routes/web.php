@@ -3,6 +3,7 @@
 use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnuncioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,16 +48,11 @@ Route::get('/buscar', 'AnuncioController@search')->name('buscar.show');
 
 
 // Pruebas para subir imagenes con dropzone
-Route::get('/gallery/create', 'GalleryController@create')->name('gallery.create');
-Route::post('/sendMessage', 'GalleryController@store')->name('gallery.store');
-Route::get('/gallery', 'GalleryController@index')->name('gallery.index');
-//Route::post('/storedata', 'GalleryController@storeData')->name('form.data');
-//Route::post('/storeimages', 'GalleryController@storeImages')->name('store.image');
-
 Route::get('/posts/create', 'PostsController@create')->name('posts.create');
-Route::post('/posts/create', 'PostsController@store')->name('posts.store');
+Route::post('/sendMessage', 'PostsController@store')->name('posts.store');
 Route::get('/posts', 'PostsController@index')->name('posts.index');
 
 // Rutas para formulario de contacto
 Route::get('/contacts/create', 'ContactController@create')->name('contacts.create');
 Route::post('/contacts', 'ContactController@store')->name('contacts.store');
+

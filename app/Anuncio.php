@@ -70,4 +70,9 @@ class Anuncio extends Model
         return 'https://picsum.photos/245/150';
     }
 
+    public function images()
+    {
+        return $this->morphMany('App\Gallery', 'imageable');
+    }
+
 }

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class InicioController extends Controller
-{   
+{
     public function index()
     {
         $nuevas = Anuncio::latest()->take(6)->get();
@@ -20,11 +20,11 @@ class InicioController extends Controller
         $tipoAuto = TipoCarros::all();
         $combustible = Combustible::all();
         // Agrupar los anuncios por marca
-         $anuncios = [];
+        $anuncios = [];
 
-         foreach($marcas as $marca) {
-             $anuncios[ Str::slug( $marca->marca ) ][] = Anuncio::where('marca_id', $marca->id )->take(3)->get();
-         }
+        foreach ($marcas as $marca) {
+            $anuncios[Str::slug($marca->marca)][] = Anuncio::where('marca_id', $marca->id)->take(3)->get();
+        }
 
         return view('inicio.index', compact('nuevas', 'anuncios', 'marcas', 'tipoAuto', 'combustible'));
     }

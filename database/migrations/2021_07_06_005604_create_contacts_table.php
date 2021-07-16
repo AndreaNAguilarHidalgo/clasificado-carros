@@ -18,7 +18,7 @@ class CreateContactsTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('email');
-            $table->string('telfeono');
+            $table->string('telefono');
             $table->text('descripcion');
             $table->timestamps();
         });

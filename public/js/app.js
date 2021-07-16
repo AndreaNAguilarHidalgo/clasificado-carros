@@ -20187,12 +20187,8 @@ var render = function() {
       _c("div", { staticClass: "p-2 w-full" }, [
         _c(
           "button",
-          {
-            staticClass:
-              "flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg",
-            on: { click: _vm.shootMessage }
-          },
-          [_vm._v("Send Message")]
+          { staticClass: "btn btn-primary", on: { click: _vm.shootMessage } },
+          [_vm._v("Create")]
         )
       ])
     ],

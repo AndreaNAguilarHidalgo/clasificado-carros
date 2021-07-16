@@ -65,8 +65,8 @@
 
                                     <div class="form-group">
                                         <label for="modelo">Modelo</label>
-                                        <select name="modelo"
-                                            class="form-control @error('modelo') is-invalid @enderror" id="modelo">
+                                        <select name="modelo" class="form-control @error('modelo') is-invalid @enderror"
+                                            id="modelo">
                                             <option value="">-- Selecciona un modelo --</option>
                                         </select>
 
@@ -251,7 +251,24 @@
                                             </span>
                                         @enderror
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="imagenes">Subir varias imágenes:</label>
+                                        <input type="file" class="form-control-file @error('imagenes') is-invalid @enderror"
+                                            name="imagenes[]" id="imagenes[]" multiple accept="image/*">
+                                        <div class="description">
+                                            Un número ilimitado de archivos pueden ser cargados en este campo.
+                                            <br>
+                                            Límite de 2048 MB por imagen.
+                                            <br>
+                                            Tipos permitidos: jpeg, png, jpg, gif, svg.
+                                            <br>
+                                        </div>
+                                        @error('imagenes')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <input type="submit" class="btn btn-primary" value="Agregar publicación">
                                     </div>

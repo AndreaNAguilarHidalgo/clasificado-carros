@@ -77,7 +77,7 @@
                                         <input id="priceRange" type="text" name="priceRange" value="">
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-4 col-sm-4">
                                     <div class="form-group" style="text-align: end">
@@ -101,7 +101,11 @@
             @foreach ($nuevas as $nuevo)
                 <div class="card">
                     <div class="image">
-                        <img src="{{ $nuevo->randomImage() }}" class="elevation-2" alt="User Image">
+                        @if ($nuevo->images->count() <= 0)
+                            <img src="/imagenes/avatar.png" class="rounded-circle">
+                        @else
+                            <img src="{{ $nuevo->images->random()->url }}">
+                        @endif
                     </div>
                     <div class="card-body h-100">
 
@@ -109,7 +113,7 @@
                         <p>{{ Str::words(strip_tags($nuevo->descripcion), 15) }}</p>
 
                         <a href="{{ route('anuncios.show', ['anuncio' => $nuevo->id]) }}"
-                            class="btn btn-primary d-block btn-anuncio">Ver anuncio
+                            class="btn btn-primary d-block btn-anuncio">Ver más...
                         </a>
                     </div>
                 </div>
@@ -126,7 +130,7 @@
         </div>
     </div>
 
-    {{--@foreach ($anuncios as $key => $grupo)
+    {{-- @foreach ($anuncios as $key => $grupo)
         <div class="container">
             <h2 class="titulo-anuncio text-uppercase mt-5 mb-4">{{ str_replace('-', ' ', $key) }}</h2>
             <div class="row">
@@ -137,12 +141,12 @@
                 @endforeach
             </div>
         </div>
-    @endforeach--}}
+    @endforeach --}}
 @endsection
 @section('questions')
     <div class="questions py-3 mt-3 col-12">
         <div class="col-md-4 texto">
-            <p class="display-3" >Contactate con nostros</p>
+            <p class="display-3">Contactate con nostros</p>
         </diV>
         @include('ui.contact')
     </div>

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Marca;
 use App\Estado;
+use App\Modelo;
 use App\Anuncio;
 use App\Condicion;
 use App\Municipio;
 use App\TipoCarros;
 use App\Combustible;
-use App\Marca;
-use App\Modelo;
+use App\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class AnuncioController extends Controller
@@ -22,7 +24,7 @@ class AnuncioController extends Controller
 
     public function byState($id)
     {
-        
+
         return Municipio::where('estado_id', $id)->get();
     }
 
@@ -31,7 +33,7 @@ class AnuncioController extends Controller
         return Modelo::where('marca_id', $id)->get();
     }
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -57,13 +59,14 @@ class AnuncioController extends Controller
         $combustible = Combustible::all(['id', 'tipo']);
         $condicion = Condicion::all(['id', 'estado']);
         $estado = Estado::all();
-        $municipio = Municipio::all(['id', 'municipio','estado_id']);
+        $municipio = Municipio::all(['id', 'municipio', 'estado_id']);
         $marca = Marca::all(['id', 'marca']);
-        $modelo = Modelo::all(['id', 'modelo','marca_id']);
+        $modelo = Modelo::all(['id', 'modelo', 'marca_id']);
+        $images = Gallery::all(['id', 'url', 'imageable_id']);
 
         //dd($municipio1);
 
-        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado', 'marca', 'modelo'));
+        return view('anuncios.create', compact('tipoCarros', 'combustible', 'condicion', 'municipio', 'estado', 'marca', 'modelo', 'images'));
     }
 
     /**
@@ -79,35 +82,50 @@ class AnuncioController extends Controller
             'año' => 'required',
             'combustible' => 'required',
             'condicion' => 'required',
-            'tipo_carro'=>'required',
+            'tipo_carro' => 'required',
             'total_puertas' => 'required',
             'precio' => 'required',
-            'kilometraje'=>'required',
+            'kilometraje' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
             'descripcion' => 'required',
             'marca' => 'required',
-            'modelo'=>'required',
+            'modelo' => 'required',
+            'imagenes.*' => 'image|mimes:jpeg,jpg,png,svg,gif|max:2048'
 
         ]);
 
-        //Almacenar datos con modelo
-        auth()->user()->anuncios()->create([
-            'marca_id' => $data['marca'],
-            'modelo_id' => $data['modelo'],
-            'año' => $data['año'],
-            'carro_id'=> $data['tipo_carro'],
-            'combustible_id' => $data['combustible'],
-            'condicion_id' => $data['condicion'],
-            'total_puertas' => $data['total_puertas'],
-            'precio' => $data['precio'],
-            'kilometraje' => $data['kilometraje'],
-            'municipio_id' => $data['municipio'],
-            'estado_id' => $data['estado'],
-            'descripcion' => $data['descripcion'],
-            //'imagen' => $data['imagen'],
-        ]);
+        $urlimagenes = [];
 
+        if ($request->hasFile('imagenes')) {
+            $imagenes = $request->file('imagenes');
+
+            foreach ($imagenes as $imagen) {
+
+                $filename = time() . '_' . trim($imagen->getClientOriginalName());
+                $path = '/public/images';
+                $imagen = $imagen->storeAs($path, $filename);
+                $urlimagenes[]['url'] = 'storage/images/' .$filename;
+            }
+
+            $anuncio = new Anuncio();
+            $anuncio->user_id = Auth::user()->id;
+            $anuncio->marca_id = $data['marca'];
+            $anuncio->modelo_id = $data['modelo'];
+            $anuncio->año = $data['año'];
+            $anuncio->carro_id = $data['tipo_carro'];
+            $anuncio->combustible_id = $data['combustible'];
+            $anuncio->condicion_id = $data['condicion'];
+            $anuncio->total_puertas = $data['total_puertas'];
+            $anuncio->precio = $data['precio'];
+            $anuncio->kilometraje = $data['kilometraje'];
+            $anuncio->descripcion = $data['descripcion'];
+            $anuncio->municipio_id = $data['municipio'];
+            $anuncio->estado_id = $data['estado'];
+            $anuncio->save();
+
+            $anuncio->images()->createMany($urlimagenes);
+        }
         // Redirección
         return redirect()->action('DashboardController@index');
     }
@@ -142,9 +160,19 @@ class AnuncioController extends Controller
         $marcaCarro = Marca::all(['id', 'marca']);
         $modeloCarro = Modelo::all(['id', 'modelo']);
 
-        return view('anuncios.edit', 
-               compact('tipoCarros','tipoCombustible','condicionCarro','anuncio',
-               'municipioCarro', 'estadoCarro', 'marcaCarro', 'modeloCarro'));
+        return view(
+            'anuncios.edit',
+            compact(
+                'tipoCarros',
+                'tipoCombustible',
+                'condicionCarro',
+                'anuncio',
+                'municipioCarro',
+                'estadoCarro',
+                'marcaCarro',
+                'modeloCarro'
+            )
+        );
     }
 
     /**
@@ -162,17 +190,17 @@ class AnuncioController extends Controller
         // Validación
         $data = $request->validate([
             'año' => 'required',
-            'tipo_carro'=>'required',
-            'combustible'=>'required',
-            'condicion'=>'required',
+            'tipo_carro' => 'required',
+            'combustible' => 'required',
+            'condicion' => 'required',
             'total_puertas' => 'required',
             'precio' => 'required',
-            'kilometraje'=>'required',
+            'kilometraje' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
             'descripcion' => 'required',
             'marca' => 'required',
-            'modelo'=>'required',
+            'modelo' => 'required',
 
         ]);
 
@@ -192,8 +220,8 @@ class AnuncioController extends Controller
 
         $anuncio->save();
 
-         // Redirección
-         return redirect()->action('AnuncioController@index');
+        // Redirección
+        return redirect()->action('AnuncioController@index');
     }
 
     /**
@@ -216,14 +244,13 @@ class AnuncioController extends Controller
 
     public function search(Request $request)
     {
-        if(empty($request->marca) && empty($request->combustible) && 
+        if (
+            empty($request->marca) && empty($request->combustible) &&
             empty($request->tipoCarro) && empty($request->doors) &&
-            !empty($request->priceRange))
-        {
+            !empty($request->priceRange)
+        ) {
             return redirect()->action('InicioController@index');
-        }
-        else
-        {
+        } else {
             $searchBrand = $request->get('marca');
             $searchDoors = $request->get('doors');
             $searchFuel = $request->get('combustible');
@@ -231,20 +258,28 @@ class AnuncioController extends Controller
             $searchPrice = $request->get('priceRange');
 
             $anuncios = Anuncio::where([
-                        ['marca_id', 'like', '%' . $searchBrand . '%'],
-                        ['total_puertas', 'like', '%' . $searchDoors . '%'],
-                        ['combustible_id', 'like', '%' . $searchFuel . '%'],
-                        ['carro_id', 'like', '%' . $searchCar . '%']
-                    ])->paginate(6);
+                ['marca_id', 'like', '%' . $searchBrand . '%'],
+                ['total_puertas', 'like', '%' . $searchDoors . '%'],
+                ['combustible_id', 'like', '%' . $searchFuel . '%'],
+                ['carro_id', 'like', '%' . $searchCar . '%']
+            ])->paginate(6);
 
-            
+
             $anuncios->appends(
-                ['marca' => $searchBrand], ['doors' => $searchDoors],
-                ['combustible' => $searchFuel], ['tipoCarro' => $searchCar]
+                ['marca' => $searchBrand],
+                ['doors' => $searchDoors],
+                ['combustible' => $searchFuel],
+                ['tipoCarro' => $searchCar]
             );
 
-            return view('busquedas.show', compact('anuncios', 'searchBrand', 'searchDoors', 
-                                                    'searchFuel', 'searchCar', 'searchPrice'));
+            return view('busquedas.show', compact(
+                'anuncios',
+                'searchBrand',
+                'searchDoors',
+                'searchFuel',
+                'searchCar',
+                'searchPrice'
+            ));
         }
     }
 }

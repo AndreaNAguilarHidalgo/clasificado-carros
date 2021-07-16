@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Gallery;
+use SplStack;
 use App\Posts;
+use App\Gallery;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\Jsonable;
+use JsonSerializable;
+
+use function PHPUnit\Framework\isJson;
 
 class PostsController extends Controller
 {
@@ -36,18 +42,73 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Posts();
-        $imagenes = Gallery::all();
+        $request->validate([
+            'name' => 'required|min:2',
+            'email' => 'required|email',
+            'imagenes:*' => 'image|mimes:jpeg,jpg,png,svg,gif|max:2048'
+        ]);
+
+        $urlimagenes = [];
+
+        if($request->hasFile('imagenes')){
+            $imagenes = $request->file('imagenes');
+            
+            foreach($imagenes as $imagen){
+
+                $filename = time() .'_' . trim($imagen->getClientOriginalName());
+                $path = 'public/images';
+                $imagen = $imagen->storeAs($path, $filename);
+                $urlimagenes[]['url'] = $imagen;
+            }
+            
+            $post = new Posts();
+
+            $post->name = $request->name;
+            $post->email = $request->email;
+            $post->save();
+
+            $post->images()->createMany($urlimagenes);
+
+            return view('posts.index');
+        }
+
+        /*$post = new Posts();
+        $urlimages = [];
 
         $post->name = $request->name;
         $post->email = $request->email;
-        foreach ($imagenes as $imagen) {
-            $post->images = $imagen;
-        }
         $post->save();
-        dd($post);
 
-        return response()->json(['message' => 'form success', 'data' => $request->email],200);
+        if ($request->file('file')) {
+            $path = 'public/images';
+
+            //Multiple file upload
+            $files = $request->file('file');
+
+            if (!is_array($files)) {
+                $files = [$files];
+            }
+
+            //loop throu the array 
+            for ($i = 0; $i < count($files); $i++) {
+
+                $file = $files[$i];
+                $filename = time() . "_$i" . '.' . $file->clientExtension();
+                $file= $file->storeAs($path, $filename);
+                $urlimages[]['url'] = $file; 
+
+                $images = new Gallery();
+                $images->url = $file;
+                $images->save();
+                
+            }
+
+            
+            
+            return response()->json(['message' => 'file uploaded'], 200);
+        } else {
+            return response()->json(['message' => 'error uploading file'], 503);
+        }*/
     }
 
     /**
@@ -58,7 +119,6 @@ class PostsController extends Controller
      */
     public function show(Posts $posts)
     {
-        
     }
 
     /**
