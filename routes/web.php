@@ -15,6 +15,7 @@ use App\Http\Controllers\AnuncioController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['verify' => true]); /*Activando la verificación de correo*/
 // Ruta de Inicio
 Route::get('/', 'InicioController@index')->name('inicio.index');
 
@@ -30,9 +31,6 @@ Route::post('/anuncios', 'AnuncioController@store')->name('anuncios.store');
 Route::get('/anuncios/{anuncio}', 'AnuncioController@show')->name('anuncios.show');
 Route::delete('/anuncios/{anuncio}', 'AnuncioController@destroy')->name('anuncios.destroy');
 //Route::resource('anuncios', AnuncioController::class);
-
-
-Auth::routes(['verify' => true]); /*Activando la verificación de correo*/
 
 Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback');

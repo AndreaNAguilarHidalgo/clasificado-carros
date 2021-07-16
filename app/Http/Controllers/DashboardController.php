@@ -10,15 +10,15 @@ class DashboardController extends Controller
     
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['user', 'admin']);
+        $request->user()->authorizeRoles(['admin', 'user']);
 
-        if(($request->user()->hasRole('admin')))
+        if(($request->user()->hasRole('user')))
         {
-            return view('dashboards.administrador');
+            return view('dashboards.anunciante');
         }
         else
         {
-            return view('dashboards.anunciante');
+            return view('dashboards.administrador');
         }
         
     }
