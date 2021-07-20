@@ -1,10 +1,11 @@
 $(function () {
     /* ION SLIDER */
     $('#priceRange').ionRangeSlider({
-        min: 0,
-        max: 5000000,
-        from: 100000,
-        to: 400000,
+        grid: true,
+        min: 50000,
+        max: 1000000,
+        from: 50000,
+        to: 100000,
         type: 'double',
         step: 1,
         prefix: '$',

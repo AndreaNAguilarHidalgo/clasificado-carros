@@ -26,7 +26,7 @@
         Botón Blog
         ======================================-->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href=" {{ route('dashboard.index') }} " class="nav-link">
             <i class="nav-icon fas fa-home"></i>
             <p>Principal</p>
           </a>

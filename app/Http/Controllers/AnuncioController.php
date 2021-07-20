@@ -11,8 +11,10 @@ use App\Municipio;
 use App\TipoCarros;
 use App\Combustible;
 use App\Gallery;
+use Facade\Ignition\QueryRecorder\Query;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class AnuncioController extends Controller
@@ -105,7 +107,7 @@ class AnuncioController extends Controller
                 $filename = time() . '_' . trim($imagen->getClientOriginalName());
                 $path = '/public/images';
                 $imagen = $imagen->storeAs($path, $filename);
-                $urlimagenes[]['url'] = 'storage/images/' .$filename;
+                $urlimagenes[]['url'] = 'storage/images/' . $filename;
             }
 
             $anuncio = new Anuncio();
@@ -159,6 +161,7 @@ class AnuncioController extends Controller
         $estadoCarro = Estado::all(['id', 'estado']);
         $marcaCarro = Marca::all(['id', 'marca']);
         $modeloCarro = Modelo::all(['id', 'modelo']);
+        $images = Gallery::all(['id', 'url', 'imageable_id']);
 
         return view(
             'anuncios.edit',
@@ -170,7 +173,8 @@ class AnuncioController extends Controller
                 'municipioCarro',
                 'estadoCarro',
                 'marcaCarro',
-                'modeloCarro'
+                'modeloCarro',
+                'images'
             )
         );
     }
@@ -201,27 +205,42 @@ class AnuncioController extends Controller
             'descripcion' => 'required',
             'marca' => 'required',
             'modelo' => 'required',
+            'imagenes.*' => 'image|mimes:jpeg,jpg,png,svg,gif|max:2048'
 
         ]);
 
-        //Asignar valores
-        $anuncio->marca_id = $data['marca'];
-        $anuncio->modelo_id = $data['modelo'];
-        $anuncio->año = $data['año'];
-        $anuncio->carro_id = $data['tipo_carro'];
-        $anuncio->combustible_id = $data['combustible'];
-        $anuncio->condicion_id = $data['condicion'];
-        $anuncio->total_puertas = $data['total_puertas'];
-        $anuncio->precio = $data['precio'];
-        $anuncio->kilometraje = $data['kilometraje'];
-        $anuncio->descripcion = $data['descripcion'];
-        $anuncio->municipio_id = $data['municipio'];
-        $anuncio->estado_id = $data['estado'];
+        $urlimagenes = [];
 
-        $anuncio->save();
+        if ($request->hasFile('imagenes')) {
+            $imagenes = $request->file('imagenes');
 
+            foreach ($imagenes as $imagen) {
+
+                $filename = time() . '_' . trim($imagen->getClientOriginalName());
+                $path = '/public/images';
+                $imagen = $imagen->storeAs($path, $filename);
+                $urlimagenes[]['url'] = 'storage/images/' . $filename;
+            }
+
+            //Asignar valores
+            $anuncio->marca_id = $data['marca'];
+            $anuncio->modelo_id = $data['modelo'];
+            $anuncio->año = $data['año'];
+            $anuncio->carro_id = $data['tipo_carro'];
+            $anuncio->combustible_id = $data['combustible'];
+            $anuncio->condicion_id = $data['condicion'];
+            $anuncio->total_puertas = $data['total_puertas'];
+            $anuncio->precio = $data['precio'];
+            $anuncio->kilometraje = $data['kilometraje'];
+            $anuncio->descripcion = $data['descripcion'];
+            $anuncio->municipio_id = $data['municipio'];
+            $anuncio->estado_id = $data['estado'];
+            $anuncio->save();
+
+            $anuncio->images()->createMany($urlimagenes);
+        }
         // Redirección
-        return redirect()->action('AnuncioController@index');
+        return redirect()->action('AnuncioController@index')->with('datos','Datos actualizados correctamente!');
     }
 
     /**
@@ -235,6 +254,13 @@ class AnuncioController extends Controller
         // Revisar el policy
         $this->authorize('delete', $anuncio);
 
+        $anuncio->with('images');
+
+        foreach($anuncio->images as $image){
+            $archivo = substr($image->url,1);
+            File::delete($archivo);
+            $image->delete();
+        }
         $anuncio->delete();
 
         // Redireccionamiento
@@ -247,7 +273,7 @@ class AnuncioController extends Controller
         if (
             empty($request->marca) && empty($request->combustible) &&
             empty($request->tipoCarro) && empty($request->doors) &&
-            !empty($request->priceRange)
+            empty($request->priceMin) && empty($request->priceMax)
         ) {
             return redirect()->action('InicioController@index');
         } else {
@@ -256,12 +282,14 @@ class AnuncioController extends Controller
             $searchFuel = $request->get('combustible');
             $searchCar = $request->get('tipoCarro');
             $searchPrice = $request->get('priceRange');
+            $searchPriceMin = $request->get('priceMin');
+            $searchPriceMax = $request->get('priceMax');
 
             $anuncios = Anuncio::where([
                 ['marca_id', 'like', '%' . $searchBrand . '%'],
                 ['total_puertas', 'like', '%' . $searchDoors . '%'],
                 ['combustible_id', 'like', '%' . $searchFuel . '%'],
-                ['carro_id', 'like', '%' . $searchCar . '%']
+                ['carro_id', 'like', '%' . $searchCar . '%'],
             ])->paginate(6);
 
 
@@ -269,8 +297,17 @@ class AnuncioController extends Controller
                 ['marca' => $searchBrand],
                 ['doors' => $searchDoors],
                 ['combustible' => $searchFuel],
-                ['tipoCarro' => $searchCar]
+                ['tipoCarro' => $searchCar],
             );
+
+            $contador = $anuncios->count();
+
+            //$anunciosPrice = Anuncio::whereBetween('precio', [$searchPriceMin, $searchPriceMax])->paginate(6);
+
+            /*$anunciosPrice->appends(
+                ['precio' => $searchPriceMin],
+                ['precio' => $searchPriceMax]
+            );*/
 
             return view('busquedas.show', compact(
                 'anuncios',
@@ -278,7 +315,9 @@ class AnuncioController extends Controller
                 'searchDoors',
                 'searchFuel',
                 'searchCar',
-                'searchPrice'
+                'contador',
+                'searchPriceMin',
+                'searchPriceMax'
             ));
         }
     }

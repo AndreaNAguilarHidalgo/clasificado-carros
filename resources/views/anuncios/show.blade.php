@@ -27,7 +27,7 @@
             <div class="anuncio-meta mt-3">
                 <p>
                     <span class="font-weight-bold text-primary">Escrito en:</span>
-                    <a class="text-dark" href="">
+                    <a class="text-dark" href="#">
                         {{ $anuncio->marcaCarro->marca }}
                     </a>
 
@@ -36,6 +36,12 @@
                     <span class="font-weight-bold text-primary">Autor:</span>
                     <a class="text-dark" href="">
                         {{ $anuncio->autor->name }}
+                    </a>
+                </p>
+                <p>
+                    <span class="font-weight-bold text-primary">Contacto:</span>
+                    <a class="text-dark" href="#">
+                        {{ $anuncio->autor->email }}
                     </a>
                 </p>
 
@@ -53,7 +59,7 @@
 
                     {!! $anuncio->descripcion !!}
                 </div>
-
+                <br>
                 <div class="card card-primary">
                     <div class="card-header">
                         <div class="card-title">

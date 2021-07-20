@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
         <h2 class="titulo-categoria text-uppercase mt-5 mb-4">
-            Resultados Búsqueda: {{$searchBrand}} || {{$searchCar}} || {{$searchDoors}} || {{$searchFuel}} 
+            Total de la búsqueda: {{ $contador }}
         </h2>
         <div class="row">
             @foreach ($anuncios as $anuncio)

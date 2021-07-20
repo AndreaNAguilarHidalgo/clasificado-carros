@@ -75,6 +75,10 @@
                                     <div class="form-group">
                                         <label for="priceRange">Rango de precio</label>
                                         <input id="priceRange" type="text" name="priceRange" value="">
+                                        <br>
+                                        <input type="number" name="priceMin" id="priceMin" placeholder="Mínimo">
+                                        <label for="separador">-</label>
+                                        <input type="number" name="priceMax" id="priceMax" placeholder="Máximo">
                                     </div>
                                 </div>
                             </div>
