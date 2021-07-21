@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use PhpParser\Node\Expr\FuncCall;
 
 class AnuncioController extends Controller
 {
@@ -240,7 +241,7 @@ class AnuncioController extends Controller
             $anuncio->images()->createMany($urlimagenes);
         }
         // Redirección
-        return redirect()->action('AnuncioController@index')->with('datos','Datos actualizados correctamente!');
+        return redirect()->action('AnuncioController@index')->with('datos', 'Datos actualizados correctamente!');
     }
 
     /**
@@ -256,8 +257,8 @@ class AnuncioController extends Controller
 
         $anuncio->with('images');
 
-        foreach($anuncio->images as $image){
-            $archivo = substr($image->url,1);
+        foreach ($anuncio->images as $image) {
+            $archivo = substr($image->url, 1);
             File::delete($archivo);
             $image->delete();
         }
@@ -285,7 +286,36 @@ class AnuncioController extends Controller
             $searchPriceMin = $request->get('priceMin');
             $searchPriceMax = $request->get('priceMax');
 
-            $anuncios = Anuncio::where([
+            /*$anuncios = Anuncio::select("*")->where(function ($query) use ($searchBrand) {
+                $query->where('marca_id', 'like', '%' . $searchBrand . '%');
+            })->where(function ($query1) use ($searchDoors) {
+                $query1->where('total_puertas', 'like', '%' . $searchDoors . '%');
+            })->where(function ($query2) use ($searchFuel) {
+                $query2->where('combustible_id', 'like', '%' . $searchFuel . '%');
+            })->where(function ($query3) use ($searchCar) {
+                $query3->where('carro_id', 'like', '%' . $searchCar . '%');
+            })->where(function ($query4) use ($searchPriceMin, $searchPriceMax) {
+                $query4->whereBetween('precio', array($searchPriceMin, $searchPriceMax));
+            })->get();*/
+
+            $anuncios = Anuncio::where('marca_id', 'like', '%' . $searchBrand . '%')
+                ->where('total_puertas', 'like', '%' . $searchDoors . '%')
+                ->where('combustible_id', 'like', '%' . $searchFuel . '%')
+                ->where('carro_id', 'like', '%' . $searchCar . '%')
+                ->get();
+
+            $anunciosPrecio = Anuncio::whereBetween('precio', [$searchPriceMin, $searchPriceMax])->get();
+
+            /*$anuncios->appends(
+                ['marca' => $searchBrand],
+                ['doors' => $searchDoors],
+                ['combustible' => $searchFuel],
+                ['tipoCarro' => $searchCar],
+                ['precio' => $searchPriceMin],
+                ['precio' => $searchPriceMax]
+            );*/
+
+            /*$anuncios = Anuncio::where([
                 ['marca_id', 'like', '%' . $searchBrand . '%'],
                 ['total_puertas', 'like', '%' . $searchDoors . '%'],
                 ['combustible_id', 'like', '%' . $searchFuel . '%'],
@@ -298,24 +328,23 @@ class AnuncioController extends Controller
                 ['doors' => $searchDoors],
                 ['combustible' => $searchFuel],
                 ['tipoCarro' => $searchCar],
-            );
-
-            $contador = $anuncios->count();
-
-            //$anunciosPrice = Anuncio::whereBetween('precio', [$searchPriceMin, $searchPriceMax])->paginate(6);
-
-            /*$anunciosPrice->appends(
                 ['precio' => $searchPriceMin],
                 ['precio' => $searchPriceMax]
             );*/
 
+            $contador = $anuncios->count();
+            $contadorPrice = $anunciosPrecio->count();
+            //dd($anuncios);
+
             return view('busquedas.show', compact(
                 'anuncios',
+                'anunciosPrecio',
                 'searchBrand',
                 'searchDoors',
                 'searchFuel',
                 'searchCar',
                 'contador',
+                'contadorPrice',
                 'searchPriceMin',
                 'searchPriceMax'
             ));

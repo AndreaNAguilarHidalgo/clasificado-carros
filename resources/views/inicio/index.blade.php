@@ -73,8 +73,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-4 col-sm-4">
                                     <div class="form-group">
-                                        <label for="priceRange">Rango de precio</label>
-                                        <input id="priceRange" type="text" name="priceRange" value="">
+                                        <label for="price">Precio</label>
                                         <br>
                                         <input type="number" name="priceMin" id="priceMin" placeholder="Mínimo">
                                         <label for="separador">-</label>
