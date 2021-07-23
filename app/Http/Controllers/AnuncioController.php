@@ -268,16 +268,14 @@ class AnuncioController extends Controller
         return redirect()->action('AnuncioController@index');
     }
 
-
+    // Función para búsqueda en el index
     public function search(Request $request)
     {
         if (
-            empty($request->marca) && empty($request->combustible) &&
-            empty($request->tipoCarro) && empty($request->doors) &&
-            empty($request->priceMin) && empty($request->priceMax)
+            (!is_null($request->priceMin) || !is_null($request->priceMax)) || !is_null($request->marca) ||
+            !is_null($request->doors) || !is_null($request->combustible) || !is_null($request->tipoCarro)
         ) {
-            return redirect()->action('InicioController@index');
-        } else {
+
             $searchBrand = $request->get('marca');
             $searchDoors = $request->get('doors');
             $searchFuel = $request->get('combustible');
@@ -286,68 +284,29 @@ class AnuncioController extends Controller
             $searchPriceMin = $request->get('priceMin');
             $searchPriceMax = $request->get('priceMax');
 
-            /*$anuncios = Anuncio::select("*")->where(function ($query) use ($searchBrand) {
-                $query->where('marca_id', 'like', '%' . $searchBrand . '%');
-            })->where(function ($query1) use ($searchDoors) {
-                $query1->where('total_puertas', 'like', '%' . $searchDoors . '%');
-            })->where(function ($query2) use ($searchFuel) {
-                $query2->where('combustible_id', 'like', '%' . $searchFuel . '%');
-            })->where(function ($query3) use ($searchCar) {
-                $query3->where('carro_id', 'like', '%' . $searchCar . '%');
-            })->where(function ($query4) use ($searchPriceMin, $searchPriceMax) {
-                $query4->whereBetween('precio', array($searchPriceMin, $searchPriceMax));
-            })->get();*/
 
-            $anuncios = Anuncio::where('marca_id', 'like', '%' . $searchBrand . '%')
-                ->where('total_puertas', 'like', '%' . $searchDoors . '%')
-                ->where('combustible_id', 'like', '%' . $searchFuel . '%')
-                ->where('carro_id', 'like', '%' . $searchCar . '%')
-                ->get();
-
-            $anunciosPrecio = Anuncio::whereBetween('precio', [$searchPriceMin, $searchPriceMax])->get();
-
-            /*$anuncios->appends(
-                ['marca' => $searchBrand],
-                ['doors' => $searchDoors],
-                ['combustible' => $searchFuel],
-                ['tipoCarro' => $searchCar],
-                ['precio' => $searchPriceMin],
-                ['precio' => $searchPriceMax]
-            );*/
-
-            /*$anuncios = Anuncio::where([
-                ['marca_id', 'like', '%' . $searchBrand . '%'],
-                ['total_puertas', 'like', '%' . $searchDoors . '%'],
-                ['combustible_id', 'like', '%' . $searchFuel . '%'],
-                ['carro_id', 'like', '%' . $searchCar . '%'],
-            ])->paginate(6);
-
-
-            $anuncios->appends(
-                ['marca' => $searchBrand],
-                ['doors' => $searchDoors],
-                ['combustible' => $searchFuel],
-                ['tipoCarro' => $searchCar],
-                ['precio' => $searchPriceMin],
-                ['precio' => $searchPriceMax]
-            );*/
-
+            $anuncios = Anuncio::orderBy('id', 'DESC')
+                ->Marca($searchBrand)
+                ->Doors($searchDoors)
+                ->Combustible($searchFuel)
+                ->tipoCarro($searchCar)
+                ->Precio($searchPriceMin, $searchPriceMax)
+                ->paginate(4);
+                
             $contador = $anuncios->count();
-            $contadorPrice = $anunciosPrecio->count();
-            //dd($anuncios);
 
             return view('busquedas.show', compact(
                 'anuncios',
-                'anunciosPrecio',
                 'searchBrand',
                 'searchDoors',
                 'searchFuel',
                 'searchCar',
                 'contador',
-                'contadorPrice',
                 'searchPriceMin',
                 'searchPriceMax'
             ));
+        } else {
+            return redirect()->action('InicioController@index');
         }
     }
 }

@@ -1,184 +1,73 @@
 @extends('layouts.anunciante')
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Principal</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Principal</li>
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div><!-- /.content-header -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Principal</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Principal</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div><!-- /.content-header -->
 
-  <!--Main Content-->
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header border-0">
-              <div class="d-flex justify-content-between">
-                <h3 class="card-title">Online Store Visitors</h3>
-                <a href="javascript:void(0);">View Report</a>
-              </div>
+        <!--Main Content-->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header  border-0">
+                                <h2 class="card-title">Mis Publicaciones</h2>
+                            </div>
+                            <div class="card-body py-0">
+                                <table class="table table-striped table-valign-middle">
+                                    <thead>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Precio</th>
+                                        <th>Ver más</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($anuncios as $anuncio)
+                                            <tr>
+                                                <td>{{ $anuncio->marcaCarro->marca }}</td>
+                                                <td>{{ $anuncio->modeloCarro->modelo }}</td>
+                                                <td>${{ $anuncio->precio }}</td>
+                                                <td>
+                                                  <a href="{{ route('anuncios.index')}}" 
+                                                  class="btn btn-success d-block mb-2 w-100">
+                                                  <i class="fas fa-eye"></i>
+                                                  </a>
+                                              </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- /.card -->
+                    </div><!-- /.col -->
+                    <div class="col-lg-6 col-md-4">
+                      <div class="card">
+                        <div class="card-header">
+                          <h2 class="card-title">Perfil</h2>
+                        </div>
+                      </div>
+                    </div>
+                </div><!--row-->
             </div>
-
-            <div class="card-body">
-              <div class="d-flex">
-                <p class="d-flex flex-column">
-                  <span class="text-bold text-lg">820</span>
-                  <span>Visitors Over Time</span>
-                </p>
-                <p class="ml-auto d-flex flex-column text-right">
-                  <span class="text-success">
-                    <i class="fas fa-arrow-up"></i> 12.5%
-                  </span>
-                  <span class="text-muted">Since last week</span>
-                </p>
-              </div><!-- /.d-flex -->
-
-              <div class="position-relative mb-4">
-                <canvas id="visitors-chart" height="200"></canvas>
-              </div>
-
-              <div class="d-flex flex-row justify-content-end">
-                <span class="mr-2">
-                  <i class="fas fa-square text-primary"></i> This Week
-                </span>
-
-                <span>
-                  <i class="fas fa-square text-gray"></i> Last Week
-                </span>
-              </div>
-            </div><!-- fin card-body-->
-          </div>
-          <!--card -->
+            <!--fin container-fluid-->
         </div>
-        <!--fin col-lg-6-->
-
-        <!--- Products -->
-        <div class="card col-lg-6">
-          <div class="card-header border-0">
-            <h3 class="card-title">Products</h3>
-            <div class="card-tools">
-              <a href="#" class="btn btn-tool btn-sm">
-                <i class="fas fa-download"></i>
-              </a>
-              <a href="#" class="btn btn-tool btn-sm">
-                <i class="fas fa-bars"></i>
-              </a>
-            </div>
-          </div>
-          <div class="card-body p-0">
-            <table class="table table-striped table-valign-middle">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Sales</th>
-                  <th>More</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Some Product
-                  </td>
-                  <td>$13 USD</td>
-                  <td>
-                    <small class="text-success mr-1">
-                      <i class="fas fa-arrow-up"></i>
-                      12%
-                    </small>
-                    12,000 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Another Product
-                  </td>
-                  <td>$29 USD</td>
-                  <td>
-                    <small class="text-warning mr-1">
-                      <i class="fas fa-arrow-down"></i>
-                      0.5%
-                    </small>
-                    123,234 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Amazing Product
-                  </td>
-                  <td>$1,230 USD</td>
-                  <td>
-                    <small class="text-danger mr-1">
-                      <i class="fas fa-arrow-down"></i>
-                      3%
-                    </small>
-                    198 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Perfect Item
-                    <span class="badge bg-danger">NEW</span>
-                  </td>
-                  <td>$199 USD</td>
-                  <td>
-                    <small class="text-success mr-1">
-                      <i class="fas fa-arrow-up"></i>
-                      63%
-                    </small>
-                    87 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div><!-- /.card -->
-
-
-      </div>
-      <!--row-->
+        <!--fin content-->
     </div>
-    <!--fin container-fluid-->
-  </div>
-  <!--fin content-->
-</div>
-<!--FIN DE content-wrapper-->
+    <!--FIN DE content-wrapper-->
 @endsection

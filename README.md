@@ -82,6 +82,14 @@ Guardamos los cambios y creamos un enlace sibólico
 Y reiniciamos Apache
 
 ` sudo systemctl restart apache2 `
+
+Después de clonar la carpeta y tener la Base de datos creada, corremos migraciones y los seeders,
+dentro de nuestra carpeta de aplicación corremos los siguientes comandos
+
+` php artisan migrate `, por último, ingresamos el siguiente comando
+` php artisan db:seed `
+
+Y tendremos lista nuestro proyecto.
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

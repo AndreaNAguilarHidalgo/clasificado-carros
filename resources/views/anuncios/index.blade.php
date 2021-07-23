@@ -30,35 +30,25 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Lista de Publicaciones</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0 " style="height: 450px;">
                 <table class="table table-head-fixed">
                   <thead>
                     <tr>
-                      <th scole="col">Marca</th>
-                      <th scole="col">Modelo</th>
-                      <th scole="col">Año</th>
-                      <th scole="col">Categoría</th>
-                      <th scole="col">Tipo de Combustible</th>
-                      <th scole="col">Condición del Auto</th>
-                      <th scole="col">Número de Puertas</th>
-                      <th scole="col">Precio</th>
-                      <th scole="col">Kilometraje</th>
-                      <th scole="col">Estado</th>
-                      <th scole="col">Municipio</th>
-                      <th scole="col">Descripción</th>
-                      <th scole="col">Acciones</th>
+                      <th >Marca</th>
+                      <th >Modelo</th>
+                      <th >Año</th>
+                      <th >Categoría</th>
+                      <th >Combustible</th>
+                      <th >Condición</th>
+                      <th ># Puertas</th>
+                      <th >Precio</th>
+                      <th >Kilometraje</th>
+                      <th >Estado</th>
+                      <th >Municipio</th>
+                      <th >Descripción</th>
+                      <th >Acciones</th>
                       
                     </tr>
                   </thead>
@@ -73,8 +63,8 @@
                             <td>{{ $anuncio->tipoCombustible->tipo }}</td>
                             <td>{{ $anuncio->condicionCarro->estado }}</td>
                             <td>{{ $anuncio->total_puertas}}</td>
-                            <td>{{ $anuncio->precio}}</td>
-                            <td>{{ $anuncio->kilometraje}}</td>
+                            <td>${{ $anuncio->precio}}</td>
+                            <td>{{ $anuncio->kilometraje}} KM</td>
                             <td>{{ $anuncio->estadoCarro->estado }}</td>
                             <td>{{ $anuncio->municipioCarro->municipio }}</td>
                             <td>{!! $anuncio->descripcion !!}</td>
@@ -85,10 +75,6 @@
                               <a href="{{ route('anuncios.edit', $anuncio->id) }}" 
                                  class="btn btn-dark d-block mb-2 w-100">Editar
                                     <i class="icono fas fa-edit"></i>
-                              </a>
-                              <a href="{{ route('anuncios.show', $anuncio->id) }}" 
-                                    class="btn btn-success d-block mb-2 w-100">Ver
-                                    <i class="fas fa-eye"></i>
                               </a>
                             </td>
                         </tr>

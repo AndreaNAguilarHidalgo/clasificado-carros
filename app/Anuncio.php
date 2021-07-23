@@ -58,13 +58,6 @@ class Anuncio extends Model
          return $this->belongsTo(Modelo::class, 'modelo_id');
      }
 
-     // Querys scope
-     public function scopeBrand($query, $marca)
-    {
-        if($marca)
-            return $query->where('marca_id', 'LIKE', "%$marca%");
-    }
-
     public function randomImage()
     {
         return 'https://picsum.photos/245/150';
@@ -73,6 +66,38 @@ class Anuncio extends Model
     public function images()
     {
         return $this->morphMany('App\Gallery', 'imageable');
+    }
+
+    
+    // Query Scope para el filtro
+    public function scopeMarca($query, $marca)
+    {
+        if($marca)
+            return $query->where('marca_id', 'LIKE', '%' . $marca . '%');
+    }
+
+    public function scopeDoors($query, $doors)
+    {
+        if($doors)
+            return $query->where('total_puertas', 'LIKE', '%' . $doors . '%');
+    }
+
+    public function scopeCombustible($query, $combustible)
+    {
+        if($combustible)
+            return $query->where('combustible_id', 'LIKE', '%' . $combustible . '%');
+    }
+
+    public function scopeTipoCarro($query, $tipoCarro)
+    {
+        if($tipoCarro)
+            return $query->where('carro_id', 'LIKE', '%' . $tipoCarro . '%');
+    }
+
+    public function scopePrecio($query, $priceMin, $priceMax)
+    {
+        if($priceMin && $priceMax)
+            return $query->whereBetween('precio', [$priceMin, $priceMax]);
     }
 
 }

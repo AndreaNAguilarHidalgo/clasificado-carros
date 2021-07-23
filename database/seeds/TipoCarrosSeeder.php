@@ -13,25 +13,25 @@ class TipoCarrosSeeder extends Seeder
     public function run()
     {
         DB::table('tipo_carros')->insert([
-            'nombre'=> 'Motocicletas',
+            'nombre'=> 'Motocicleta',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         
         DB::table('tipo_carros')->insert([
-            'nombre'=> 'Camionetas',
+            'nombre'=> 'Camioneta',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('tipo_carros')->insert([
-            'nombre'=> 'Automóviles',
+            'nombre'=> 'Automóvil',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('tipo_carros')->insert([
-            'nombre'=> 'Camiones',
+            'nombre'=> 'Furgoneta',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

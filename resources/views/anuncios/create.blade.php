@@ -159,7 +159,7 @@
                                         <input type="number" name="total_puertas"
                                             class="form-control @error('total_puertas') is-invalid @enderror"
                                             id="total_puertas" placeholder="Ej. 4" value="{{ old('total_puertas') }}"
-                                            min="1" max="6" />
+                                            min="0" max="6" />
 
                                         @error('total_puertas')
                                             <span class="invalid-feedback d-block" role="alert">

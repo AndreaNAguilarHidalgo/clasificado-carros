@@ -165,5 +165,33 @@ class ModeloSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+
+        DB::table('modelos')->insert([
+            'modelo'=> 'Sprinter',
+            'marca_id' => '14',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('modelos')->insert([
+            'modelo'=> 'MT-09 SP',
+            'marca_id' => '12',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('modelos')->insert([
+            'modelo'=> 'Iron 883',
+            'marca_id' => '13',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('modelos')->insert([
+            'modelo'=> 'Transit Van',
+            'marca_id' => '4',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
     }
 }
